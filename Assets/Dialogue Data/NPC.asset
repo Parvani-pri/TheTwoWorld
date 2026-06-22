@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16738a2eb319e904f976b36fb4ee8676, type: 3}
+  m_Name: NPC
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.DialogueData
+  lines:
+  - speakerName: Mysterious Old Man
+    text: You've finally arrived, young one...
+    portrait: {fileID: 0}
+  - speakerName: Mysterious Old Man
+    text: Take this mask shard; it will guide you.
+    portrait: {fileID: 0}
+  playOnce: 1
+  rewardItem: {fileID: 11400000, guid: 03c1951dd26db304c864fc3ddca64f83, type: 2}
+  rewardAmount: 1
