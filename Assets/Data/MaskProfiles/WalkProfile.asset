@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1e3c378fafe5094f9a970cd7fdc1233, type: 3}
+  m_Name: WalkProfile
+  m_EditorClassIdentifier: Assembly-CSharp::XuFu.MaskSystem.MaskAnimationProfile
+  animationName: walk
+  bodyFrames:
+  - {fileID: -1940099584, guid: c7bd12b0933363347b379e25eaa67363, type: 3}
+  - {fileID: -299983595, guid: c7bd12b0933363347b379e25eaa67363, type: 3}
+  - {fileID: 1038222850, guid: c7bd12b0933363347b379e25eaa67363, type: 3}
+  - {fileID: -1602892860, guid: c7bd12b0933363347b379e25eaa67363, type: 3}
+  - {fileID: 836927138, guid: c7bd12b0933363347b379e25eaa67363, type: 3}
+  - {fileID: 549542880, guid: c7bd12b0933363347b379e25eaa67363, type: 3}
+  - {fileID: 269813712, guid: c7bd12b0933363347b379e25eaa67363, type: 3}
+  - {fileID: 1512351464, guid: c7bd12b0933363347b379e25eaa67363, type: 3}
+  - {fileID: -760197323, guid: c7bd12b0933363347b379e25eaa67363, type: 3}
+  - {fileID: 889434369, guid: c7bd12b0933363347b379e25eaa67363, type: 3}
+  - {fileID: -1720081235, guid: c7bd12b0933363347b379e25eaa67363, type: 3}
+  - {fileID: -972377309, guid: c7bd12b0933363347b379e25eaa67363, type: 3}
+  - {fileID: -2025609060, guid: c7bd12b0933363347b379e25eaa67363, type: 3}
+  - {fileID: 365591208, guid: c7bd12b0933363347b379e25eaa67363, type: 3}
+  - {fileID: -253491289, guid: c7bd12b0933363347b379e25eaa67363, type: 3}
+  - {fileID: 332951056, guid: c7bd12b0933363347b379e25eaa67363, type: 3}
+  - {fileID: -1920843775, guid: c7bd12b0933363347b379e25eaa67363, type: 3}
+  - {fileID: -462464827, guid: c7bd12b0933363347b379e25eaa67363, type: 3}
+  - {fileID: -616972886, guid: c7bd12b0933363347b379e25eaa67363, type: 3}
+  - {fileID: 651704036, guid: c7bd12b0933363347b379e25eaa67363, type: 3}
+  - {fileID: 1894332321, guid: c7bd12b0933363347b379e25eaa67363, type: 3}
+  - {fileID: 2089153761, guid: c7bd12b0933363347b379e25eaa67363, type: 3}
+  - {fileID: 1928627831, guid: c7bd12b0933363347b379e25eaa67363, type: 3}
+  - {fileID: -1093833017, guid: c7bd12b0933363347b379e25eaa67363, type: 3}
+  - {fileID: 1292428259, guid: c7bd12b0933363347b379e25eaa67363, type: 3}
+  anchorJson: {fileID: 4900000, guid: d8996985b1de2cc41a934808b1c9e84d, type: 3}
+  defaultAngle: 0

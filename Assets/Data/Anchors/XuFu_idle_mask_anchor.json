@@ -1,0 +1,225 @@
+{
+  "animation": "idle",
+  "image": "XuFu-idle-v1.png",
+  "columns": 5,
+  "rows": 5,
+  "frameWidth": 640,
+  "frameHeight": 640,
+  "coordinateSystem": "frame_pixels_top_left_origin",
+  "note": "x/y are pixel coordinates inside each frame. Convert to Unity local units using Pixels Per Unit and invert Y if needed.",
+  "anchors": [
+    {
+      "frame": 0,
+      "face": {
+        "x": 385,
+        "y": 289
+      },
+      "confidence": 1.0
+    },
+    {
+      "frame": 1,
+      "face": {
+        "x": 386,
+        "y": 290
+      },
+      "confidence": 0.9596278071403503
+    },
+    {
+      "frame": 2,
+      "face": {
+        "x": 388,
+        "y": 291
+      },
+      "confidence": 0.8918083310127258
+    },
+    {
+      "frame": 3,
+      "face": {
+        "x": 390,
+        "y": 292
+      },
+      "confidence": 0.8380077481269836
+    },
+    {
+      "frame": 4,
+      "face": {
+        "x": 391,
+        "y": 293
+      },
+      "confidence": 0.8015393018722534
+    },
+    {
+      "frame": 5,
+      "face": {
+        "x": 390,
+        "y": 293
+      },
+      "confidence": 0.8138893842697144
+    },
+    {
+      "frame": 6,
+      "face": {
+        "x": 389,
+        "y": 292
+      },
+      "confidence": 0.8408859968185425
+    },
+    {
+      "frame": 7,
+      "face": {
+        "x": 388,
+        "y": 292
+      },
+      "confidence": 0.8470562696456909
+    },
+    {
+      "frame": 8,
+      "face": {
+        "x": 387,
+        "y": 294
+      },
+      "confidence": 0.7572261095046997
+    },
+    {
+      "frame": 9,
+      "face": {
+        "x": 385,
+        "y": 293
+      },
+      "confidence": 0.5732665657997131
+    },
+    {
+      "frame": 10,
+      "face": {
+        "x": 384,
+        "y": 292
+      },
+      "confidence": 0.5598297119140625
+    },
+    {
+      "frame": 11,
+      "face": {
+        "x": 383,
+        "y": 290
+      },
+      "confidence": 0.663806676864624
+    },
+    {
+      "frame": 12,
+      "face": {
+        "x": 383,
+        "y": 289
+      },
+      "confidence": 0.8873486518859863
+    },
+    {
+      "frame": 13,
+      "face": {
+        "x": 383,
+        "y": 288
+      },
+      "confidence": 0.9235608577728271
+    },
+    {
+      "frame": 14,
+      "face": {
+        "x": 383,
+        "y": 288
+      },
+      "confidence": 0.9239704012870789
+    },
+    {
+      "frame": 15,
+      "face": {
+        "x": 384,
+        "y": 288
+      },
+      "confidence": 0.9431400299072266
+    },
+    {
+      "frame": 16,
+      "face": {
+        "x": 384,
+        "y": 288
+      },
+      "confidence": 0.953008770942688
+    },
+    {
+      "frame": 17,
+      "face": {
+        "x": 384,
+        "y": 289
+      },
+      "confidence": 0.9438923597335815
+    },
+    {
+      "frame": 18,
+      "face": {
+        "x": 385,
+        "y": 288
+      },
+      "confidence": 0.9490674734115601
+    },
+    {
+      "frame": 19,
+      "face": {
+        "x": 385,
+        "y": 289
+      },
+      "confidence": 0.960350513458252
+    },
+    {
+      "frame": 20,
+      "face": {
+        "x": 385,
+        "y": 289
+      },
+      "confidence": 0.9744776487350464
+    },
+    {
+      "frame": 21,
+      "face": {
+        "x": 385,
+        "y": 289
+      },
+      "confidence": 0.9783257246017456
+    },
+    {
+      "frame": 22,
+      "face": {
+        "x": 385,
+        "y": 289
+      },
+      "confidence": 0.9821345806121826
+    },
+    {
+      "frame": 23,
+      "face": {
+        "x": 385,
+        "y": 289
+      },
+      "confidence": 0.9822521209716797
+    },
+    {
+      "frame": 24,
+      "face": {
+        "x": 385,
+        "y": 289
+      },
+      "confidence": 0.9810335040092468
+    }
+  ],
+  "maskPreview": {
+    "mask": "mask1_640.png",
+    "maskScale": 1.0,
+    "maskPivotOriginalPixels": {
+      "x": 386,
+      "y": 289
+    },
+    "maskPivotScaledPixels": {
+      "x": 386,
+      "y": 289
+    },
+    "previewImage": "XuFu_idle_mask_anchor_mask_overlay_preview.png"
+  }
+}
