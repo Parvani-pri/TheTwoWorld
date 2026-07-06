@@ -5,6 +5,17 @@ namespace XuFu.MaskSystem
 {
     public class MaskController : MonoBehaviour
     {
+        [Header("Animation Follow Strength")]
+        public float runFollowStrength;
+        public float jumpFollowStrength;
+        public float attack1FollowStrength;
+
+        [Header("Animator Blend Tree")]
+        public Animator animator;
+        public string speedParameter = "speed";
+        public float walkThreshold = 0.25f;
+        public float runThreshold = 0.75f;
+
         [Header("Scene References")]
         public SpriteRenderer bodyRenderer;
         public SpriteRenderer maskRenderer;
@@ -15,15 +26,15 @@ namespace XuFu.MaskSystem
         public MaskItem equippedMask;
 
         [Header("Optional: Up To 3 Masks")]
-        [Tooltip("Optional shortcut list. 0 can mean no mask; 1-3 can be your mask items.")]
         public MaskItem[] quickMasks;
 
-        [Header("Import Settings")]
-        public float pixelsPerUnit = 640f;
+        [Header("Settings")]
         public bool hideMaskWhenNoFrameFound = true;
 
         private MaskAnimationProfile currentProfile;
         private MaskAnchorData currentAnchorData;
+        private Vector3 baseMaskLocalPosition;
+        private bool hasBaseMaskPosition = false;
         private readonly Dictionary<Sprite, int> spriteToFrame = new Dictionary<Sprite, int>();
 
         void Start()
@@ -34,32 +45,85 @@ namespace XuFu.MaskSystem
 
         void LateUpdate()
         {
+            UpdateAnimationFromAnimator();
             UpdateMaskFromCurrentBodySprite();
+            
         }
+
+        private void UpdateAnimationFromAnimator()
+        {
+            if (animator == null)
+                return;
+
+            AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+
+            if (state.IsName("jump"))
+            {
+                SetIfChanged("jump");
+                return;
+            }
+
+            if (state.IsName("attack1") || state.IsName("attack2") || state.IsName("attack3"))
+            {
+                int attackIndex = animator.GetInteger("attackIndex");
+
+                if (attackIndex <= 1)
+                    SetIfChanged("attack1");
+                else if (attackIndex == 2)
+                    SetIfChanged("attack2");
+                else
+                    SetIfChanged("attack3");
+
+                return;
+            }
+
+            if (state.IsName("Locomotion"))
+            {
+                float speed = animator.GetFloat(speedParameter);
+
+                if (speed < walkThreshold)
+                    SetIfChanged("idle");
+                else if (speed < runThreshold)
+                    SetIfChanged("walk");
+                else
+                    SetIfChanged("run");
+            }
+        }
+
+private void SetIfChanged(string animName)
+{
+    if (currentAnimation != animName)
+        SetAnimation(animName);
+}
 
         public void SetAnimation(string animationName)
         {
             currentAnimation = animationName;
             currentProfile = database != null ? database.GetProfile(animationName) : null;
+
             currentAnchorData = null;
             spriteToFrame.Clear();
 
             if (currentProfile == null)
             {
-                Debug.LogWarning($"MaskController: No MaskAnimationProfile found for animation '{animationName}'. Check MaskDatabase.profiles and MaskAnimationStateRelay.animationName.", this);
+                Debug.LogWarning($"MaskController: No profile found for '{animationName}'.", this);
                 return;
             }
 
             if (currentProfile.anchorJson != null)
+            {
                 currentAnchorData = JsonUtility.FromJson<MaskAnchorData>(currentProfile.anchorJson.text);
+            }
             else
-                Debug.LogWarning($"MaskController: Profile '{animationName}' has no anchorJson.", currentProfile);
+            {
+                Debug.LogWarning($"MaskController: Profile '{animationName}' has no JSON.", currentProfile);
+            }
 
             if (currentProfile.bodyFrames != null)
             {
                 for (int i = 0; i < currentProfile.bodyFrames.Length; i++)
                 {
-                    var s = currentProfile.bodyFrames[i];
+                    Sprite s = currentProfile.bodyFrames[i];
                     if (s != null && !spriteToFrame.ContainsKey(s))
                         spriteToFrame.Add(s, i);
                 }
@@ -69,13 +133,16 @@ namespace XuFu.MaskSystem
         public void EquipMask(MaskItem mask)
         {
             equippedMask = mask;
-            if (maskRenderer == null) return;
+
+            if (maskRenderer == null)
+                return;
 
             maskRenderer.sprite = equippedMask != null ? equippedMask.maskSprite : null;
             maskRenderer.enabled = equippedMask != null && equippedMask.maskSprite != null;
+            baseMaskLocalPosition = maskRenderer.transform.localPosition;
+            hasBaseMaskPosition = true;
         }
 
-        // Convenience for your case: 0 = no mask, 1/2/3 = quickMasks[0/1/2].
         public void SetMaskIndex(int index)
         {
             if (index <= 0)
@@ -85,6 +152,7 @@ namespace XuFu.MaskSystem
             }
 
             int arrayIndex = index - 1;
+
             if (quickMasks == null || arrayIndex < 0 || arrayIndex >= quickMasks.Length)
             {
                 Debug.LogWarning($"MaskController: quickMasks has no mask at index {index}.", this);
@@ -94,50 +162,109 @@ namespace XuFu.MaskSystem
             EquipMask(quickMasks[arrayIndex]);
         }
 
-        public void UpdateMaskFromCurrentBodySprite()
+        private void UpdateMaskFromCurrentBodySprite()
         {
-            if (bodyRenderer == null || maskRenderer == null || equippedMask == null || equippedMask.maskSprite == null)
+            if (bodyRenderer == null || maskRenderer == null)
+                return;
+
+            if (equippedMask == null || equippedMask.maskSprite == null)
                 return;
 
             if (currentAnchorData == null || currentAnchorData.anchors == null)
                 return;
 
-            if (!spriteToFrame.TryGetValue(bodyRenderer.sprite, out int frameIndex))
+            Sprite currentBodySprite = bodyRenderer.sprite;
+
+            if (currentBodySprite == null)
+                return;
+
+            if (!spriteToFrame.TryGetValue(currentBodySprite, out int frameIndex))
             {
-                if (hideMaskWhenNoFrameFound) maskRenderer.enabled = false;
+                //if (hideMaskWhenNoFrameFound)
+                    //maskRenderer.enabled = false;
+
                 return;
             }
 
             ApplyFrame(frameIndex);
         }
 
-        public void ApplyFrame(int frameIndex)
+        private void ApplyFrame(int frameIndex)
         {
-            if (currentAnchorData == null || currentAnchorData.anchors == null) return;
-            if (frameIndex < 0 || frameIndex >= currentAnchorData.anchors.Length) return;
+           if (currentAnchorData == null || currentAnchorData.anchors == null)
+                return;
 
-            maskRenderer.enabled = true;
+            if (frameIndex < 0 || frameIndex >= currentAnchorData.anchors.Length)
+                return;
+
+            if (bodyRenderer == null || maskRenderer == null)
+                return;
+
+            if (equippedMask == null || equippedMask.maskSprite == null)
+                return;
 
             AnchorFrame a = currentAnchorData.anchors[frameIndex];
 
-            float fw = currentAnchorData.frameWidth > 0 ? currentAnchorData.frameWidth : 640f;
-            float fh = currentAnchorData.frameHeight > 0 ? currentAnchorData.frameHeight : 640f;
+            maskRenderer.enabled = true;
+            Sprite bodySprite = bodyRenderer.sprite;
+            if (bodySprite == null)
+                return;
 
-            float x = a.face.x + equippedMask.extraOffsetPixels.x;
-            float y = a.face.y + equippedMask.extraOffsetPixels.y;
+            float ppu = bodySprite.pixelsPerUnit;
 
-            float localX = (x - fw * 0.5f) / pixelsPerUnit;
-            float localY = -(y - fh * 0.5f) / pixelsPerUnit;
-            maskRenderer.transform.localPosition = new Vector3(localX, localY, maskRenderer.transform.localPosition.z);
+            AnchorFrame baseAnchor = currentAnchorData.anchors[0];
 
-            bool jsonHasRotation = Mathf.Abs(currentAnchorData.maskBaseAngle) > 0.0001f || Mathf.Abs(a.angle) > 0.0001f;
-            float finalAngle = jsonHasRotation ? (a.angle - currentAnchorData.maskBaseAngle) : currentProfile.defaultAngle;
-            finalAngle += equippedMask.extraRotation;
-            maskRenderer.transform.localRotation = Quaternion.Euler(0f, 0f, finalAngle);
+            float dx = a.face.x - baseAnchor.face.x;
+            float dy = a.face.y - baseAnchor.face.y;
 
-            float frameScale = Mathf.Approximately(a.scale, 0f) ? 1f : a.scale;
-            float s = frameScale * equippedMask.globalScale;
-            maskRenderer.transform.localScale = new Vector3(s, s, 1f);
+            // 可調，jump/attack 太誇張就較細
+            //float followStrength = 0.35f;
+            float followStrength = 1f;
+
+            if (currentAnimation == "run")
+                followStrength = runFollowStrength;
+            else if (currentAnimation == "jump")
+                followStrength = jumpFollowStrength;
+            else if (currentAnimation.StartsWith("attack"))
+                followStrength = attack1FollowStrength;     
+
+            Vector3 offset = new Vector3(
+                dx / ppu * followStrength,
+                -dy / ppu * followStrength,
+                0f
+            );
+
+            maskRenderer.transform.localPosition = baseMaskLocalPosition + offset;
+        }
+
+        private Vector2 GetMaskPivot(Vector2 fallbackPivot)
+        {
+            if (currentAnchorData != null &&
+                currentAnchorData.maskPivot != null)
+            {
+                return new Vector2(
+                    currentAnchorData.maskPivot.x,
+                    currentAnchorData.maskPivot.y
+                );
+            }
+
+            if (currentAnchorData != null &&
+                currentAnchorData.maskPreview != null &&
+                currentAnchorData.maskPreview.maskPivotOriginalPixels != null)
+            {
+                return new Vector2(
+                    currentAnchorData.maskPreview.maskPivotOriginalPixels.x,
+                    currentAnchorData.maskPreview.maskPivotOriginalPixels.y
+                );
+            }
+
+            return fallbackPivot;
+        }
+
+        private bool IsZero(float x, float y)
+        {
+            return Mathf.Approximately(x, 0f) && Mathf.Approximately(y, 0f);
         }
     }
+
 }

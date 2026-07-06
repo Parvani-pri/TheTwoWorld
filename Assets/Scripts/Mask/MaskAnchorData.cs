@@ -3,6 +3,20 @@ using UnityEngine;
 
 namespace XuFu.MaskSystem
 {
+
+    [System.Serializable]
+    public class MaskPreviewData
+    {
+        public MaskPivotPixels maskPivotOriginalPixels;
+        public MaskPivotPixels maskPivotScaledPixels;
+    }
+
+    [System.Serializable]
+    public class MaskPivotPixels
+    {
+        public float x;
+        public float y;
+    }
     [Serializable]
     public class MaskAnchorData
     {
@@ -12,6 +26,7 @@ namespace XuFu.MaskSystem
         public Vec2Json maskPivot;
         public float maskBaseAngle;
         public AnchorFrame[] anchors;
+        public MaskPreviewData maskPreview;
     }
 
     [Serializable]
@@ -37,4 +52,6 @@ namespace XuFu.MaskSystem
         public float x;
         public float y;
     }
+    
+   
 }
