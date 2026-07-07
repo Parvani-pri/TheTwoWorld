@@ -15,10 +15,13 @@ namespace TwoWorlds.Inventory
         [SerializeField] InventorySlotUI slotPrefab;
         [SerializeField] TMP_Text itemNameText;
         [SerializeField] TMP_Text itemDescriptionText;
+        [SerializeField] ItemDropper itemDropper;
+        [SerializeField] UnityEngine.UI.Button discardButton;
 
         InventorySlotUI[] slotViews;
         bool isOpen;
         bool gameplayBlocked;
+        int selectedSlotIndex = -1;
 
         void OnEnable()
         {
@@ -43,6 +46,12 @@ namespace TwoWorlds.Inventory
             if (playerInventory == null)
                 playerInventory = FindFirstObjectByType<PlayerInventory>();
 
+            if (itemDropper == null)
+                itemDropper = FindFirstObjectByType<ItemDropper>();
+
+            if (discardButton != null)
+                discardButton.onClick.AddListener(DiscardSelectedItem);
+
             BuildSlotViews();
             SetOpen(false);
             Refresh();
@@ -62,6 +71,22 @@ namespace TwoWorlds.Inventory
 
             if (WantsCloseInventory())
                 SetOpen(false);
+
+            if (isOpen)
+                HandleDiscardInput();
+        }
+
+        void HandleDiscardInput()
+        {
+            if (selectedSlotIndex < 0)
+                return;
+
+            var keyboard = Keyboard.current;
+            if (keyboard == null)
+                return;
+
+            if (keyboard.deleteKey.wasPressedThisFrame || keyboard.xKey.wasPressedThisFrame)
+                DiscardSelectedItem();
         }
 
         bool WantsCloseInventory()
@@ -114,8 +139,16 @@ namespace TwoWorlds.Inventory
             if (EventSystem.current != null)
                 EventSystem.current.SetSelectedGameObject(null);
 
-            if (open)
+            if (!open)
+            {
+                selectedSlotIndex = -1;
+                ClearItemDetails();
+                RefreshDiscardButton();
+            }
+            else
+            {
                 Refresh();
+            }
         }
 
         void OnInventoryChanged(PlayerInventory _) => Refresh();
@@ -135,9 +168,67 @@ namespace TwoWorlds.Inventory
             var slots = playerInventory.Slots;
             for (var i = 0; i < slotViews.Length; i++)
             {
+                var slotIndex = i;
                 var slot = i < slots.Count ? slots[i] : default;
-                slotViews[i].Bind(slot, ShowItemDetails);
+                slotViews[i].Bind(slot, selected => OnSlotSelected(slotIndex, selected));
             }
+        }
+
+        void OnSlotSelected(int slotIndex, InventorySlot slot)
+        {
+            selectedSlotIndex = slot.IsEmpty ? -1 : slotIndex;
+            ShowItemDetails(slot);
+            RefreshDiscardButton();
+        }
+
+        void DiscardSelectedItem()
+        {
+            if (selectedSlotIndex < 0 || itemDropper == null || playerInventory == null)
+                return;
+
+            var slot = playerInventory.GetSlot(selectedSlotIndex);
+            if (slot.IsEmpty)
+            {
+                selectedSlotIndex = -1;
+                ClearItemDetails();
+                RefreshDiscardButton();
+                return;
+            }
+
+            if (!itemDropper.DropFromSlot(playerInventory, selectedSlotIndex, 1))
+                return;
+
+            var remaining = playerInventory.GetSlot(selectedSlotIndex);
+            if (remaining.IsEmpty)
+            {
+                selectedSlotIndex = -1;
+                ClearItemDetails();
+            }
+            else
+            {
+                ShowItemDetails(remaining);
+            }
+
+            RefreshDiscardButton();
+        }
+
+        void RefreshDiscardButton()
+        {
+            if (discardButton == null)
+                return;
+
+            var hasSelection = selectedSlotIndex >= 0 &&
+                               !playerInventory.GetSlot(selectedSlotIndex).IsEmpty;
+            discardButton.interactable = hasSelection;
+        }
+
+        void ClearItemDetails()
+        {
+            if (itemNameText != null)
+                itemNameText.text = string.Empty;
+
+            if (itemDescriptionText != null)
+                itemDescriptionText.text = string.Empty;
         }
 
         void ShowItemDetails(InventorySlot slot)
@@ -147,6 +238,12 @@ namespace TwoWorlds.Inventory
 
             if (itemDescriptionText != null)
                 itemDescriptionText.text = slot.IsEmpty ? string.Empty : slot.item.Description;
+        }
+
+        void OnDestroy()
+        {
+            if (discardButton != null)
+                discardButton.onClick.RemoveListener(DiscardSelectedItem);
         }
     }
 }

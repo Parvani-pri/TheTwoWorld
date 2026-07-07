@@ -1,0 +1,8 @@
+dialogue_id,speaker,text,play_once,reward_item_id,reward_amount
+npc_intro,NPC_Elder,"You've finally arrived, young one...",true,,
+npc_intro,Player,"Who are you? What is this place?",true,,
+npc_intro,NPC_Elder,"Take this mask shard; it will guide you.",true,MaskFragment,1
+elder_no_key,NPC_Elder,"You cannot pass without the ancient key.",false,,
+elder_no_key,Player,"I'll look for it.",false,,
+elder_has_key,NPC_Elder,"Ah! You found the key. Proceed.",true,,
+elder_has_key,Player,"Thank you. I'll keep moving.",true,,

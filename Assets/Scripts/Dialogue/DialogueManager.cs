@@ -10,9 +10,10 @@ namespace TwoWorlds.Dialogue
         public static DialogueManager Instance { get; private set; }
 
         [SerializeField] DialogueUI dialogueUI;
+        [SerializeField] CharacterPortraitDatabase portraitDatabase;
         [SerializeField] float charactersPerSecond = 40f;
 
-        DialogueData currentDialogue;
+        DialogueSessionData currentDialogue;
         int currentLineIndex;
         bool isPlaying;
         bool lineFinished;
@@ -37,9 +38,12 @@ namespace TwoWorlds.Dialogue
                 Instance = null;
         }
 
-        public void StartDialogue(DialogueData dialogue, GameObject interactor)
+        public void StartDialogue(DialogueData dialogue, GameObject interactor) =>
+            StartDialogue(DialogueSessionData.FromAsset(dialogue), interactor);
+
+        public void StartDialogue(DialogueSessionData dialogue, GameObject interactor)
         {
-            if (dialogue == null || dialogue.Lines == null || dialogue.Lines.Length == 0 || isPlaying)
+            if (dialogue == null || dialogue.Lines == null || dialogue.Lines.Count == 0 || isPlaying)
                 return;
 
             currentDialogue = dialogue;
@@ -65,7 +69,7 @@ namespace TwoWorlds.Dialogue
             }
 
             currentLineIndex++;
-            if (currentLineIndex >= currentDialogue.Lines.Length)
+            if (currentLineIndex >= currentDialogue.Lines.Count)
             {
                 EndDialogue();
                 return;
@@ -87,7 +91,11 @@ namespace TwoWorlds.Dialogue
 
         IEnumerator TypeLine(DialogueLine line)
         {
-            dialogueUI?.SetSpeaker(line.SpeakerName, line.Portrait);
+            var portrait = line.Portrait != null
+                ? line.Portrait
+                : portraitDatabase?.GetPortrait(line.SpeakerName);
+
+            dialogueUI?.SetSpeaker(line.SpeakerName, portrait);
             dialogueUI?.SetBodyText(string.Empty);
 
             var fullText = line.Text ?? string.Empty;

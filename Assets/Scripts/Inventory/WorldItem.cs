@@ -1,5 +1,4 @@
 using TwoWorlds.Core;
-using TwoWorlds.Player;
 using UnityEngine;
 
 namespace TwoWorlds.Inventory
@@ -11,6 +10,15 @@ namespace TwoWorlds.Inventory
         [SerializeField] int amount = 1;
         [SerializeField] bool destroyOnPickup = true;
         [SerializeField] string promptText = "拾取";
+
+        public ItemData ItemData => itemData;
+        public int Amount => amount;
+
+        public void Configure(ItemData data, int count)
+        {
+            itemData = data;
+            amount = Mathf.Max(1, count);
+        }
 
         public bool CanInteract(GameObject interactor) =>
             itemData != null && interactor.GetComponent<PlayerInventory>() != null;

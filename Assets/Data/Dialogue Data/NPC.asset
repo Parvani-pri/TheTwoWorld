@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: NPC
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.DialogueData
   lines:
-  - speakerName: Mysterious Old Man
+  - speakerName: NPC_Elder
     text: You've finally arrived, young one...
     portrait: {fileID: 0}
-  - speakerName: Mysterious Old Man
+  - speakerName: NPC_Elder
     text: Take this mask shard; it will guide you.
     portrait: {fileID: 0}
   playOnce: 1

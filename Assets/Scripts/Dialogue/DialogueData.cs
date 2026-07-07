@@ -11,6 +11,17 @@ namespace TwoWorlds.Dialogue
         [SerializeField] string text;
         [SerializeField] Sprite portrait;
 
+        public DialogueLine()
+        {
+        }
+
+        public DialogueLine(string speaker, string lineText, Sprite linePortrait = null)
+        {
+            speakerName = speaker;
+            text = lineText;
+            portrait = linePortrait;
+        }
+
         public string SpeakerName => speakerName;
         public string Text => text;
         public Sprite Portrait => portrait;
@@ -28,5 +39,19 @@ namespace TwoWorlds.Dialogue
         public bool PlayOnce => playOnce;
         public Inventory.ItemData RewardItem => rewardItem;
         public int RewardAmount => rewardAmount;
+
+        public void ApplySessionData(DialogueSessionData sessionData)
+        {
+            if (sessionData == null)
+                return;
+
+            lines = new DialogueLine[sessionData.Lines.Count];
+            for (var i = 0; i < sessionData.Lines.Count; i++)
+                lines[i] = sessionData.Lines[i];
+
+            playOnce = sessionData.PlayOnce;
+            rewardItem = sessionData.RewardItem;
+            rewardAmount = sessionData.RewardAmount;
+        }
     }
 }

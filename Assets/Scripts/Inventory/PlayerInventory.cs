@@ -149,6 +149,38 @@ namespace TwoWorlds.Inventory
             return total;
         }
 
+        public bool TryTakeFromSlot(int slotIndex, int amount, out ItemData item, out int taken)
+        {
+            item = null;
+            taken = 0;
+
+            if (slotIndex < 0 || slotIndex >= slots.Count || amount <= 0)
+                return false;
+
+            var slot = slots[slotIndex];
+            if (slot.IsEmpty)
+                return false;
+
+            taken = Mathf.Min(amount, slot.quantity);
+            item = slot.item;
+            slot.quantity -= taken;
+
+            if (slot.quantity <= 0)
+                slot = default;
+
+            slots[slotIndex] = slot;
+            NotifyChanged();
+            return true;
+        }
+
+        public InventorySlot GetSlot(int slotIndex)
+        {
+            if (slotIndex < 0 || slotIndex >= slots.Count)
+                return default;
+
+            return slots[slotIndex];
+        }
+
         int FindEmptySlotIndex()
         {
             for (var i = 0; i < slots.Count; i++)

@@ -8903,6 +8903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.DialogueManager
   dialogueUI: {fileID: 487936876}
+  portraitDatabase: {fileID: 11400000, guid: 0d3e31341ddabd14693c0ea38dac48f0, type: 2}
   charactersPerSecond: 40
 --- !u!114 &1820472274
 MonoBehaviour:
