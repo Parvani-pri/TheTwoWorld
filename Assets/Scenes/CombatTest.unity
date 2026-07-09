@@ -341,7 +341,10 @@ MonoBehaviour:
   inputReader: {fileID: 182035035}
   groundSpeed: 5
   depthSpeedScale: 0.6
-  verticalSpeed: 3
+  bounds: {fileID: 1064042059}
+  maxFlightDuration: 5
+  ascendSpeedFactor: 5
+  fallingAcceleration: 9.81
 --- !u!114 &1030503855
 MonoBehaviour:
   m_ObjectHideFlags: 0
