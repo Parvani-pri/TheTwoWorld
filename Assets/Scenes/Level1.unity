@@ -1772,7 +1772,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &651502371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1876,6 +1876,8 @@ MonoBehaviour:
   slotPrefab: {fileID: 2418484913273652437, guid: 2c692f7071c60a343a0f78e7f36ff1c5, type: 3}
   itemNameText: {fileID: 616932838}
   itemDescriptionText: {fileID: 2087250477}
+  itemDropper: {fileID: 2124706761}
+  discardButton: {fileID: 0}
 --- !u!1 &652415054
 GameObject:
   m_ObjectHideFlags: 0
@@ -8228,8 +8230,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a9c0c7698069647967d84c0fb9ce0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.DialogueTrigger
+  sourceMode: 1
   dialogue: {fileID: 11400000, guid: 4c0a1cb029b7e894bbf2063b3a5a9397, type: 2}
   fallbackDialogue: {fileID: 0}
+  csvLibrary: {fileID: 11400000, guid: 709a92fdc576e5442881e723b7c528a0, type: 2}
+  csvDialogueId: npc_intro
+  fallbackCsvDialogueId: 
   requiredItem: {fileID: 0}
   requiredAmount: 1
   consumeRequiredItem: 0
@@ -9859,6 +9865,7 @@ GameObject:
   - component: {fileID: 2124706754}
   - component: {fileID: 2124706760}
   - component: {fileID: 2124706759}
+  - component: {fileID: 2124706761}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -10055,6 +10062,19 @@ MonoBehaviour:
   groundLayers:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2124706761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124706753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5179dca4ffe4a24ab26ec45880d7071, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Inventory.ItemDropper
+  dropOffset: 0.8
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8a15f6e1d9d49f4ab987f89db4f92dc, type: 3}
   m_Name: CharacterPortraitDatabase
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.CharacterPortraitDatabase
-  entries: []
+  entries:
+  - speakerName: NPC_Elder
+    portrait: {fileID: -803321122, guid: 836ba81373ddf664c8a192783efe0ecd, type: 3}
+  - speakerName: Player
+    portrait: {fileID: 21300000, guid: 35fb4e802305325478d6a8e1f4150cab, type: 3}

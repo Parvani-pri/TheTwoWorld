@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20a673adecba2cd48bcdb3136b71a043, type: 3}
   m_Name: DialogueCsvLibrary
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.DialogueCsvLibrary
-  csvFile: {fileID: 0}
-  rewardItemCatalog: []
+  csvFile: {fileID: 4900000, guid: 7890a15a83df1e84f982d968ca98da94, type: 3}
+  rewardItemCatalog:
+  - {fileID: 11400000, guid: 03c1951dd26db304c864fc3ddca64f83, type: 2}
+  portraitDatabase: {fileID: 11400000, guid: 0d3e31341ddabd14693c0ea38dac48f0, type: 2}
