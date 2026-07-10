@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b207e10d75d92024fb9491f5c0dc1573, type: 3}
   m_Name: Herb
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Inventory.ItemData
-  itemId: 
-  displayName: 
-  description: 
-  icon: {fileID: 21300000, guid: 02dd52a7425e86e4b96914ad0fe9b10a, type: 3}
+  itemId: herb
+  displayName: Herb
+  description: A healing herb.
+  icon: {fileID: 21300000, guid: f93c164bce69b16438c9dcc67823a193, type: 3}
   itemType: 3
   maxStackSize: 10
   isUnique: 0

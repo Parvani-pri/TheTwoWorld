@@ -27,6 +27,7 @@ namespace TwoWorlds.Combat
 
         CombatActor actor;
         bool gameplayBlocked;
+        bool inventoryOpen;
 
         void Awake()
         {
@@ -37,11 +38,13 @@ namespace TwoWorlds.Combat
         void OnEnable()
         {
             GameEvents.GameplayInputBlocked += OnGameplayInputBlocked;
+            GameEvents.InventoryOpenChanged += OnInventoryOpenChanged;
         }
 
         void OnDisable()
         {
             GameEvents.GameplayInputBlocked -= OnGameplayInputBlocked;
+            GameEvents.InventoryOpenChanged -= OnInventoryOpenChanged;
         }
 
         void Start()
@@ -55,7 +58,7 @@ namespace TwoWorlds.Combat
 
         void Update()
         {
-            if (gameplayBlocked || inputReader == null)
+            if (IsInputBlocked() || inputReader == null)
                 return;
 
             var moveInput = inputReader.MoveAction != null
@@ -126,5 +129,9 @@ namespace TwoWorlds.Combat
         }
 
         void OnGameplayInputBlocked(bool blocked) => gameplayBlocked = blocked;
+
+        void OnInventoryOpenChanged(bool open) => inventoryOpen = open;
+
+        bool IsInputBlocked() => gameplayBlocked || inventoryOpen;
     }
 }

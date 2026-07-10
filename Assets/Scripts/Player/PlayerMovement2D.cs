@@ -15,6 +15,7 @@ namespace TwoWorlds.Player
 
         Rigidbody2D rb;
         bool gameplayBlocked;
+        bool inventoryOpen;
         bool jumpQueued;
 
         void Awake()
@@ -26,6 +27,7 @@ namespace TwoWorlds.Player
         void OnEnable()
         {
             GameEvents.GameplayInputBlocked += OnGameplayInputBlocked;
+            GameEvents.InventoryOpenChanged += OnInventoryOpenChanged;
 
             if (inputReader?.JumpAction != null)
                 inputReader.JumpAction.performed += OnJumpPerformed;
@@ -34,6 +36,7 @@ namespace TwoWorlds.Player
         void OnDisable()
         {
             GameEvents.GameplayInputBlocked -= OnGameplayInputBlocked;
+            GameEvents.InventoryOpenChanged -= OnInventoryOpenChanged;
 
             if (inputReader?.JumpAction != null)
                 inputReader.JumpAction.performed -= OnJumpPerformed;
@@ -41,7 +44,7 @@ namespace TwoWorlds.Player
 
         void Update()
         {
-            if (gameplayBlocked)
+            if (IsInputBlocked())
                 return;
 
             FlipSprite();
@@ -49,7 +52,7 @@ namespace TwoWorlds.Player
 
         void FixedUpdate()
         {
-            if (gameplayBlocked)
+            if (IsInputBlocked())
             {
                 rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
                 return;
@@ -67,7 +70,7 @@ namespace TwoWorlds.Player
 
         void OnJumpPerformed(UnityEngine.InputSystem.InputAction.CallbackContext _)
         {
-            if (!gameplayBlocked)
+            if (!IsInputBlocked())
                 jumpQueued = true;
         }
 
@@ -94,6 +97,10 @@ namespace TwoWorlds.Player
             if (blocked)
                 jumpQueued = false;
         }
+
+        void OnInventoryOpenChanged(bool open) => inventoryOpen = open;
+
+        bool IsInputBlocked() => gameplayBlocked || inventoryOpen;
 
         void OnDrawGizmosSelected()
         {

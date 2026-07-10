@@ -14,6 +14,7 @@ namespace TwoWorlds.Player
 
         IInteractable currentTarget;
         bool gameplayBlocked;
+        bool inventoryOpen;
 
         void Start()
         {
@@ -35,16 +36,18 @@ namespace TwoWorlds.Player
         void OnEnable()
         {
             GameEvents.GameplayInputBlocked += OnGameplayInputBlocked;
+            GameEvents.InventoryOpenChanged += OnInventoryOpenChanged;
         }
 
         void OnDisable()
         {
             GameEvents.GameplayInputBlocked -= OnGameplayInputBlocked;
+            GameEvents.InventoryOpenChanged -= OnInventoryOpenChanged;
         }
 
         void Update()
         {
-            if (gameplayBlocked)
+            if (IsInputBlocked())
             {
                 currentTarget = null;
                 return;
@@ -55,7 +58,7 @@ namespace TwoWorlds.Player
 
         void OnInteractPerformed(InputAction.CallbackContext _)
         {
-            if (gameplayBlocked)
+            if (IsInputBlocked())
                 return;
 
             if (currentTarget == null)
@@ -114,6 +117,10 @@ namespace TwoWorlds.Player
         }
 
         void OnGameplayInputBlocked(bool blocked) => gameplayBlocked = blocked;
+
+        void OnInventoryOpenChanged(bool open) => inventoryOpen = open;
+
+        bool IsInputBlocked() => gameplayBlocked || inventoryOpen;
 
         void OnDrawGizmosSelected()
         {

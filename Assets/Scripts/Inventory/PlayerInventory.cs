@@ -33,37 +33,43 @@ namespace TwoWorlds.Inventory
                 slots.Add(default);
         }
 
-        public bool AddItem(ItemData item, int amount = 1)
+        public InventoryAddResult AddItem(ItemData item, int amount = 1)
         {
             if (item == null || amount <= 0)
-                return false;
+                return InventoryAddResult.Failed(amount);
 
             EnsureCapacity();
             var remaining = amount;
 
             if (!item.IsUnique)
-            {
                 remaining = TryStackExisting(item, remaining);
-                if (remaining <= 0)
-                {
-                    NotifyChanged();
-                    return true;
-                }
-            }
 
             while (remaining > 0)
             {
                 var emptyIndex = FindEmptySlotIndex();
                 if (emptyIndex < 0)
-                    return false;
+                    break;
 
                 var stackAmount = item.IsUnique ? 1 : Mathf.Min(remaining, item.MaxStackSize);
                 slots[emptyIndex] = new InventorySlot { item = item, quantity = stackAmount };
                 remaining -= stackAmount;
             }
 
-            NotifyChanged();
-            return true;
+            var addedAmount = amount - remaining;
+            InventoryAddResult result;
+
+            if (remaining <= 0)
+                result = InventoryAddResult.Success(addedAmount);
+            else if (addedAmount > 0)
+                result = InventoryAddResult.Partial(addedAmount, amount);
+            else
+                result = InventoryAddResult.Failed(amount);
+
+            if (addedAmount > 0)
+                NotifyChanged();
+
+            GameEvents.RaiseInventoryAddResult(result, item);
+            return result;
         }
 
         int TryStackExisting(ItemData item, int amount)
@@ -179,6 +185,57 @@ namespace TwoWorlds.Inventory
                 return default;
 
             return slots[slotIndex];
+        }
+
+        public bool SwapSlots(int fromIndex, int toIndex) => MoveSlot(fromIndex, toIndex, allowSwap: true);
+
+        public bool MoveSlot(int fromIndex, int toIndex, bool allowSwap = true)
+        {
+            if (fromIndex == toIndex ||
+                fromIndex < 0 || fromIndex >= slots.Count ||
+                toIndex < 0 || toIndex >= slots.Count)
+                return false;
+
+            var from = slots[fromIndex];
+            if (from.IsEmpty)
+                return false;
+
+            var to = slots[toIndex];
+
+            if (to.IsEmpty)
+            {
+                slots[toIndex] = from;
+                slots[fromIndex] = default;
+                NotifyChanged();
+                return true;
+            }
+
+            if (!from.item.IsUnique && from.item == to.item)
+            {
+                var space = to.item.MaxStackSize - to.quantity;
+                if (space > 0)
+                {
+                    var moveAmount = Mathf.Min(space, from.quantity);
+                    to.quantity += moveAmount;
+                    from.quantity -= moveAmount;
+
+                    if (from.quantity <= 0)
+                        from = default;
+
+                    slots[fromIndex] = from;
+                    slots[toIndex] = to;
+                    NotifyChanged();
+                    return true;
+                }
+            }
+
+            if (!allowSwap)
+                return false;
+
+            slots[fromIndex] = to;
+            slots[toIndex] = from;
+            NotifyChanged();
+            return true;
         }
 
         int FindEmptySlotIndex()

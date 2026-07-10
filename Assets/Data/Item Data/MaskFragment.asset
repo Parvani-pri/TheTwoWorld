@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b207e10d75d92024fb9491f5c0dc1573, type: 3}
   m_Name: MaskFragment
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Inventory.ItemData
-  itemId: 
+  itemId: mask_fragment
   displayName: Mask
   description: Old Mask
-  icon: {fileID: 21300000, guid: 6d353b4c8dd20ec459af394bfc8a9a2b, type: 3}
+  icon: {fileID: 21300000, guid: 8d3b6fcbbca27cd47b3bada5fb97d4c7, type: 3}
   itemType: 2
   maxStackSize: 99
   isUnique: 1

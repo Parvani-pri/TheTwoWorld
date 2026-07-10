@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b207e10d75d92024fb9491f5c0dc1573, type: 3}
   m_Name: AncientKey
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Inventory.ItemData
-  itemId: 
+  itemId: ancient_key
   displayName: Key
   description: Ancient key
   icon: {fileID: 21300000, guid: 54663b220818d3e46b532480d0b47d28, type: 3}

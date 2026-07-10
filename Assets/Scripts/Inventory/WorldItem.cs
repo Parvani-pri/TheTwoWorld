@@ -29,14 +29,19 @@ namespace TwoWorlds.Inventory
             if (inventory == null || itemData == null)
                 return;
 
-            if (!inventory.AddItem(itemData, amount))
+            var result = inventory.AddItem(itemData, amount);
+            if (result.AddedAmount <= 0)
+                return;
+
+            if (result.IsFullSuccess)
             {
-                Debug.Log("[WorldItem] Inventory is full.");
+                if (destroyOnPickup)
+                    Destroy(gameObject);
                 return;
             }
 
-            if (destroyOnPickup)
-                Destroy(gameObject);
+            amount -= result.AddedAmount;
+            Configure(itemData, amount);
         }
 
         public string GetPromptText() =>
