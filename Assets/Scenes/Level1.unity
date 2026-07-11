@@ -10372,33 +10372,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   showDebugGizmos: 1
---- !u!50 &2124706756
-Rigidbody2D:
-  serializedVersion: 5
+--- !u!114 &2124706756
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2124706753}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a9c3e7d1f8b42c6a4d2e9b0c7f6a381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.CombatActor
+  faction: 0
+  arena: {fileID: 0}
+  depthSortedRenderer: {fileID: 2124706759}
+  depthSortingScale: 100
 --- !u!58 &2124706757
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -10518,17 +10507,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2124706753}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2deecb5745b516a41abb62ce91ebaab0, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c3e9a1b4d2f48e6b8a0c5d7e9f1b324, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Player.PlayerMovement2D
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.PlayerGroundController
   inputReader: {fileID: 1820472274}
-  moveSpeed: 5
-  jumpForce: 10
-  groundCheck: {fileID: 0}
-  groundCheckRadius: 0.15
-  groundLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
+  groundSpeed: 5
+  depthSpeedScale: 0.6
 --- !u!114 &2124706761
 MonoBehaviour:
   m_ObjectHideFlags: 0

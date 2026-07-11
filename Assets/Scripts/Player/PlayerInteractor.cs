@@ -1,3 +1,4 @@
+using TwoWorlds.Combat;
 using TwoWorlds.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,10 +12,18 @@ namespace TwoWorlds.Player
         [SerializeField] float interactRadius = 1.5f;
         [SerializeField] LayerMask interactableLayers = ~0;
         [SerializeField] bool showDebugGizmos = true;
+        [Tooltip("Max depth (world Z) difference when using 2.5D ground movement.")]
+        [SerializeField] float depthTolerance = 1.5f;
 
         IInteractable currentTarget;
         bool gameplayBlocked;
         bool inventoryOpen;
+        CombatActor combatActor;
+
+        void Awake()
+        {
+            combatActor = GetComponent<CombatActor>();
+        }
 
         void Start()
         {
@@ -93,7 +102,10 @@ namespace TwoWorlds.Player
                 if (interactable == null || !interactable.CanInteract(gameObject))
                     continue;
 
-                var distance = Vector2.Distance(transform.position, hit.transform.position);
+                if (Mathf.Abs(transform.position.z - hit.transform.position.z) > depthTolerance)
+                    continue;
+
+                var distance = GetGroundDistance(hit.transform.position);
                 if (distance >= closestDistance)
                     continue;
 
@@ -102,6 +114,17 @@ namespace TwoWorlds.Player
             }
 
             return closest;
+        }
+
+        float GetGroundDistance(Vector3 targetPosition)
+        {
+            if (combatActor != null)
+            {
+                var ground = combatActor.GroundPosition;
+                return Vector2.Distance(ground, new Vector2(targetPosition.x, targetPosition.z));
+            }
+
+            return Vector2.Distance(transform.position, targetPosition);
         }
 
         static IInteractable GetInteractable(Collider2D collider)
