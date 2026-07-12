@@ -29,7 +29,18 @@ namespace TwoWorlds.Combat
                 return;
 
             base.Update();
-            UpdateFlight();
+
+            if (!IsAttacking)
+                UpdateFlight();
+        }
+
+        bool IsAttacking
+        {
+            get
+            {
+                var attack = GetComponent<IPlayerAttackState>();
+                return attack != null && attack.IsAttacking;
+            }
         }
 
         void UpdateFlight()

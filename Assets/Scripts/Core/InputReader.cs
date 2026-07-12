@@ -16,6 +16,7 @@ namespace TwoWorlds.Core
         InputAction inventoryAction;
         InputAction moveAction;
         InputAction jumpAction;
+        InputAction attackAction;
 
         public InputAction InteractAction => interactAction;
         public InputAction SubmitAction => submitAction;
@@ -23,6 +24,7 @@ namespace TwoWorlds.Core
         public InputAction InventoryAction => inventoryAction;
         public InputAction MoveAction => moveAction;
         public InputAction JumpAction => jumpAction;
+        public InputAction AttackAction => attackAction;
 
         void Awake()
         {
@@ -42,6 +44,7 @@ namespace TwoWorlds.Core
             inventoryAction = playerMap.FindAction("Inventory", true);
             moveAction = playerMap.FindAction("Move", true);
             jumpAction = playerMap.FindAction("Jump", true);
+            attackAction = playerMap.FindAction("Attack", true);
         }
 
         void OnEnable()

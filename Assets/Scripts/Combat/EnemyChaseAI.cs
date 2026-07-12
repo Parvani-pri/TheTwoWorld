@@ -18,14 +18,19 @@ namespace TwoWorlds.Combat
         [SerializeField] float heightTolerance = 0.15f;
 
         CombatActor actor;
+        IEnemyAttackRangeProvider attackAI;
 
         void Awake()
         {
             actor = GetComponent<CombatActor>();
+            attackAI = GetComponent<IEnemyAttackRangeProvider>();
         }
 
         void Update()
         {
+            if (attackAI != null && attackAI.IsInAttackRange)
+                return;
+
             var target = CombatActor.FindClosest(CombatFaction.Player, actor.GroundPosition);
             if (target == null)
                 return;

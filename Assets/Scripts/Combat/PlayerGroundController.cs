@@ -18,6 +18,7 @@ namespace TwoWorlds.Combat
         protected CombatActor Actor { get; private set; }
         bool gameplayBlocked;
         bool inventoryOpen;
+        bool combatEnded;
 
         protected virtual void Awake()
         {
@@ -28,12 +29,14 @@ namespace TwoWorlds.Combat
         {
             GameEvents.GameplayInputBlocked += OnGameplayInputBlocked;
             GameEvents.InventoryOpenChanged += OnInventoryOpenChanged;
+            GameEvents.CombatEnded += OnCombatEnded;
         }
 
         void OnDisable()
         {
             GameEvents.GameplayInputBlocked -= OnGameplayInputBlocked;
             GameEvents.InventoryOpenChanged -= OnInventoryOpenChanged;
+            GameEvents.CombatEnded -= OnCombatEnded;
         }
 
         protected virtual void Start()
@@ -79,6 +82,8 @@ namespace TwoWorlds.Combat
 
         void OnInventoryOpenChanged(bool open) => inventoryOpen = open;
 
-        protected bool IsInputBlocked() => gameplayBlocked || inventoryOpen;
+        void OnCombatEnded(CombatResult _) => combatEnded = true;
+
+        protected bool IsInputBlocked() => gameplayBlocked || inventoryOpen || combatEnded;
     }
 }
