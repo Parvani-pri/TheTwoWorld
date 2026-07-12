@@ -28,9 +28,6 @@ namespace TwoWorlds.Combat
             GameEvents.CombatEnded += OnCombatEnded;
             GameEvents.GameplayInputBlocked += OnGameplayInputBlocked;
             GameEvents.InventoryOpenChanged += OnInventoryOpenChanged;
-
-            if (inputReader?.AttackAction != null)
-                inputReader.AttackAction.performed += OnAttackPerformed;
         }
 
         void OnDisable()
@@ -38,26 +35,24 @@ namespace TwoWorlds.Combat
             GameEvents.CombatEnded -= OnCombatEnded;
             GameEvents.GameplayInputBlocked -= OnGameplayInputBlocked;
             GameEvents.InventoryOpenChanged -= OnInventoryOpenChanged;
-
-            if (inputReader?.AttackAction != null)
-                inputReader.AttackAction.performed -= OnAttackPerformed;
         }
 
         void Start()
         {
             if (inputReader == null)
                 inputReader = FindFirstObjectByType<InputReader>();
+
+            if (inputReader?.AttackAction == null)
+                Debug.LogWarning("[PlayerAttackController] Attack action not found on InputReader.");
         }
 
         void Update()
         {
             if (cooldownTimer > 0f)
                 cooldownTimer -= Time.deltaTime;
-        }
 
-        void OnAttackPerformed(InputAction.CallbackContext _)
-        {
-            TryAttack();
+            if (inputReader?.AttackAction != null && inputReader.AttackAction.WasPerformedThisFrame())
+                TryAttack();
         }
 
         public void TryAttack()

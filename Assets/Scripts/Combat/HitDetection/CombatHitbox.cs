@@ -13,6 +13,9 @@ namespace TwoWorlds.Combat
         [SerializeField] Collider2D hitCollider;
 
         readonly HashSet<CombatHurtbox> hitThisActivation = new();
+        readonly List<Collider2D> overlapResults = new();
+        static readonly ContactFilter2D TriggerFilter = ContactFilter2D.noFilter;
+
         AttackData activeAttack;
         float activeTimer;
         bool isActive;
@@ -51,6 +54,8 @@ namespace TwoWorlds.Combat
             isActive = true;
             hitThisActivation.Clear();
             hitCollider.enabled = true;
+            Physics2D.SyncTransforms();
+            ScanCurrentOverlaps();
         }
 
         public void Deactivate()
@@ -64,7 +69,25 @@ namespace TwoWorlds.Combat
                 hitCollider.enabled = false;
         }
 
-        void OnTriggerEnter2D(Collider2D other)
+        void OnTriggerEnter2D(Collider2D other) => TryHit(other);
+
+        void OnTriggerStay2D(Collider2D other) => TryHit(other);
+
+        void ScanCurrentOverlaps()
+        {
+            if (!isActive || hitCollider == null)
+                return;
+
+            overlapResults.Clear();
+            var filter = TriggerFilter;
+            filter.useTriggers = true;
+            hitCollider.Overlap(filter, overlapResults);
+
+            foreach (var other in overlapResults)
+                TryHit(other);
+        }
+
+        void TryHit(Collider2D other)
         {
             if (!isActive || activeAttack == null)
                 return;

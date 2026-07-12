@@ -10,24 +10,31 @@ namespace TwoWorlds.Combat
         [SerializeField] Image fillImage;
         [SerializeField] bool hideWhenFull;
 
+        RectTransform fillRect;
+
+        void Awake()
+        {
+            if (fillImage != null)
+                fillRect = fillImage.rectTransform;
+        }
+
         void OnEnable()
         {
             GameEvents.ActorHealthChanged += OnActorHealthChanged;
+            GameEvents.CombatStarted += OnCombatStarted;
 
-            if (targetHealth != null)
-                Refresh(targetHealth.CurrentHealth, targetHealth.MaxHealth);
+            RefreshFromTarget();
         }
 
         void OnDisable()
         {
             GameEvents.ActorHealthChanged -= OnActorHealthChanged;
+            GameEvents.CombatStarted -= OnCombatStarted;
         }
 
-        void Start()
-        {
-            if (targetHealth != null)
-                Refresh(targetHealth.CurrentHealth, targetHealth.MaxHealth);
-        }
+        void Start() => RefreshFromTarget();
+
+        void OnCombatStarted() => RefreshFromTarget();
 
         void OnActorHealthChanged(CombatHealth health, int current, int max)
         {
@@ -37,15 +44,30 @@ namespace TwoWorlds.Combat
             Refresh(current, max);
         }
 
-        void Refresh(int current, int max)
+        void RefreshFromTarget()
         {
-            if (fillImage == null)
+            if (targetHealth == null)
                 return;
 
-            var normalized = max > 0 ? (float)current / max : 0f;
-            fillImage.fillAmount = normalized;
+            Refresh(targetHealth.CurrentHealth, targetHealth.MaxHealth);
+        }
 
-            if (hideWhenFull)
+        void Refresh(int current, int max)
+        {
+            var normalized = max > 0 ? (float)current / max : 0f;
+
+            if (fillRect != null)
+            {
+                var anchorMax = fillRect.anchorMax;
+                anchorMax.x = normalized;
+                fillRect.anchorMax = anchorMax;
+            }
+            else if (fillImage != null)
+            {
+                fillImage.fillAmount = normalized;
+            }
+
+            if (hideWhenFull && fillImage != null && fillImage.transform.parent != null)
                 fillImage.transform.parent.gameObject.SetActive(current < max);
         }
     }
