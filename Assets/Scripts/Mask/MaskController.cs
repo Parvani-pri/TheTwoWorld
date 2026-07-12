@@ -9,6 +9,8 @@ namespace XuFu.MaskSystem
         public float runFollowStrength;
         public float jumpFollowStrength;
         public float attack1FollowStrength;
+        public float attack2FollowStrength;
+        public float attack3FollowStrength;
 
         [Header("Animator Blend Tree")]
         public Animator animator;
@@ -225,8 +227,12 @@ private void SetIfChanged(string animName)
                 followStrength = runFollowStrength;
             else if (currentAnimation == "jump")
                 followStrength = jumpFollowStrength;
-            else if (currentAnimation.StartsWith("attack"))
-                followStrength = attack1FollowStrength;     
+            else if (currentAnimation == "attack1")
+                followStrength = attack1FollowStrength;
+            else if (currentAnimation == "attack2")
+                followStrength = attack2FollowStrength;     
+            else if (currentAnimation == "attack3")
+                followStrength = attack3FollowStrength;          
 
             Vector3 offset = new Vector3(
                 dx / ppu * followStrength,

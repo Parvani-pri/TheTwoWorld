@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1e3c378fafe5094f9a970cd7fdc1233, type: 3}
+  m_Name: Attack2Profile
+  m_EditorClassIdentifier: Assembly-CSharp::XuFu.MaskSystem.MaskAnimationProfile
+  animationName: attack2
+  bodyFrames:
+  - {fileID: 186384402, guid: 282df87221d3b5841a8d14d6baea2ecf, type: 3}
+  - {fileID: 1167531829, guid: 282df87221d3b5841a8d14d6baea2ecf, type: 3}
+  - {fileID: -1899792733, guid: 282df87221d3b5841a8d14d6baea2ecf, type: 3}
+  - {fileID: 944890138, guid: 282df87221d3b5841a8d14d6baea2ecf, type: 3}
+  - {fileID: -1914430694, guid: 282df87221d3b5841a8d14d6baea2ecf, type: 3}
+  - {fileID: 1226663430, guid: 282df87221d3b5841a8d14d6baea2ecf, type: 3}
+  - {fileID: 599852593, guid: 282df87221d3b5841a8d14d6baea2ecf, type: 3}
+  - {fileID: -9188997, guid: 282df87221d3b5841a8d14d6baea2ecf, type: 3}
+  - {fileID: 375127311, guid: 282df87221d3b5841a8d14d6baea2ecf, type: 3}
+  - {fileID: -1439831183, guid: 282df87221d3b5841a8d14d6baea2ecf, type: 3}
+  - {fileID: 1635401577, guid: 282df87221d3b5841a8d14d6baea2ecf, type: 3}
+  - {fileID: -1589772317, guid: 282df87221d3b5841a8d14d6baea2ecf, type: 3}
+  - {fileID: 1123135037, guid: 282df87221d3b5841a8d14d6baea2ecf, type: 3}
+  - {fileID: 1380363040, guid: 282df87221d3b5841a8d14d6baea2ecf, type: 3}
+  - {fileID: -2040883032, guid: 282df87221d3b5841a8d14d6baea2ecf, type: 3}
+  - {fileID: 2018074766, guid: 282df87221d3b5841a8d14d6baea2ecf, type: 3}
+  - {fileID: 720397871, guid: 282df87221d3b5841a8d14d6baea2ecf, type: 3}
+  - {fileID: -2123264783, guid: 282df87221d3b5841a8d14d6baea2ecf, type: 3}
+  - {fileID: -159813206, guid: 282df87221d3b5841a8d14d6baea2ecf, type: 3}
+  - {fileID: 2108728753, guid: 282df87221d3b5841a8d14d6baea2ecf, type: 3}
+  - {fileID: 1627689216, guid: 282df87221d3b5841a8d14d6baea2ecf, type: 3}
+  - {fileID: -182237162, guid: 282df87221d3b5841a8d14d6baea2ecf, type: 3}
+  - {fileID: 445328553, guid: 282df87221d3b5841a8d14d6baea2ecf, type: 3}
+  - {fileID: -2066370039, guid: 282df87221d3b5841a8d14d6baea2ecf, type: 3}
+  - {fileID: -174509375, guid: 282df87221d3b5841a8d14d6baea2ecf, type: 3}
+  anchorJson: {fileID: 4900000, guid: fe3092eb734676843b1cd644f94cf0b5, type: 3}
+  defaultAngle: 0

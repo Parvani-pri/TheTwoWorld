@@ -58,11 +58,15 @@ public class PlayerAnimationTest : MonoBehaviour
 
         if (Keyboard.current.kKey.wasPressedThisFrame)
         {
+            anim.SetTrigger("attack");
+            anim.SetInteger("attackIndex", 2);
             anim.Play("Base Layer.attack2", 0, 0f);
         }
 
         if (Keyboard.current.lKey.wasPressedThisFrame)
         {
+            anim.SetTrigger("attack");
+            anim.SetInteger("attackIndex", 3);
             anim.Play("Base Layer.attack3", 0, 0f);
         }
     }
