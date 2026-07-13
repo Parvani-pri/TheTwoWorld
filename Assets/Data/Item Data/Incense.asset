@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b207e10d75d92024fb9491f5c0dc1573, type: 3}
-  m_Name: Herb
+  m_Name: Incense
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Inventory.ItemData
-  itemId: herb
-  displayName: 草药
-  description: 常见药草，可配制符水，亦可疗愈轻伤。
+  itemId: incense
+  displayName: "\u7EBF\u9999"
+  description: "\u5C45\u6240\u5E38\u5907\u7684\u7EBF\u9999\uFF0C\u5165\u9634\u524D\u71C3\u4E4B\u53EF\u5B89\u5B9A\u795E\u9B42\u3002"
   icon: {fileID: 0}
   itemType: 3
-  maxStackSize: 10
+  maxStackSize: 20
   isUnique: 0
