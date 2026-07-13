@@ -1,6 +1,7 @@
 using System;
 using TwoWorlds.Combat;
 using TwoWorlds.Inventory;
+using UnityEngine.UI;
 
 namespace TwoWorlds.Core
 {
@@ -18,6 +19,9 @@ namespace TwoWorlds.Core
         public static event Action<CombatHealth, int, CombatActor> ActorDamaged;
         public static event Action<CombatHealth> ActorDied;
         public static event Action<CombatHealth, int, int> ActorHealthChanged;
+
+        public static event Action<float, float> OnActorSprint;
+        public static event Action<float, float> OnActorFlight;
 
         public static bool IsInventoryOpen { get; private set; }
 
@@ -56,5 +60,16 @@ namespace TwoWorlds.Core
 
         public static void RaiseActorHealthChanged(CombatHealth health, int current, int max) =>
             ActorHealthChanged?.Invoke(health, current, max);
+
+        public static void UpdateSprintBar(float target, float max)
+        {
+            OnActorSprint?.Invoke(target, max);
+        }
+
+        public static void UpdateFlightBar(float target, float max)
+        {
+            OnActorFlight?.Invoke(target, max);
+        }
+
     }
 }

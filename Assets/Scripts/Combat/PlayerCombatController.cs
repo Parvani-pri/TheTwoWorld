@@ -1,3 +1,4 @@
+using TwoWorlds.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,16 +12,21 @@ namespace TwoWorlds.Combat
     {
         [Header("Fly Parameters")]
         [SerializeField] float maxFlightDuration = 5f;
+        [SerializeField] float maxSprintDuration = 10f;
         [SerializeField] float ascendSpeedFactor = 5f;
         [SerializeField] float fallingAcceleration = 7f;
 
-        float remainingFlightDuration;
+        [SerializeField] Animator animator;
+
+        public float remainingFlightDuration { get; private set; }
+        public float remainingSprintDuration { get; private set; }
         float currentFallingSpeed;
 
         protected override void Awake()
         {
             base.Awake();
             remainingFlightDuration = maxFlightDuration;
+            remainingSprintDuration = maxSprintDuration;
         }
 
         protected override void Update()
@@ -29,6 +35,19 @@ namespace TwoWorlds.Combat
                 return;
 
             base.Update();
+            float speedValue = Read2DInput() == Vector2.zero ? 0f : ReadSprintInput() == 0f && remainingSprintDuration > 0f ? 0.5f : 1f;
+
+            animator.SetFloat(PlayerAnimParams.SPEED, speedValue);
+
+            if (speedValue == 1)
+            {
+                remainingSprintDuration -= Time.deltaTime;
+                GameEvents.UpdateSprintBar(remainingSprintDuration, maxSprintDuration);
+            }
+            else if (remainingSprintDuration < maxSprintDuration)
+            {
+                RestoreSprintDuration();
+            }
 
             if (!IsAttacking)
                 UpdateFlight();
@@ -71,6 +90,7 @@ namespace TwoWorlds.Combat
             {
                 value += 1f;
                 remainingFlightDuration -= Time.deltaTime;
+                GameEvents.UpdateFlightBar(remainingFlightDuration, maxFlightDuration);
             }
 
             var keyboard = Keyboard.current;
@@ -86,6 +106,16 @@ namespace TwoWorlds.Combat
             remainingFlightDuration += Time.deltaTime;
             if (remainingFlightDuration > maxFlightDuration)
                 remainingFlightDuration = maxFlightDuration;
+            GameEvents.UpdateFlightBar(remainingFlightDuration, maxFlightDuration);
+
+        }
+
+        void RestoreSprintDuration()
+        {
+            remainingSprintDuration += Time.deltaTime;
+            if (remainingSprintDuration > maxSprintDuration)
+                remainingSprintDuration = maxSprintDuration;
+            GameEvents.UpdateSprintBar(remainingSprintDuration, maxSprintDuration);
         }
     }
 }

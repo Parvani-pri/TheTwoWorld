@@ -25,6 +25,8 @@ namespace TwoWorlds.Combat
         [SerializeField] SpriteRenderer depthSortedRenderer;
         [SerializeField] float depthSortingScale = 100f;
 
+
+
         public CombatFaction Faction => faction;
         public ArenaBounds Arena => arena;
         /// <summary>Ground plane coords: x = world X, y = world Z.</summary>
@@ -45,6 +47,8 @@ namespace TwoWorlds.Combat
 
         void OnEnable() => active.Add(this);
         void OnDisable() => active.Remove(this);
+
+
 
         /// <summary>Delta on the ground plane: x = X, y = Z.</summary>
         public void MoveGround(Vector2 delta)
@@ -95,9 +99,13 @@ namespace TwoWorlds.Combat
                 GroundPosition.x,
                 GetGroundLevelY() + Height,
                 GroundPosition.y);
-
             if (depthSortedRenderer != null)
                 depthSortedRenderer.sortingOrder = Mathf.RoundToInt(-GroundPosition.y * depthSortingScale);
         }
     }
+}
+
+public static class PlayerAnimParams
+{
+    public static readonly int SPEED = Animator.StringToHash("speed");
 }
