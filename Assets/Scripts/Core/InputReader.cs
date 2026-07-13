@@ -17,6 +17,7 @@ namespace TwoWorlds.Core
         InputAction moveAction;
         InputAction jumpAction;
         InputAction attackAction;
+        InputAction sprintAction;
 
         public InputAction InteractAction => interactAction;
         public InputAction SubmitAction => submitAction;
@@ -25,6 +26,9 @@ namespace TwoWorlds.Core
         public InputAction MoveAction => moveAction;
         public InputAction JumpAction => jumpAction;
         public InputAction AttackAction => attackAction;
+        public InputAction SprintAction => sprintAction;
+
+
 
         void Awake()
         {
@@ -45,6 +49,7 @@ namespace TwoWorlds.Core
             moveAction = playerMap.FindAction("Move", true);
             jumpAction = playerMap.FindAction("Jump", true);
             attackAction = playerMap.FindAction("Attack", true);
+            sprintAction = playerMap.FindAction("Sprint", true);
         }
 
         void OnEnable()

@@ -9,6 +9,8 @@ namespace TwoWorlds.Combat
         [SerializeField] int maxHealth = 10;
         [SerializeField] bool destroyOnDeath = true;
         [SerializeField] float invincibilityDuration = 0.3f;
+        [SerializeField] GameObject damagePopupPrefab;
+        [SerializeField] Transform healthBarTransform;
 
         CombatActor actor;
         float invincibleUntil;
@@ -42,6 +44,7 @@ namespace TwoWorlds.Combat
             invincibleUntil = Time.time + invincibilityDuration;
 
             HealthChanged?.Invoke(CurrentHealth, maxHealth);
+            DamagePopup.Create(healthBarTransform.position, amount, damagePopupPrefab);
             GameEvents.RaiseActorHealthChanged(this, CurrentHealth, maxHealth);
             GameEvents.RaiseActorDamaged(this, amount, source);
 

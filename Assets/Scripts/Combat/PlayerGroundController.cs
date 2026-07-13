@@ -12,6 +12,7 @@ namespace TwoWorlds.Combat
     {
         [SerializeField] protected InputReader inputReader;
         [SerializeField] float groundSpeed = 5f;
+        [SerializeField] float sprintSpeed = 8f;
         [Tooltip("Depth movement is slower than horizontal to sell the flattened stage perspective.")]
         [SerializeField] float depthSpeedScale = 0.6f;
 
@@ -53,13 +54,13 @@ namespace TwoWorlds.Combat
             if (IsInputBlocked() || inputReader == null)
                 return;
 
-            var moveInput = inputReader.MoveAction != null
-                ? inputReader.MoveAction.ReadValue<Vector2>()
-                : Vector2.zero;
+            var moveInput = Read2DInput();
+            var sprintInput = ReadSprintInput();
+            float targetSpeed = sprintInput == 0 ? groundSpeed : sprintSpeed;
 
             var groundDelta = new Vector2(
-                moveInput.x * groundSpeed,
-                moveInput.y * groundSpeed * depthSpeedScale) * Time.deltaTime;
+                moveInput.x * targetSpeed,
+                moveInput.y * targetSpeed * depthSpeedScale) * Time.deltaTime;
 
             if (groundDelta.sqrMagnitude > 0f)
             {
@@ -67,6 +68,21 @@ namespace TwoWorlds.Combat
                 FaceMoveDirection(moveInput.x);
             }
         }
+
+        protected Vector2 Read2DInput()
+        {
+            return inputReader.MoveAction != null
+                ? inputReader.MoveAction.ReadValue<Vector2>().normalized
+                : Vector2.zero;
+        }
+
+        protected float ReadSprintInput()
+        {
+            return inputReader.SprintAction != null
+                ? inputReader.SprintAction.ReadValue<float>()
+                : 0f;
+        }
+
 
         protected void FaceMoveDirection(float horizontal)
         {

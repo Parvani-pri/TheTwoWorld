@@ -191,7 +191,7 @@ namespace TwoWorlds.Combat.Editor
             fillImage.raycastTarget = false;
             AssignDefaultUISprite(fillImage);
 
-            var barUI = barRoot.AddComponent<CombatHealthBarUI>();
+            var barUI = barRoot.AddComponent<CombatPlayerStatsUI>();
             SetObject(barUI, "targetHealth", target);
             SetObject(barUI, "fillImage", fillImage);
             SetBool(barUI, "hideWhenFull", false);
