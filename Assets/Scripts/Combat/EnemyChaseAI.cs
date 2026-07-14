@@ -17,11 +17,14 @@ namespace TwoWorlds.Combat
         [Tooltip("Height difference below which the enemy stops adjusting altitude.")]
         [SerializeField] float heightTolerance = 0.15f;
 
+        SpriteRenderer spriteRenderer;
+
         CombatActor actor;
         IEnemyAttackRangeProvider attackAI;
 
         void Awake()
         {
+            spriteRenderer = GetComponent<SpriteRenderer>();
             actor = GetComponent<CombatActor>();
             attackAI = GetComponent<IEnemyAttackRangeProvider>();
         }
@@ -64,12 +67,10 @@ namespace TwoWorlds.Combat
 
         void FaceTarget(float horizontal)
         {
+            spriteRenderer.flipX = horizontal <= 0f;
             if (Mathf.Approximately(horizontal, 0f))
                 return;
 
-            var scale = transform.localScale;
-            scale.x = horizontal > 0f ? Mathf.Abs(scale.x) : -Mathf.Abs(scale.x);
-            transform.localScale = scale;
         }
     }
 }

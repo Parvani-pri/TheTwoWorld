@@ -16,7 +16,9 @@ namespace TwoWorlds.Core
         InputAction inventoryAction;
         InputAction moveAction;
         InputAction jumpAction;
-        InputAction attackAction;
+        InputAction attackAction1;
+        InputAction attackAction2;
+        InputAction attackAction3;
         InputAction sprintAction;
 
         public InputAction InteractAction => interactAction;
@@ -25,7 +27,9 @@ namespace TwoWorlds.Core
         public InputAction InventoryAction => inventoryAction;
         public InputAction MoveAction => moveAction;
         public InputAction JumpAction => jumpAction;
-        public InputAction AttackAction => attackAction;
+        public InputAction AttackAction1 => attackAction1;
+        public InputAction AttackAction2 => attackAction2;
+        public InputAction AttackAction3 => attackAction3;
         public InputAction SprintAction => sprintAction;
 
 
@@ -48,7 +52,9 @@ namespace TwoWorlds.Core
             inventoryAction = playerMap.FindAction("Inventory", true);
             moveAction = playerMap.FindAction("Move", true);
             jumpAction = playerMap.FindAction("Jump", true);
-            attackAction = playerMap.FindAction("Attack", true);
+            attackAction1 = playerMap.FindAction("Attack1", true);
+            attackAction2 = playerMap.FindAction("Attack2", true);
+            attackAction3 = playerMap.FindAction("Attack3", true);
             sprintAction = playerMap.FindAction("Sprint", true);
         }
 

@@ -45,7 +45,7 @@ namespace TwoWorlds.Combat
             if (!IsInAttackRange || hitbox.IsActive)
                 return;
 
-            FaceTarget(target);
+            //FaceTarget(target);
             hitbox.Activate(attackData);
             cooldownTimer = attackData.Cooldown;
         }
