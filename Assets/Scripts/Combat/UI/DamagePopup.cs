@@ -5,7 +5,7 @@ public class DamagePopup : MonoBehaviour
 {
     private TextMeshProUGUI popupText;
     private float disappearCountdown;
-    private float moveSpeed = 10f;
+    private float moveSpeed = 2f;
     private float fadeOutSpeed = 3f;
 
     private Color popupTextColor;
