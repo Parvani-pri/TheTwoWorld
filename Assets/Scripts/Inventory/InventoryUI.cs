@@ -20,6 +20,7 @@ namespace TwoWorlds.Inventory
         [SerializeField] ItemDropper itemDropper;
         [SerializeField] Button discardButton;
         [SerializeField] Button discardAllButton;
+        [SerializeField] ItemInterpretUI itemInterpretUI;
         [SerializeField] Canvas dragCanvas;
         [SerializeField] float dragGhostSize = 64f;
 
@@ -70,6 +71,9 @@ namespace TwoWorlds.Inventory
 
             if (itemDropper == null)
                 itemDropper = FindFirstObjectByType<ItemDropper>();
+
+            if (itemInterpretUI == null)
+                itemInterpretUI = GetComponentInChildren<ItemInterpretUI>(true);
 
             if (dragCanvas == null)
                 dragCanvas = GetComponentInParent<Canvas>();
@@ -384,6 +388,8 @@ namespace TwoWorlds.Inventory
 
             if (itemMetaText != null)
                 itemMetaText.text = string.Empty;
+
+            itemInterpretUI?.Clear();
         }
 
         void ShowItemDetails(InventorySlot slot)
@@ -408,6 +414,8 @@ namespace TwoWorlds.Inventory
 
                 itemDescriptionText.text = description;
             }
+
+            itemInterpretUI?.BindItem(slot.item);
         }
 
         static string BuildMetaText(InventorySlot slot)

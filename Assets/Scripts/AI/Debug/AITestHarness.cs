@@ -23,7 +23,7 @@ namespace TwoWorlds.AI
         [SerializeField] ItemData soulNail;
 
         [Header("Editor Test Setup")]
-        [SerializeField] bool seedTestItemsInEditor = true;
+        [SerializeField] bool seedTestItemsInEditor = false;
 
         const string SimpleSystemPrompt =
             "你是《两界》中的叙事向导。用简体中文简短回答，每次 1-2 句话。";
