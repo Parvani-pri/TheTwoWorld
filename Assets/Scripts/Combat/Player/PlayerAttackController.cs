@@ -1,6 +1,5 @@
 using TwoWorlds.Core;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace TwoWorlds.Combat
 {
@@ -9,8 +8,11 @@ namespace TwoWorlds.Combat
         [SerializeField] InputReader inputReader;
         [SerializeField] AttackData attackData;
         [SerializeField] CombatHitbox hitbox;
+        [SerializeField] Animator playerAnimator;
+
 
         float cooldownTimer;
+        public bool canAttack;
         bool combatEnded;
         bool gameplayBlocked;
         bool inventoryOpen;
@@ -19,6 +21,7 @@ namespace TwoWorlds.Combat
 
         void Awake()
         {
+            canAttack = true;
             if (hitbox == null)
                 hitbox = GetComponentInChildren<CombatHitbox>();
         }
@@ -42,7 +45,7 @@ namespace TwoWorlds.Combat
             if (inputReader == null)
                 inputReader = FindFirstObjectByType<InputReader>();
 
-            if (inputReader?.AttackAction == null)
+            if (inputReader?.AttackAction1 == null)
                 Debug.LogWarning("[PlayerAttackController] Attack action not found on InputReader.");
         }
 
@@ -51,8 +54,24 @@ namespace TwoWorlds.Combat
             if (cooldownTimer > 0f)
                 cooldownTimer -= Time.deltaTime;
 
-            if (inputReader?.AttackAction != null && inputReader.AttackAction.WasPerformedThisFrame())
-                TryAttack();
+            if (inputReader?.AttackAction1 != null && inputReader.AttackAction1.WasPerformedThisFrame() && cooldownTimer <= 0f &&  canAttack)
+            {
+                playerAnimator.SetTrigger(PlayerAnimParams.ATTACK);
+                playerAnimator.SetInteger(PlayerAnimParams.ATTACK_INDEX, 1);
+            }
+
+            else if (inputReader?.AttackAction2 != null && inputReader.AttackAction2.WasPerformedThisFrame() && cooldownTimer <= 0f && canAttack)
+            {
+                playerAnimator.SetTrigger(PlayerAnimParams.ATTACK);
+                playerAnimator.SetInteger(PlayerAnimParams.ATTACK_INDEX, 2);
+            }
+
+            else if (inputReader?.AttackAction3 != null && inputReader.AttackAction3.WasPerformedThisFrame() && cooldownTimer <= 0f && canAttack)
+            {
+                playerAnimator.SetTrigger(PlayerAnimParams.ATTACK);
+                playerAnimator.SetInteger(PlayerAnimParams.ATTACK_INDEX, 3);
+            }
+
         }
 
         public void TryAttack()
@@ -89,6 +108,11 @@ namespace TwoWorlds.Combat
                 || gameplayBlocked
                 || inventoryOpen
                 || attackData == null;
+        }
+
+        public void SetAttackEligibility(int eligibility)
+        {
+            canAttack = eligibility != 0;
         }
     }
 }

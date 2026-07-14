@@ -41,8 +41,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: VFX
+    uniqueID: 2080675021
+    locked: 0
   - name: Text
     uniqueID: 2475199169
+    locked: 0
+  - name: Player
+    uniqueID: 1449403055
+    locked: 0
+  - name: Mask
+    uniqueID: 3254620869
     locked: 0
   m_RenderingLayers:
   - Default

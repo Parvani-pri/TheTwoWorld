@@ -83,6 +83,7 @@ namespace TwoWorlds.Combat
             filter.useTriggers = true;
             hitCollider.Overlap(filter, overlapResults);
 
+
             foreach (var other in overlapResults)
                 TryHit(other);
         }

@@ -108,4 +108,6 @@ namespace TwoWorlds.Combat
 public static class PlayerAnimParams
 {
     public static readonly int SPEED = Animator.StringToHash("speed");
+    public static readonly int ATTACK = Animator.StringToHash("attack");
+    public static readonly int ATTACK_INDEX = Animator.StringToHash("attackIndex");
 }
