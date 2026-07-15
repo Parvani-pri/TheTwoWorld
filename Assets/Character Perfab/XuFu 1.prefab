@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3897933516923468710
 Transform:
   m_ObjectHideFlags: 0
@@ -5124,7 +5124,9 @@ MonoBehaviour:
   database: {fileID: 11400000, guid: e50714c6df4ee184295e12325f2bbe80, type: 2}
   currentAnimation: idle
   equippedMask: {fileID: 11400000, guid: 5fc1f841aa9778c43b0f16c024a81b9a, type: 2}
-  quickMasks: []
+  quickMasks:
+  - {fileID: 11400000, guid: 5fc1f841aa9778c43b0f16c024a81b9a, type: 2}
+  - {fileID: 11400000, guid: a64529f57fe0da44c8cbdebe093e6b21, type: 2}
   hideMaskWhenNoFrameFound: 1
 --- !u!114 &1611358903885864689
 MonoBehaviour:
@@ -5156,7 +5158,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2553226376662667068
 Transform:
   m_ObjectHideFlags: 0
@@ -5298,6 +5300,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 42528d697b7443744b4119c2c1dc304f, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 42528d697b7443744b4119c2c1dc304f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7703671542218137513}
   - component: {fileID: 5905036129310244790}
   - component: {fileID: 7252032906247500139}
-  - component: {fileID: 1936485737773569190}
   m_Layer: 0
   m_Name: sMonster6
   m_TagString: Untagged
@@ -115,19 +114,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1936485737773569190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2916847040964889232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1e9b448a8afe374ab861f0d9b1864cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WangLiangAnimationDemo
-  animator: {fileID: 7252032906247500139}
-  showDebugPanel: 1
-  locomotionPreviewSeconds: 2
-  attackClipSeconds: 2.083
