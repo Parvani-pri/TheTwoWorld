@@ -45,7 +45,7 @@ namespace TwoWorlds.Combat
             if (!IsInAttackRange || hitbox.IsActive)
                 return;
 
-            //FaceTarget(target);
+            FaceTarget(target);
             hitbox.Activate(attackData);
             cooldownTimer = attackData.Cooldown;
         }
@@ -56,9 +56,9 @@ namespace TwoWorlds.Combat
             if (Mathf.Approximately(horizontal, 0f))
                 return;
 
-            var scale = transform.localScale;
+            var scale = hitbox.transform.localScale;
             scale.x = horizontal > 0f ? Mathf.Abs(scale.x) : -Mathf.Abs(scale.x);
-            transform.localScale = scale;
+            hitbox.transform.localScale = scale;
         }
     }
 }
