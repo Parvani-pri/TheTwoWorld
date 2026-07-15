@@ -46,6 +46,8 @@ namespace TwoWorlds.Combat
 
         public void Activate(AttackData attackData)
         {
+            print(attackData);
+            print(hitCollider);
             if (attackData == null || hitCollider == null)
                 return;
 
@@ -83,7 +85,6 @@ namespace TwoWorlds.Combat
             filter.useTriggers = true;
             hitCollider.Overlap(filter, overlapResults);
 
-
             foreach (var other in overlapResults)
                 TryHit(other);
         }
@@ -92,21 +93,22 @@ namespace TwoWorlds.Combat
         {
             if (!isActive || activeAttack == null)
                 return;
-
+            print("condition 1 passed");
             var hurtbox = other.GetComponent<CombatHurtbox>()
                 ?? other.GetComponentInParent<CombatHurtbox>();
-
             if (hurtbox == null || hurtbox.Health == null || !hurtbox.Health.IsAlive)
                 return;
-
+            print("condition 2 passed");
             if (owner != null && hurtbox.Owner == owner)
                 return;
-
+            print("condition 3 passed");
             if (owner != null && hurtbox.Faction == owner.Faction)
                 return;
-
+            print("condition 4 passed");
             if (hitThisActivation.Contains(hurtbox))
                 return;
+
+            print("conditions passed");
 
             if (owner != null && hurtbox.Owner != null)
             {
