@@ -84,6 +84,15 @@ namespace TwoWorlds.AI
             string npcPersona,
             string userMessage,
             Action<string> onSuccess,
+            Action<string> onError) =>
+            AskWithInventoryContext(inventory, null, npcPersona, userMessage, onSuccess, onError);
+
+        public void AskWithInventoryContext(
+            PlayerInventory inventory,
+            string npcName,
+            string npcPersona,
+            string userMessage,
+            Action<string> onSuccess,
             Action<string> onError)
         {
             if (contextBuilder == null)
@@ -92,7 +101,7 @@ namespace TwoWorlds.AI
                 return;
             }
 
-            var systemPrompt = contextBuilder.BuildNpcSystemPrompt(null, npcPersona, inventory);
+            var systemPrompt = contextBuilder.BuildNpcSystemPrompt(npcName, npcPersona, inventory);
             Ask(systemPrompt, userMessage, onSuccess, onError);
         }
 
