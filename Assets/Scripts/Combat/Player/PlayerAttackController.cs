@@ -15,6 +15,7 @@ namespace TwoWorlds.Combat
 
 
         [SerializeField] GameObject chargeProjectilePrefab;
+        GameObject chargeProjectileInstance;
         [SerializeField] Transform spawnTransform;
         [SerializeField] float maxChargeTimer = 3f;
         [SerializeField] float maxChargeAttackMultiplier = 3f;
@@ -65,6 +66,10 @@ namespace TwoWorlds.Combat
         {
             if (cooldownTimer1 > 0f)
                 cooldownTimer1 -= Time.deltaTime;
+            if (cooldownTimer2 > 0f)
+                cooldownTimer2 -= Time.deltaTime;
+            if (cooldownTimer3 > 0f)
+                cooldownTimer3 -= Time.deltaTime;
 
             if (inputReader?.AttackAction1 != null && inputReader.AttackAction1.WasPerformedThisFrame() && cooldownTimer1 <= 0f &&  canAttack)
             {
@@ -75,8 +80,8 @@ namespace TwoWorlds.Combat
             if (inputReader?.AttackAction2 != null && inputReader.AttackAction2.WasPerformedThisFrame() && cooldownTimer2 <= 0f && canAttack)
             {
                 StartChargeAttack();
-                playerAnimator.SetTrigger(PlayerAnimParams.ATTACK);
-                playerAnimator.SetInteger(PlayerAnimParams.ATTACK_INDEX, 2);
+                //playerAnimator.SetTrigger(PlayerAnimParams.ATTACK);
+                //playerAnimator.SetInteger(PlayerAnimParams.ATTACK_INDEX, 2);
             }
 
             if (inputReader?.AttackAction3 != null && inputReader.AttackAction3.WasPerformedThisFrame() && cooldownTimer3 <= 0f && canAttack)
@@ -89,19 +94,28 @@ namespace TwoWorlds.Combat
 
         void StartChargeAttack()
         {
-            Instantiate(chargeProjectilePrefab, spawnTransform.position, Quaternion.identity);
+            chargeProjectileInstance = Instantiate(chargeProjectilePrefab, spawnTransform.position, Quaternion.identity);
+            chargeProjectileInstance.transform.parent = transform;
+
             StartCoroutine(StartCharging());
             canAttack = false;
         }
 
         IEnumerator StartCharging()
         {
+            if (chargeProjectileInstance.GetComponent<ProjectileAttack>() != null)
+            {
+                chargeProjectileInstance.GetComponent<ProjectileAttack>().Charge(maxChargeTimer);
+            }
             while (inputReader.AttackAction2.IsPressed())
             {
                 currentChargeTimer += Time.deltaTime;
                 yield return null;
             }
+            chargeProjectileInstance.GetComponent<ProjectileAttack>().Release();
             TryAttack(2);
+            playerAnimator.SetTrigger(PlayerAnimParams.ATTACK);
+            playerAnimator.SetInteger(PlayerAnimParams.ATTACK_INDEX, 2);
         }
 
 
@@ -121,6 +135,7 @@ namespace TwoWorlds.Combat
                     break;
                 case 2:
                     hitbox.Activate(attack2Data, currentChargeTimer / maxChargeTimer * (maxChargeAttackMultiplier - 1) + 1);
+                    currentChargeTimer = 0f;
                     cooldownTimer2 = attack2Data.Cooldown;
                     break;
                 case 3:
@@ -157,7 +172,7 @@ namespace TwoWorlds.Combat
                 || attack1Data == null;
         }
 
-        public void SetAttack1Eligibility(int eligibility)
+        public void SetAttackEligibility(int eligibility)
         {
             canAttack = eligibility != 0;
         }

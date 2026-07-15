@@ -111,6 +111,7 @@ namespace TwoWorlds.Combat
             }
 
             hitThisActivation.Add(hurtbox);
+            print(accumulatedMultiplier);
             hurtbox.Health.TakeDamage((int)(activeAttack.Damage * accumulatedMultiplier), owner);
         }
     }
