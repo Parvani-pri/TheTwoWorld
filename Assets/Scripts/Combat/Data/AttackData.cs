@@ -10,11 +10,13 @@ namespace TwoWorlds.Combat
         [SerializeField] float cooldown = 0.5f;
         [SerializeField] float attackRange = 1.2f;
         [SerializeField] float heightTolerance = 0.5f;
+        [SerializeField] int chargeMultiplier = 1;
 
         public int Damage => damage;
         public float HitboxActiveDuration => hitboxActiveDuration;
         public float Cooldown => cooldown;
         public float AttackRange => attackRange;
         public float HeightTolerance => heightTolerance;
+        public int ChargeMultiplier => chargeMultiplier;
     }
 }

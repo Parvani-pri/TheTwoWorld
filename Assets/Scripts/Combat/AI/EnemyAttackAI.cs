@@ -46,7 +46,7 @@ namespace TwoWorlds.Combat
                 return;
 
             FaceTarget(target);
-            hitbox.Activate(attackData);
+            hitbox.Activate(attackData, 1);
             cooldownTimer = attackData.Cooldown;
         }
 

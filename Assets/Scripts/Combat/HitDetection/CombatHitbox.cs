@@ -44,10 +44,8 @@ namespace TwoWorlds.Combat
                 Deactivate();
         }
 
-        public void Activate(AttackData attackData)
+        public void Activate(AttackData attackData, float accumulatedMultiplier)
         {
-            print(attackData);
-            print(hitCollider);
             if (attackData == null || hitCollider == null)
                 return;
 
@@ -57,7 +55,7 @@ namespace TwoWorlds.Combat
             hitThisActivation.Clear();
             hitCollider.enabled = true;
             Physics2D.SyncTransforms();
-            ScanCurrentOverlaps();
+            ScanCurrentOverlaps(accumulatedMultiplier);
         }
 
         public void Deactivate()
@@ -71,11 +69,11 @@ namespace TwoWorlds.Combat
                 hitCollider.enabled = false;
         }
 
-        void OnTriggerEnter2D(Collider2D other) => TryHit(other);
+        void OnTriggerEnter2D(Collider2D other) => TryHit(other, 1);
 
-        void OnTriggerStay2D(Collider2D other) => TryHit(other);
+        void OnTriggerStay2D(Collider2D other) => TryHit(other, 1);
 
-        void ScanCurrentOverlaps()
+        void ScanCurrentOverlaps(float accumulatedMultiplier)
         {
             if (!isActive || hitCollider == null)
                 return;
@@ -86,29 +84,24 @@ namespace TwoWorlds.Combat
             hitCollider.Overlap(filter, overlapResults);
 
             foreach (var other in overlapResults)
-                TryHit(other);
+                TryHit(other, accumulatedMultiplier);
         }
 
-        void TryHit(Collider2D other)
+        void TryHit(Collider2D other, float accumulatedMultiplier)
         {
             if (!isActive || activeAttack == null)
                 return;
-            print("condition 1 passed");
             var hurtbox = other.GetComponent<CombatHurtbox>()
                 ?? other.GetComponentInParent<CombatHurtbox>();
             if (hurtbox == null || hurtbox.Health == null || !hurtbox.Health.IsAlive)
                 return;
-            print("condition 2 passed");
             if (owner != null && hurtbox.Owner == owner)
                 return;
-            print("condition 3 passed");
             if (owner != null && hurtbox.Faction == owner.Faction)
                 return;
-            print("condition 4 passed");
             if (hitThisActivation.Contains(hurtbox))
                 return;
 
-            print("conditions passed");
 
             if (owner != null && hurtbox.Owner != null)
             {
@@ -118,7 +111,7 @@ namespace TwoWorlds.Combat
             }
 
             hitThisActivation.Add(hurtbox);
-            hurtbox.Health.TakeDamage(activeAttack.Damage, owner);
+            hurtbox.Health.TakeDamage((int)(activeAttack.Damage * accumulatedMultiplier), owner);
         }
     }
 }
