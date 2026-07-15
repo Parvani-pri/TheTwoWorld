@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f67f9fc46b31ce42b2b8868de9a1b7b, type: 3}
   m_Name: MaskItem 1
   m_EditorClassIdentifier: Assembly-CSharp::XuFu.MaskSystem.MaskItem
-  maskId: bird_mask
-  maskSprite: {fileID: 0}
+  maskId: zhong_mask
+  maskSprite: {fileID: 21300000, guid: 4571738fa31d4354db3546ceb32263ad, type: 3}
   globalScale: 1
   extraOffsetPixels: {x: 0, y: 0}
   extraRotation: 0
