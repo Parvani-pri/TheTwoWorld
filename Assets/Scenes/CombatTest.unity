@@ -1086,7 +1086,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &755123965
 Transform:
   m_ObjectHideFlags: 0
@@ -3474,7 +3474,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1664251574
 Transform:
   m_ObjectHideFlags: 0
@@ -3611,11 +3611,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6935476639196451371, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
       propertyPath: TriggerModule.enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6935476639196451371, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
       propertyPath: TriggerModule.outside
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935476639196451371, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6935476639196451371, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
       propertyPath: CollisionModule.collisionMode
@@ -3874,6 +3878,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1751563113}
   - component: {fileID: 1751563114}
+  - component: {fileID: 1751563115}
   m_Layer: 0
   m_Name: EnemyHealthBar
   m_TagString: Untagged
@@ -3916,6 +3921,19 @@ MonoBehaviour:
   targetHealth: {fileID: 1037640361}
   enemyHealthFill: {fileID: 2043255242}
   hideWhenFull: 0
+--- !u!114 &1751563115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751563112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad26bd4524f086c4aa7d85ac5432ba59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemColliderManager
+  ps: {fileID: 0}
 --- !u!1 &1860209172
 GameObject:
   m_ObjectHideFlags: 0
