@@ -156,13 +156,10 @@ AnimationClip:
     floatParameter: 0
     intParameter: 3
     messageOptions: 0
-<<<<<<< Updated upstream
   - time: 1.5833334
     functionName: PlayCoinFirework
-=======
   - time: 1.3333334
     functionName: 
->>>>>>> Stashed changes
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
