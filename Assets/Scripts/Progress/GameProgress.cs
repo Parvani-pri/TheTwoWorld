@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
+using TwoWorlds.AI;
 using TwoWorlds.Core;
 using UnityEngine;
 

@@ -16,7 +16,9 @@ namespace TwoWorlds.Combat
         [SerializeField] bool canFly = true;
         [Tooltip("Height difference below which the enemy stops adjusting altitude.")]
         [SerializeField] float heightTolerance = 0.15f;
+        [SerializeField] Animator animator;
 
+        
         SpriteRenderer spriteRenderer;
 
         CombatActor actor;
@@ -48,8 +50,11 @@ namespace TwoWorlds.Combat
         {
             var toTarget = target.GroundPosition - actor.GroundPosition;
             if (toTarget.magnitude <= stopDistance)
+            {
+                animator.SetBool(PlayerAnimParams.IS_WALK, false);
                 return;
-
+            }
+            animator.SetBool(PlayerAnimParams.IS_WALK, true);
             var step = toTarget.normalized * moveSpeed * Time.deltaTime;
             actor.MoveGround(step);
             FaceTarget(toTarget.x);
@@ -71,6 +76,11 @@ namespace TwoWorlds.Combat
             if (Mathf.Approximately(horizontal, 0f))
                 return;
 
+        }
+
+        public void SetStopDistance(float stopDistance)
+        {
+            this.stopDistance = stopDistance;
         }
     }
 }

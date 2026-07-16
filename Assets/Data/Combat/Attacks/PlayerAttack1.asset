@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.AttackData
   damage: 3
   hitboxActiveDuration: 0.15
-  cooldown: 0.4
+  cooldown: 1.5
   attackRange: 1.2
   heightTolerance: 0.5
+  chargeMultiplier: 1

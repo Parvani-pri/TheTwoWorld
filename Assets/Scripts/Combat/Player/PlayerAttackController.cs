@@ -73,6 +73,7 @@ namespace TwoWorlds.Combat
 
             if (inputReader?.AttackAction1 != null && inputReader.AttackAction1.WasPerformedThisFrame() && cooldownTimer1 <= 0f &&  canAttack)
             {
+
                 playerAnimator.SetTrigger(PlayerAnimParams.ATTACK);
                 playerAnimator.SetInteger(PlayerAnimParams.ATTACK_INDEX, 1);
             }
@@ -86,6 +87,7 @@ namespace TwoWorlds.Combat
 
             if (inputReader?.AttackAction3 != null && inputReader.AttackAction3.WasPerformedThisFrame() && cooldownTimer3 <= 0f && canAttack)
             {
+
                 playerAnimator.SetTrigger(PlayerAnimParams.ATTACK);
                 playerAnimator.SetInteger(PlayerAnimParams.ATTACK_INDEX, 3);
             }
@@ -103,16 +105,23 @@ namespace TwoWorlds.Combat
 
         IEnumerator StartCharging()
         {
+            PlayerAttackUI.StartAttackCharge();
             if (chargeProjectileInstance.GetComponent<ProjectileAttack>() != null)
             {
                 chargeProjectileInstance.GetComponent<ProjectileAttack>().Charge(maxChargeTimer);
             }
             while (inputReader.AttackAction2.IsPressed())
             {
-                currentChargeTimer += Time.deltaTime;
+                if (currentChargeTimer < maxChargeTimer)
+                {
+                    currentChargeTimer += Time.deltaTime;
+                }
+
                 yield return null;
             }
-            chargeProjectileInstance.GetComponent<ProjectileAttack>().Release();
+            chargeProjectileInstance.GetComponent<ProjectileAttack>().Release((currentChargeTimer / maxChargeTimer * (maxChargeAttackMultiplier - 1) + 1) * attack2Data.Damage);
+            PlayerAttackUI.ReleaseAttack();
+
             TryAttack(2);
             playerAnimator.SetTrigger(PlayerAnimParams.ATTACK);
             playerAnimator.SetInteger(PlayerAnimParams.ATTACK_INDEX, 2);
@@ -132,15 +141,18 @@ namespace TwoWorlds.Combat
                 case 1:
                     hitbox.Activate(attack1Data, 1);
                     cooldownTimer1 = attack1Data.Cooldown;
+                    PlayerAttackUI.OnAttackLaunched(1, attack1Data.Cooldown);
                     break;
                 case 2:
                     hitbox.Activate(attack2Data, currentChargeTimer / maxChargeTimer * (maxChargeAttackMultiplier - 1) + 1);
                     currentChargeTimer = 0f;
                     cooldownTimer2 = attack2Data.Cooldown;
+                    PlayerAttackUI.OnAttackLaunched(2, attack2Data.Cooldown);
                     break;
                 case 3:
                     hitbox.Activate(attack3Data, 1);
                     cooldownTimer3 = attack3Data.Cooldown;
+                    PlayerAttackUI.OnAttackLaunched(3, attack3Data.Cooldown);
                     break;
                 default:
                     break;

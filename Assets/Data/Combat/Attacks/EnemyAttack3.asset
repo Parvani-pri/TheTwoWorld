@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8f3c2e1b4d5476980aabbccddee0103, type: 3}
-  m_Name: EnemyMeleeAttack
+  m_Name: EnemyAttack3
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.AttackData
-  damage: 2
+  damage: 4
   hitboxActiveDuration: 0.2
   cooldown: 2
-  attackRange: 1.3
+  attackRange: 1.2
   heightTolerance: 0.5
+  chargeMultiplier: 1

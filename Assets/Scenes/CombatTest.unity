@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.50980395}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -656,6 +656,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 390052059}
+  - component: {fileID: 390052060}
   m_Layer: 0
   m_Name: Attacks
   m_TagString: Untagged
@@ -685,6 +686,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &390052060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390052058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f4810b41c62199488f48e79a0e8a3dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAttackUI
+  attack1: {fileID: 1212942998}
+  attack2: {fileID: 1712182966}
+  attack2Charge: {fileID: 1556537942}
+  attack3: {fileID: 1514650041}
+  attack1Data: {fileID: 11400000, guid: c8d9e0f1a2b3434590aabbccddeeff11, type: 2}
+  attack2Data: {fileID: 11400000, guid: 0b6e57fd406777042b0992e4840bd702, type: 2}
+  chargeMaxTimer: 3
+  attack3Data: {fileID: 11400000, guid: df4035a89666db9458e6b1330f0c4057, type: 2}
 --- !u!1 &408194241
 GameObject:
   m_ObjectHideFlags: 0
@@ -1080,7 +1101,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1037640363}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -20, z: 0}
 --- !u!114 &755123966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1529,6 +1550,7 @@ GameObject:
   - component: {fileID: 1037640358}
   - component: {fileID: 1037640357}
   - component: {fileID: 1037640356}
+  - component: {fileID: 1037640364}
   m_Layer: 0
   m_Name: Enemy (1)
   m_TagString: Untagged
@@ -1570,8 +1592,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4f5a6b7c8d940125aabbccddeeff071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.EnemyAttackAI
-  attackData: {fileID: 11400000, guid: d9e0f1a2b3c444560aabbccddeeff121, type: 2}
+  attack1Data: {fileID: 11400000, guid: d9e0f1a2b3c444560aabbccddeeff121, type: 2}
+  attack2Data: {fileID: 11400000, guid: fb597c17fa2698e4eab3ccc73ccc1924, type: 2}
+  attack3Data: {fileID: 11400000, guid: ddd5134c5132dea4f8bb67b6033d805c, type: 2}
   hitbox: {fileID: 1645761271}
+  chaseAI: {fileID: 1037640360}
+  animator: {fileID: 1037640356}
+  attackCD: 3
 --- !u!50 &1037640358
 Rigidbody2D:
   serializedVersion: 5
@@ -1675,6 +1702,7 @@ MonoBehaviour:
   stopDistance: 1.2
   canFly: 1
   heightTolerance: 0.15
+  animator: {fileID: 1037640356}
 --- !u!114 &1037640361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1716,7 +1744,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1037640355}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.17364816, z: 0, w: 0.9848078}
   m_LocalPosition: {x: 3.681, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1726,7 +1754,49 @@ Transform:
   - {fileID: 755123965}
   - {fileID: 514024453}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 20, z: 0}
+--- !u!114 &1037640364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037640355}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dac23968eec08147b1a974b93e1fdaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaterAttackFX
+  waveSlashA: {fileID: 0}
+  waveSlashB: {fileID: 0}
+  fish01: {fileID: 0}
+  fish02: {fileID: 0}
+  fish03: {fileID: 0}
+  splashBurst: {fileID: 0}
+  foamTrail: {fileID: 0}
+  moveLeft: 1
+  moveDistance: 2.8
+  totalDuration: 1.15
+  chargeDuration: 0.2
+  moveDuration: 0.7
+  startScale: 0.15
+  chargeScale: 0.45
+  maxScale: 1
+  waveVerticalAmount: 0.08
+  waveRotationAmount: 4
+  fishJumpHeight: 0.65
+  fishJumpDuration: 0.45
+  fish01Delay: 0.25
+  fish02Delay: 0.4
+  fish03Delay: 0.55
+  fish01HorizontalOffset: -0.15
+  fish02HorizontalOffset: 0.1
+  fish03HorizontalOffset: 0.3
+  fishSpinAmount: 35
+  fadeStartNormalizedTime: 0.72
+  splashTime: 0.78
+  splashVisibleDuration: 0.3
+  extraDestroyDelay: 0.1
 --- !u!1 &1064042058
 GameObject:
   m_ObjectHideFlags: 0
@@ -2097,8 +2167,8 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
+  m_FillAmount: 0
+  m_FillClockwise: 0
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
@@ -2593,7 +2663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b483d2db5ecf4674fb0326b00d714a65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.CombatPlayerStatsUI
-  targetHealth: {fileID: 0}
+  targetHealth: {fileID: 1709274830}
   playerHealthFill: {fileID: 1317341889}
   playerSprintFill: {fileID: 1422347462}
   playerFlightFill: {fileID: 261136406}
@@ -2735,8 +2805,8 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
+  m_FillAmount: 0
+  m_FillClockwise: 0
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
@@ -2818,7 +2888,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
@@ -3056,6 +3126,7 @@ MonoBehaviour:
   stopDistance: 1.2
   canFly: 1
   heightTolerance: 0.15
+  animator: {fileID: 0}
 --- !u!114 &1609175028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3177,8 +3248,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4f5a6b7c8d940125aabbccddeeff071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.EnemyAttackAI
-  attackData: {fileID: 11400000, guid: d9e0f1a2b3c444560aabbccddeeff121, type: 2}
+  attack1Data: {fileID: 0}
+  attack2Data: {fileID: 0}
+  attack3Data: {fileID: 0}
   hitbox: {fileID: 1088351758}
+  chaseAI: {fileID: 0}
+  animator: {fileID: 0}
+  attackCD: 3
 --- !u!50 &1609175033
 Rigidbody2D:
   serializedVersion: 5
@@ -3494,7 +3570,7 @@ MonoBehaviour:
   maxFlightDuration: 5
   maxSprintDuration: 10
   ascendSpeedFactor: 5
-  fallingAcceleration: 9.81
+  fallingAcceleration: 6
   animator: {fileID: 442501993}
 --- !u!114 &1709274828
 MonoBehaviour:
@@ -3613,8 +3689,8 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
+  m_FillAmount: 0
+  m_FillClockwise: 0
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1

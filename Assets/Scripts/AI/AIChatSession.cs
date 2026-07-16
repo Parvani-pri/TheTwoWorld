@@ -18,6 +18,8 @@ namespace TwoWorlds.AI
 
         public bool IsActive => isActive;
 
+        public static AIChatSession Instance;
+
         public static AIChatSession FindInstance()
         {
             if (Instance != null)
