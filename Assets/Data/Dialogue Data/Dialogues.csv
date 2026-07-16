@@ -1,7 +1,7 @@
-dialogue_id,speaker,text,play_once,reward_item_id,reward_amount
-npc_intro,NPC_Elder,"You've finally arrived, young one...",true,,
-npc_intro,Player,"Who are you? What is this place?",true,,
-npc_intro,NPC_Elder,"Take this mask shard; it will guide you.",true,MaskFragment,1
+dialogue_id,speaker,text,play_once,reward_item_id,reward_amount,progress_note
+npc_intro,NPC_Elder,"You've finally arrived, young one...",true,,,
+npc_intro,Player,"Who are you? What is this place?",true,,,
+npc_intro,NPC_Elder,"Take this mask shard; it will guide you.",true,MaskFragment,1,"老翁给予面具碎片"
 elder_no_key,NPC_Elder,"You cannot pass without the ancient key.",false,,
 elder_no_key,Player,"I'll look for it.",false,,
 elder_has_key,NPC_Elder,"Ah! You found the key. Proceed.",true,,

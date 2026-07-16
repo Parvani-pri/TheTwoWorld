@@ -8,6 +8,7 @@ namespace TwoWorlds.AI
     public class AIChatTrigger : MonoBehaviour, IInteractable
     {
         [SerializeField] AIChatSession chatSession;
+        [SerializeField] bool requireInteractHub;
         [SerializeField] string npcName = "小梅";
         [TextArea(3, 6)]
         [SerializeField] string npcPersona =
@@ -33,13 +34,23 @@ namespace TwoWorlds.AI
 
         public bool CanInteract(GameObject interactor)
         {
+            if (requireInteractHub)
+                return false;
+
+            return IsAIChatAvailable(interactor);
+        }
+
+        public bool IsAIChatAvailable(GameObject interactor)
+        {
             if (chatSession == null)
                 chatSession = FindFirstObjectByType<AIChatSession>();
 
             return chatSession != null && !chatSession.IsActive;
         }
 
-        public void Interact(GameObject interactor)
+        public void Interact(GameObject interactor) => TriggerAIChat(interactor);
+
+        public void TriggerAIChat(GameObject interactor, string openingMessageOverride = null)
         {
             if (chatSession == null)
                 chatSession = FindFirstObjectByType<AIChatSession>();
@@ -51,7 +62,7 @@ namespace TwoWorlds.AI
             }
 
             var inventory = interactor.GetComponent<PlayerInventory>();
-            chatSession.StartSession(this, inventory);
+            chatSession.StartSession(this, inventory, openingMessageOverride);
         }
 
         public string GetPromptText() => promptText;

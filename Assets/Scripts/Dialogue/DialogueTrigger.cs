@@ -22,11 +22,20 @@ namespace TwoWorlds.Dialogue
         [SerializeField] ItemData requiredItem;
         [SerializeField] int requiredAmount = 1;
         [SerializeField] bool consumeRequiredItem;
+        [SerializeField] bool requireInteractHub;
         [SerializeField] string promptText = "对话";
 
         bool hasPlayedOnce;
 
         public bool CanInteract(GameObject interactor)
+        {
+            if (requireInteractHub)
+                return false;
+
+            return IsDialogueAvailable(interactor);
+        }
+
+        public bool IsDialogueAvailable(GameObject interactor)
         {
             if (!HasPrimaryDialogue())
                 return false;
@@ -37,7 +46,9 @@ namespace TwoWorlds.Dialogue
             return true;
         }
 
-        public void Interact(GameObject interactor)
+        public void Interact(GameObject interactor) => TriggerDialogue(interactor);
+
+        public void TriggerDialogue(GameObject interactor)
         {
             var inventory = interactor.GetComponent<PlayerInventory>();
             var selectedDialogue = ResolveDialogue(inventory);

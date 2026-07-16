@@ -12,6 +12,7 @@ namespace TwoWorlds.Core
         public static event Action<bool> InventoryOpenChanged;
         public static event Action DialogueStarted;
         public static event Action DialogueEnded;
+        public static event Action<DialogueEndInfo> ScriptDialogueEnded;
         public static event Action<bool> GameplayInputBlocked;
 
         public static event Action CombatStarted;
@@ -47,6 +48,15 @@ namespace TwoWorlds.Core
         {
             GameplayInputBlocked?.Invoke(false);
             DialogueEnded?.Invoke();
+        }
+
+        public static void RaiseDialogueEnded(DialogueEndInfo info)
+        {
+            GameplayInputBlocked?.Invoke(false);
+            DialogueEnded?.Invoke();
+
+            if (info.HasInteractor)
+                ScriptDialogueEnded?.Invoke(info);
         }
 
         public static void RaiseCombatStarted() => CombatStarted?.Invoke();

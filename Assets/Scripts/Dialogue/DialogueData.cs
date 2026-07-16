@@ -34,11 +34,14 @@ namespace TwoWorlds.Dialogue
         [SerializeField] bool playOnce;
         [SerializeField] Inventory.ItemData rewardItem;
         [SerializeField] int rewardAmount = 1;
+        [TextArea(1, 3)]
+        [SerializeField] string progressNote;
 
         public DialogueLine[] Lines => lines;
         public bool PlayOnce => playOnce;
         public Inventory.ItemData RewardItem => rewardItem;
         public int RewardAmount => rewardAmount;
+        public string ProgressNote => progressNote;
 
         public void ApplySessionData(DialogueSessionData sessionData)
         {
@@ -52,6 +55,7 @@ namespace TwoWorlds.Dialogue
             playOnce = sessionData.PlayOnce;
             rewardItem = sessionData.RewardItem;
             rewardAmount = sessionData.RewardAmount;
+            progressNote = sessionData.ProgressNote;
         }
     }
 }
