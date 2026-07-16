@@ -12,6 +12,7 @@ namespace TwoWorlds.Combat
         [SerializeField] GameObject damagePopupPrefab;
         [SerializeField] Transform healthBarTransform;
         [SerializeField] Animator animator;
+        [SerializeField] CombatActor combatActor;
 
         CombatActor actor;
         float invincibleUntil;
@@ -42,6 +43,7 @@ namespace TwoWorlds.Combat
                 return;
 
             animator.SetTrigger(PlayerAnimParams.ON_HURT);
+            combatActor.SetTransformLock(1);
             CurrentHealth = Mathf.Max(0, CurrentHealth - amount);
             invincibleUntil = Time.time + invincibilityDuration;
 
@@ -69,5 +71,7 @@ namespace TwoWorlds.Combat
             HealthChanged?.Invoke(CurrentHealth, maxHealth);
             GameEvents.RaiseActorHealthChanged(this, CurrentHealth, maxHealth);
         }
+
+
     }
 }

@@ -936,7 +936,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 150}
+  m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &528288916
 MonoBehaviour:
@@ -951,14 +951,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 677430481, guid: 553719c4f7f3e5f409512877c6b84d07, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ab5557f1827b64c4197769b8bbfcf80a, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1716,12 +1716,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.CombatHealth
   maxHealth: 100
-  maxHealth: 50
   destroyOnDeath: 1
   invincibilityDuration: 0.3
   damagePopupPrefab: {fileID: 5399276526245205816, guid: 2510c6dfccfa17d49bf5ca14d9d6f0bb, type: 3}
   healthBarTransform: {fileID: 338224893}
   animator: {fileID: 1037640356}
+  combatActor: {fileID: 1037640362}
 --- !u!114 &1037640362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3147,6 +3147,7 @@ MonoBehaviour:
   damagePopupPrefab: {fileID: 5399276526245205816, guid: 2510c6dfccfa17d49bf5ca14d9d6f0bb, type: 3}
   healthBarTransform: {fileID: 2043255241}
   animator: {fileID: 0}
+  combatActor: {fileID: 0}
 --- !u!114 &1609175029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3463,6 +3464,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1790470724794015652, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1790470724794015652, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.55
+      objectReference: {fileID: 0}
     - target: {fileID: 2029716946296000595, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -3515,6 +3524,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: XuFu 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6935476639196451371, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
+      propertyPath: TriggerModule.enter
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935476639196451371, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
+      propertyPath: TriggerModule.inside
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935476639196451371, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
+      propertyPath: TriggerModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935476639196451371, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
+      propertyPath: TriggerModule.outside
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935476639196451371, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
+      propertyPath: CollisionModule.collisionMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935476639196451371, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
+      propertyPath: CollisionModule.collidesWith.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935476639196451371, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
+      propertyPath: TriggerModule.primitives.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935476639196451371, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
+      propertyPath: 'TriggerModule.primitives.Array.data[0]'
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -3543,6 +3584,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2501018622194889917, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1709274827}
+    - targetCorrespondingSourceObject: {fileID: 4447138856311248145, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2000951974}
   m_SourcePrefab: {fileID: 100100000, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
 --- !u!4 &1709274824 stripped
 Transform:
@@ -3631,6 +3675,7 @@ MonoBehaviour:
   damagePopupPrefab: {fileID: 5399276526245205816, guid: 2510c6dfccfa17d49bf5ca14d9d6f0bb, type: 3}
   healthBarTransform: {fileID: 1317341888}
   animator: {fileID: 442501993}
+  combatActor: {fileID: 1709274829}
 --- !u!1 &1712182964
 GameObject:
   m_ObjectHideFlags: 0
@@ -3937,6 +3982,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1991774595}
   m_CullTransparentMesh: 1
+--- !u!1 &2000951970 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4447138856311248145, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
+  m_PrefabInstance: {fileID: 1709274823}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2000951974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000951970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f3beb56e135aa4bb330d7b02bb1e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemCollider
+  attackData: {fileID: 11400000, guid: df4035a89666db9458e6b1330f0c4057, type: 2}
 --- !u!1 &2043255240
 GameObject:
   m_ObjectHideFlags: 0

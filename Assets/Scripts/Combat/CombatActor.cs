@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace TwoWorlds.Combat
@@ -25,7 +26,7 @@ namespace TwoWorlds.Combat
         [SerializeField] SpriteRenderer depthSortedRenderer;
         [SerializeField] float depthSortingScale = 100f;
 
-
+        private bool isTransformLocked = false;
 
         public CombatFaction Faction => faction;
         public ArenaBounds Arena => arena;
@@ -53,8 +54,11 @@ namespace TwoWorlds.Combat
         /// <summary>Delta on the ground plane: x = X, y = Z.</summary>
         public void MoveGround(Vector2 delta)
         {
-            GroundPosition = ClampGround(GroundPosition + delta);
-            ApplyVisualPosition();
+            if (!isTransformLocked)
+            {
+                GroundPosition = ClampGround(GroundPosition + delta);
+                ApplyVisualPosition();
+            }
         }
 
         public void MoveHeight(float delta) => SetHeight(Height + delta);
@@ -101,6 +105,11 @@ namespace TwoWorlds.Combat
                 GroundPosition.y);
             if (depthSortedRenderer != null)
                 depthSortedRenderer.sortingOrder = Mathf.RoundToInt(-GroundPosition.y * depthSortingScale);
+        }
+
+        public void SetTransformLock(int isLocked)
+        {
+            isTransformLocked = isLocked == 0 ? false : true;
         }
     }
 }
