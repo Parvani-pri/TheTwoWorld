@@ -39,8 +39,8 @@ namespace TwoWorlds.Combat
             var target = CombatActor.FindClosest(CombatFaction.Player, actor.GroundPosition);
             if (target == null)
                 return;
-
             ChaseGround(target);
+
 
             if (canFly)
                 ChaseHeight(target);
@@ -49,8 +49,9 @@ namespace TwoWorlds.Combat
         void ChaseGround(CombatActor target)
         {
             var toTarget = target.GroundPosition - actor.GroundPosition;
-            if (toTarget.magnitude <= stopDistance)
+            if (toTarget.magnitude <= stopDistance + 0.02f)
             {
+                animator.SetTrigger(PlayerAnimParams.ATTACK);
                 animator.SetBool(PlayerAnimParams.IS_WALK, false);
                 return;
             }

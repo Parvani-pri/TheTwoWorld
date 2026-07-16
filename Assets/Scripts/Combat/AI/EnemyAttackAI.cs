@@ -28,13 +28,13 @@ namespace TwoWorlds.Combat
             switch (nextAttackID)
             {
                 case 1:
-                    chaseAI.SetStopDistance(attack1Data.AttackRange - 0.1f);
+                    chaseAI.SetStopDistance(attack1Data.AttackRange);
                     break;
                 case 2:
-                    chaseAI.SetStopDistance(attack2Data.AttackRange - 0.1f);
+                    chaseAI.SetStopDistance(attack2Data.AttackRange);
                     break;
                 case 3:
-                    chaseAI.SetStopDistance(attack3Data.AttackRange - 0.1f);
+                    chaseAI.SetStopDistance(attack3Data.AttackRange);
                     break;
 
             }
@@ -47,7 +47,7 @@ namespace TwoWorlds.Combat
         void Update()
         {
             target = CombatActor.FindClosest(CombatFaction.Player, actor.GroundPosition);
-            IsInAttackRange = false;
+            //IsInAttackRange = false;
 
             if (target == null || attack1Data == null || attack2Data == null || attack3Data == null || hitbox == null)
                 return;
@@ -111,13 +111,13 @@ namespace TwoWorlds.Combat
                 switch (nextAttackID)
                 {
                     case 1:
-                        chaseAI.SetStopDistance(attack1Data.AttackRange - 0.1f);
+                        chaseAI.SetStopDistance(attack1Data.AttackRange);
                         break;
                     case 2:
-                        chaseAI.SetStopDistance(attack2Data.AttackRange - 0.1f);
+                        chaseAI.SetStopDistance(attack2Data.AttackRange);
                         break;
                     case 3:
-                        chaseAI.SetStopDistance(attack3Data.AttackRange - 0.1f);
+                        chaseAI.SetStopDistance(attack3Data.AttackRange);
                         break;
 
                 }
