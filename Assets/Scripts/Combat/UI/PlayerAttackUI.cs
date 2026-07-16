@@ -22,6 +22,7 @@ public class PlayerAttackUI : MonoBehaviour
     static event Action OnAttack2Released;
     static event Action<float> OnAttack3Launched;
 
+    static bool shouldCharge;
     private void Awake()
     {
         attack1.fillAmount = 0f;
@@ -61,6 +62,7 @@ public class PlayerAttackUI : MonoBehaviour
     }
     private void PlayerAttackUI_OnAttack2Charging()
     {
+        shouldCharge = true;
         StartCoroutine(StartCharging());
     }
 
@@ -68,14 +70,18 @@ public class PlayerAttackUI : MonoBehaviour
     {
         float timeElapsed = 0f;
         print(chargeMaxTimer);
-        while (timeElapsed < chargeMaxTimer)
+        while (timeElapsed < chargeMaxTimer && shouldCharge)
         {
 
             attack2Charge.fillAmount = Mathf.Lerp(0, 1, timeElapsed / chargeMaxTimer);
             timeElapsed += Time.deltaTime;   
             yield return null;
         }
-        attack2Charge.fillAmount = 1;
+        if (timeElapsed >= chargeMaxTimer)
+        {
+            attack2Charge.fillAmount = 1;
+        }
+
     }
 
    private void PlayerAttackUI_OnAttack2Released()
@@ -85,6 +91,7 @@ public class PlayerAttackUI : MonoBehaviour
 
     public static void ReleaseAttack()
     {
+        shouldCharge = false;
         OnAttack2Released?.Invoke();
     }
 
