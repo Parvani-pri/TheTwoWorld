@@ -29,7 +29,13 @@ namespace TwoWorlds.RoamingNpc
 
         public void Show(string speakerName, Sprite portrait, string text, float typewriterCps = 0f)
         {
-            if (panelRoot != null)
+            if (panelRoot == null)
+                panelRoot = gameObject;
+
+            if (!gameObject.activeSelf)
+                gameObject.SetActive(true);
+
+            if (panelRoot != gameObject)
                 panelRoot.SetActive(true);
 
             isShowing = true;
@@ -126,14 +132,19 @@ namespace TwoWorlds.RoamingNpc
             isShowing = false;
             lineFinished = false;
 
-            if (panelRoot != null)
-                panelRoot.SetActive(false);
-
             if (bodyText != null)
                 bodyText.text = string.Empty;
 
             if (continueHint != null)
                 continueHint.SetActive(false);
+
+            if (panelRoot == null)
+                panelRoot = gameObject;
+
+            if (panelRoot != gameObject)
+                panelRoot.SetActive(false);
+            else
+                gameObject.SetActive(false);
         }
     }
 }

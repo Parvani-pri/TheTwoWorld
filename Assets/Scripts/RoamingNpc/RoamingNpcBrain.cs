@@ -47,7 +47,10 @@ namespace TwoWorlds.RoamingNpc
             }
 
             if (state == RoamingNpcState.ExternalDialogue)
+            {
                 SetState(RoamingNpcState.Roaming);
+                controller?.WakeUpWander();
+            }
         }
 
         public void SetState(RoamingNpcState newState)

@@ -1,3 +1,4 @@
+using System.Collections;
 using TwoWorlds.AI;
 using TwoWorlds.Inventory;
 using TwoWorlds.Progress;
@@ -13,12 +14,17 @@ namespace TwoWorlds.RoamingNpc
         [SerializeField] InterruptDialogueUI interruptDialogueUI;
         [SerializeField] AIService aiService;
         [SerializeField] GameProgress gameProgress;
+        [SerializeField] float postDialogueApproachDelay = 2f;
+        [SerializeField] float interruptAiTimeoutSeconds = 12f;
 
         Transform playerTransform;
         float cooldownUntil;
+        float approachGraceUntil;
         bool interruptLogicEnabled = true;
         int activeRequestId;
         bool waitingForAi;
+        RoamingNpcState previousBrainState = RoamingNpcState.Disabled;
+        Coroutine interruptTimeoutRoutine;
 
         void Awake()
         {
@@ -51,11 +57,12 @@ namespace TwoWorlds.RoamingNpc
         void Update()
         {
             UpdateUnlockState();
+            TrackBrainTransitions();
 
-            if (!interruptLogicEnabled || brain == null)
+            if (brain == null)
                 return;
 
-            if (brain.State == RoamingNpcState.InterruptShowing || waitingForAi)
+            if (brain.State == RoamingNpcState.InterruptShowing)
                 return;
 
             if (brain.State == RoamingNpcState.Approaching)
@@ -64,10 +71,19 @@ namespace TwoWorlds.RoamingNpc
                 return;
             }
 
+            if (!interruptLogicEnabled)
+                return;
+
+            if (brain.State == RoamingNpcState.Cooldown && Time.time >= cooldownUntil)
+                brain.SetState(RoamingNpcState.Roaming);
+
             if (!brain.AllowInterruptLogic())
                 return;
 
-            if (Time.time < cooldownUntil)
+            if (waitingForAi)
+                return;
+
+            if (Time.time < cooldownUntil || Time.time < approachGraceUntil)
                 return;
 
             if (!TryGetPlayerPlanarPosition(out var playerPosition))
@@ -79,6 +95,21 @@ namespace TwoWorlds.RoamingNpc
             BeginApproach(playerPosition);
         }
 
+        void TrackBrainTransitions()
+        {
+            if (brain == null)
+                return;
+
+            if (previousBrainState == RoamingNpcState.ExternalDialogue &&
+                brain.State == RoamingNpcState.Roaming)
+            {
+                approachGraceUntil = Time.time + postDialogueApproachDelay;
+                controller?.WakeUpWander();
+            }
+
+            previousBrainState = brain.State;
+        }
+
         public void SetInterruptEnabled(bool enabled)
         {
             interruptLogicEnabled = enabled;
@@ -88,14 +119,16 @@ namespace TwoWorlds.RoamingNpc
         {
             waitingForAi = false;
             activeRequestId++;
+            StopInterruptTimeout();
 
             interruptDialogueUI?.Hide();
 
             if (config != null)
                 cooldownUntil = Time.time + config.InterruptCooldownSeconds;
 
-            brain?.SetState(RoamingNpcState.Cooldown);
+            brain?.SetState(RoamingNpcState.Roaming);
             controller?.StopMoving();
+            controller?.WakeUpWander();
         }
 
         void UpdateUnlockState()
@@ -116,7 +149,10 @@ namespace TwoWorlds.RoamingNpc
             }
 
             if (brain.State == RoamingNpcState.Disabled)
+            {
                 brain.SetState(RoamingNpcState.Roaming);
+                controller?.WakeUpWander();
+            }
         }
 
         void BeginApproach(Vector3 playerPosition)
@@ -144,6 +180,9 @@ namespace TwoWorlds.RoamingNpc
             if (config == null || controller == null || brain == null)
                 return;
 
+            if (waitingForAi)
+                return;
+
             if (!TryGetPlayerPlanarPosition(out var playerPosition))
             {
                 CancelApproach(config.FailedChaseCooldownSeconds);
@@ -156,7 +195,11 @@ namespace TwoWorlds.RoamingNpc
                 return;
             }
 
-            if (!controller.HasReachedTarget())
+            var reachedApproachPoint = controller.HasReachedTarget();
+            var closeEnoughToPlayer = GetPlanarDistance(transform.position, playerPosition) <=
+                                      config.ApproachStopDistance + config.ArriveThreshold;
+
+            if (!reachedApproachPoint && !closeEnoughToPlayer)
                 return;
 
             controller.StopMoving();
@@ -168,15 +211,16 @@ namespace TwoWorlds.RoamingNpc
             controller?.StopMoving();
             cooldownUntil = Time.time + cooldownSeconds;
             brain?.SetState(RoamingNpcState.Roaming);
+            controller?.WakeUpWander();
         }
 
         void RequestInterruptLine()
         {
-            if (config == null || brain == null)
+            if (config == null || brain == null || waitingForAi)
                 return;
 
-            brain.SetState(RoamingNpcState.InterruptShowing);
             waitingForAi = true;
+            brain.SetState(RoamingNpcState.Approaching);
 
             if (aiService == null)
             {
@@ -189,6 +233,7 @@ namespace TwoWorlds.RoamingNpc
                 : FindFirstObjectByType<PlayerInventory>();
 
             var requestId = ++activeRequestId;
+            StartInterruptTimeout(requestId);
             aiService.AskInterruptLine(
                 inventory,
                 config.InterruptPersona,
@@ -196,11 +241,37 @@ namespace TwoWorlds.RoamingNpc
                 error => HandleInterruptError(requestId, error));
         }
 
+        void StartInterruptTimeout(int requestId)
+        {
+            StopInterruptTimeout();
+            interruptTimeoutRoutine = StartCoroutine(InterruptTimeoutCoroutine(requestId));
+        }
+
+        void StopInterruptTimeout()
+        {
+            if (interruptTimeoutRoutine == null)
+                return;
+
+            StopCoroutine(interruptTimeoutRoutine);
+            interruptTimeoutRoutine = null;
+        }
+
+        IEnumerator InterruptTimeoutCoroutine(int requestId)
+        {
+            yield return new WaitForSecondsRealtime(interruptAiTimeoutSeconds);
+
+            if (requestId != activeRequestId || !waitingForAi)
+                yield break;
+
+            HandleInterruptError(requestId, "Interrupt AI request timed out.");
+        }
+
         void HandleInterruptSuccess(int requestId, string response)
         {
             if (requestId != activeRequestId)
                 return;
 
+            StopInterruptTimeout();
             ShowInterruptLine(response);
         }
 
@@ -209,6 +280,7 @@ namespace TwoWorlds.RoamingNpc
             if (requestId != activeRequestId)
                 return;
 
+            StopInterruptTimeout();
             Debug.LogWarning("[RoamingNpcInterrupter] " + error);
             ShowInterruptLine(config != null ? config.GetRandomFallbackLine() : "嘿，等等我！");
         }
@@ -217,8 +289,20 @@ namespace TwoWorlds.RoamingNpc
         {
             waitingForAi = false;
 
-            if (interruptDialogueUI == null || config == null)
+            if (config == null)
+            {
+                brain?.SetState(RoamingNpcState.Roaming);
+                controller?.WakeUpWander();
                 return;
+            }
+
+            if (interruptDialogueUI == null)
+            {
+                Debug.LogWarning("[RoamingNpcInterrupter] InterruptDialogueUI is missing.");
+                brain?.SetState(RoamingNpcState.Roaming);
+                controller?.WakeUpWander();
+                return;
+            }
 
             var text = string.IsNullOrWhiteSpace(line) ? config.GetRandomFallbackLine() : line;
             interruptDialogueUI.Show(
@@ -226,6 +310,7 @@ namespace TwoWorlds.RoamingNpc
                 config.Portrait,
                 text,
                 config.InterruptTypewriterCps);
+            brain.SetState(RoamingNpcState.InterruptShowing);
         }
 
         bool TryGetPlayerPlanarPosition(out Vector3 playerPosition)

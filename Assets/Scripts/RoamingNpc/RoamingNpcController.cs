@@ -80,6 +80,20 @@ namespace TwoWorlds.RoamingNpc
             IsMovingToTarget = false;
         }
 
+        public void WakeUpWander()
+        {
+            nextPickTime = Time.time;
+
+            if (brain == null ||
+                (brain.State != RoamingNpcState.Roaming && brain.State != RoamingNpcState.Cooldown) ||
+                hasMoveTarget)
+            {
+                return;
+            }
+
+            PickWanderTarget();
+        }
+
         void Update()
         {
             if (!movementEnabled || config == null)
@@ -88,8 +102,13 @@ namespace TwoWorlds.RoamingNpc
             if (brain != null && !brain.AllowRoamingMovement() && brain.State != RoamingNpcState.Approaching)
                 return;
 
-            if (brain != null && brain.State == RoamingNpcState.Roaming && Time.time >= nextPickTime && !hasMoveTarget)
+            if (brain != null &&
+                (brain.State == RoamingNpcState.Roaming || brain.State == RoamingNpcState.Cooldown) &&
+                Time.time >= nextPickTime &&
+                !hasMoveTarget)
+            {
                 PickWanderTarget();
+            }
 
             if (!hasMoveTarget)
                 return;
