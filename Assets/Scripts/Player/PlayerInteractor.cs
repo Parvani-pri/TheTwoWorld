@@ -98,8 +98,8 @@ namespace TwoWorlds.Player
                 if (hit.transform == transform)
                     continue;
 
-                var interactable = GetInteractable(hit);
-                if (interactable == null || !interactable.CanInteract(gameObject))
+                var interactable = GetInteractable(hit, gameObject);
+                if (interactable == null)
                     continue;
 
                 if (Mathf.Abs(transform.position.z - hit.transform.position.z) > depthTolerance)
@@ -127,16 +127,26 @@ namespace TwoWorlds.Player
             return Vector2.Distance(transform.position, targetPosition);
         }
 
-        static IInteractable GetInteractable(Collider2D collider)
+        static IInteractable GetInteractable(Collider2D collider, GameObject interactor)
         {
             var behaviours = collider.GetComponents<MonoBehaviour>();
             foreach (var behaviour in behaviours)
             {
-                if (behaviour is IInteractable interactable)
-                    return interactable;
+                if (behaviour is IInteractable candidate && candidate.CanInteract(interactor))
+                    return candidate;
             }
 
-            return collider.GetComponentInParent<IInteractable>();
+            var parentBehaviours = collider.GetComponentsInParent<MonoBehaviour>();
+            foreach (var behaviour in parentBehaviours)
+            {
+                if (behaviour is not IInteractable candidate || behaviour.gameObject == collider.gameObject)
+                    continue;
+
+                if (candidate.CanInteract(interactor))
+                    return candidate;
+            }
+
+            return null;
         }
 
         void OnGameplayInputBlocked(bool blocked) => gameplayBlocked = blocked;

@@ -48,6 +48,12 @@ namespace TwoWorlds.AI
                 portraitImage.sprite = portrait;
             }
 
+            if (closeButton != null)
+            {
+                closeButton.gameObject.SetActive(true);
+                closeButton.interactable = true;
+            }
+
             SetBodyText(openingMessage);
             BindQuickQuestions(quickQuestions);
         }

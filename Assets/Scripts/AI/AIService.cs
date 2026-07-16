@@ -101,8 +101,28 @@ namespace TwoWorlds.AI
                 return;
             }
 
-            var systemPrompt = contextBuilder.BuildNpcSystemPrompt(npcName, npcPersona, inventory);
+            var systemPrompt = contextBuilder.BuildNpcSystemPrompt(
+                npcName,
+                npcPersona,
+                inventory,
+                AIContextLevel.Full);
             Ask(systemPrompt, userMessage, onSuccess, onError);
+        }
+
+        public void AskInterruptLine(
+            PlayerInventory inventory,
+            string personaOverride,
+            Action<string> onSuccess,
+            Action<string> onError)
+        {
+            if (contextBuilder == null)
+            {
+                onError?.Invoke("AIContextBuilder 未配置。");
+                return;
+            }
+
+            var systemPrompt = contextBuilder.BuildInterruptPrompt(inventory, personaOverride);
+            Ask(systemPrompt, "请生成一句你突然跑到玩家面前说的话。", onSuccess, onError);
         }
 
         public void AskItemInterpretation(

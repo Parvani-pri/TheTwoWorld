@@ -18,6 +18,7 @@ namespace TwoWorlds.Dialogue
         bool isPlaying;
         bool lineFinished;
         Coroutine typingRoutine;
+        GameObject lastInteractor;
 
         public bool IsPlaying => isPlaying;
 
@@ -46,6 +47,7 @@ namespace TwoWorlds.Dialogue
             if (dialogue == null || dialogue.Lines == null || dialogue.Lines.Count == 0 || isPlaying)
                 return;
 
+            lastInteractor = interactor;
             currentDialogue = dialogue;
             currentLineIndex = 0;
             isPlaying = true;
@@ -135,14 +137,23 @@ namespace TwoWorlds.Dialogue
         void EndDialogue()
         {
             TryGrantReward();
+
+            var endedDialogueId = currentDialogue?.DialogueId ?? string.Empty;
+            var progressNote = currentDialogue?.ProgressNote ?? string.Empty;
+            var interactor = lastInteractor;
+
             isPlaying = false;
             currentDialogue = null;
             lineFinished = false;
+            lastInteractor = null;
 
             if (dialogueUI != null)
                 dialogueUI.Hide();
 
-            GameEvents.RaiseDialogueEnded();
+            if (interactor != null)
+                GameEvents.RaiseDialogueEnded(new DialogueEndInfo(interactor, endedDialogueId, progressNote));
+            else
+                GameEvents.RaiseDialogueEnded();
         }
 
         void TryGrantReward()

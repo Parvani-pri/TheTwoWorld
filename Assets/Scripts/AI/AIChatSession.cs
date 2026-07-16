@@ -18,6 +18,14 @@ namespace TwoWorlds.AI
 
         public bool IsActive => isActive;
 
+        public static AIChatSession FindInstance()
+        {
+            if (Instance != null)
+                return Instance;
+
+            return FindFirstObjectByType<AIChatSession>();
+        }
+
         void Awake()
         {
             if (aiService == null)
@@ -48,7 +56,7 @@ namespace TwoWorlds.AI
                 EndSession();
         }
 
-        public void StartSession(AIChatTrigger trigger, PlayerInventory inventory)
+        public void StartSession(AIChatTrigger trigger, PlayerInventory inventory, string openingMessageOverride = null)
         {
             if (trigger == null || isActive)
                 return;
@@ -66,12 +74,16 @@ namespace TwoWorlds.AI
             activeRequestId++;
             isActive = true;
 
+            var openingMessage = string.IsNullOrWhiteSpace(openingMessageOverride)
+                ? trigger.OpeningMessage
+                : openingMessageOverride;
+
             GameEvents.RaiseDialogueStarted();
             chatUI.Show(
                 trigger.NpcName,
                 trigger.Portrait,
                 trigger.QuickQuestions,
-                trigger.OpeningMessage);
+                openingMessage);
             RefreshQuestionState(setButtonsInteractable: true);
         }
 

@@ -14,6 +14,7 @@ namespace TwoWorlds.Dialogue
         const string HeaderPlayOnce = "play_once";
         const string HeaderRewardItemId = "reward_item_id";
         const string HeaderRewardAmount = "reward_amount";
+        const string HeaderProgressNote = "progress_note";
 
         public static Dictionary<string, DialogueSessionData> Parse(
             string csvText,
@@ -41,7 +42,7 @@ namespace TwoWorlds.Dialogue
             }
 
             var groupedLines = new Dictionary<string, List<DialogueLine>>();
-            var groupedMeta = new Dictionary<string, (bool playOnce, ItemData rewardItem, int rewardAmount)>();
+            var groupedMeta = new Dictionary<string, (bool playOnce, ItemData rewardItem, int rewardAmount, string progressNote)>();
 
             for (var i = 1; i < rows.Count; i++)
             {
@@ -60,12 +61,13 @@ namespace TwoWorlds.Dialogue
                 {
                     lines = new List<DialogueLine>();
                     groupedLines[dialogueId] = lines;
-                    groupedMeta[dialogueId] = (false, null, 1);
+                    groupedMeta[dialogueId] = (false, null, 1, string.Empty);
                 }
 
                 var playOnce = ParseBool(GetCell(row, columnIndex, HeaderPlayOnce));
                 var rewardItemId = GetCell(row, columnIndex, HeaderRewardItemId);
                 var rewardAmount = ParseInt(GetCell(row, columnIndex, HeaderRewardAmount), 1);
+                var progressNote = GetCell(row, columnIndex, HeaderProgressNote);
                 itemLookup.TryGetValue(rewardItemId, out var rewardItem);
 
                 var meta = groupedMeta[dialogueId];
@@ -77,6 +79,9 @@ namespace TwoWorlds.Dialogue
                     meta.rewardItem = rewardItem;
                     meta.rewardAmount = rewardAmount;
                 }
+
+                if (string.IsNullOrWhiteSpace(meta.progressNote) && !string.IsNullOrWhiteSpace(progressNote))
+                    meta.progressNote = progressNote;
 
                 groupedMeta[dialogueId] = meta;
 
@@ -91,7 +96,8 @@ namespace TwoWorlds.Dialogue
                     pair.Value,
                     meta.playOnce,
                     meta.rewardItem,
-                    meta.rewardAmount);
+                    meta.rewardAmount,
+                    meta.progressNote);
             }
 
             return result;
