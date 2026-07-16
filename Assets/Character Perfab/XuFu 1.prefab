@@ -4977,6 +4977,7 @@ GameObject:
   - component: {fileID: 8927111038911921220}
   - component: {fileID: 8481240108570144352}
   - component: {fileID: 1611358903885864689}
+  - component: {fileID: 1731797471868734749}
   m_Layer: 7
   m_Name: XuFu 1
   m_TagString: Untagged
@@ -4998,6 +4999,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2185034858719655667}
+  - {fileID: 1790470724794015652}
   - {fileID: 143988208103596881}
   - {fileID: 3897933516923468710}
   - {fileID: 2553226376662667068}
@@ -5142,6 +5144,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RuneRainAnimationEvent
   runeRainFX: {fileID: 4274528203404669344}
   duration: 4
+--- !u!114 &1731797471868734749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2501018622194889917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0913ec1a354cb9478bb6547cd0177f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CoinFireworkEffect
+  coinFirework: {fileID: 6935476639196451371}
 --- !u!1 &5936511635976726836
 GameObject:
   m_ObjectHideFlags: 0
@@ -5516,4 +5531,103 @@ Transform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3068221418559060052, guid: b9b3c62b2a0f4f04bbbc0bf34d2bdee3, type: 3}
   m_PrefabInstance: {fileID: 1280904517070080500}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5761345766122976299
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2029716946296000595}
+    m_Modifications:
+    - target: {fileID: 3444033475985204736, guid: 8b069736fab3af845b4ed46954ae3de5, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3444033475985204736, guid: 8b069736fab3af845b4ed46954ae3de5, type: 3}
+      propertyPath: CollisionModule.type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3444033475985204736, guid: 8b069736fab3af845b4ed46954ae3de5, type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3444033475985204736, guid: 8b069736fab3af845b4ed46954ae3de5, type: 3}
+      propertyPath: CollisionModule.m_Dampen.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3444033475985204736, guid: 8b069736fab3af845b4ed46954ae3de5, type: 3}
+      propertyPath: CollisionModule.collisionMessages
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3444033475985204736, guid: 8b069736fab3af845b4ed46954ae3de5, type: 3}
+      propertyPath: CollisionModule.collidesWith.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 3444033475985204736, guid: 8b069736fab3af845b4ed46954ae3de5, type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281798896056314767, guid: 8b069736fab3af845b4ed46954ae3de5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281798896056314767, guid: 8b069736fab3af845b4ed46954ae3de5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281798896056314767, guid: 8b069736fab3af845b4ed46954ae3de5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281798896056314767, guid: 8b069736fab3af845b4ed46954ae3de5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281798896056314767, guid: 8b069736fab3af845b4ed46954ae3de5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281798896056314767, guid: 8b069736fab3af845b4ed46954ae3de5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281798896056314767, guid: 8b069736fab3af845b4ed46954ae3de5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281798896056314767, guid: 8b069736fab3af845b4ed46954ae3de5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281798896056314767, guid: 8b069736fab3af845b4ed46954ae3de5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281798896056314767, guid: 8b069736fab3af845b4ed46954ae3de5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8233424858851123514, guid: 8b069736fab3af845b4ed46954ae3de5, type: 3}
+      propertyPath: m_Name
+      value: CoinFirework
+      objectReference: {fileID: 0}
+    - target: {fileID: 8233424858851123514, guid: 8b069736fab3af845b4ed46954ae3de5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8b069736fab3af845b4ed46954ae3de5, type: 3}
+--- !u!4 &1790470724794015652 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6281798896056314767, guid: 8b069736fab3af845b4ed46954ae3de5, type: 3}
+  m_PrefabInstance: {fileID: 5761345766122976299}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &6935476639196451371 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3444033475985204736, guid: 8b069736fab3af845b4ed46954ae3de5, type: 3}
+  m_PrefabInstance: {fileID: 5761345766122976299}
   m_PrefabAsset: {fileID: 0}

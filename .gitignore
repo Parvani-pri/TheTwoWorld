@@ -101,3 +101,7 @@ InitTestScene*.unity*
 # AI secrets (API keys)
 /[Aa]ssets/StreamingAssets/ai_secrets.json
 /[Aa]ssets/StreamingAssets/ai_secrets.json.meta
+Assets/Fonts/SourceHanSansSC-Regular SDF.asset
+Assets/Fonts/SourceHanSerifSC-Regular SDF.asset
+Assets/Fonts/XuanZongTi-v0.1 SDF.asset
+Assets/Fonts/XuanZongTi-v0.1 SDF_Outline.asset
