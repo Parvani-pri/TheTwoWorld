@@ -30,6 +30,8 @@ namespace TwoWorlds.AI
 
         void Awake()
         {
+            Instance = this;
+
             if (aiService == null)
                 aiService = AIService.Instance ?? FindFirstObjectByType<AIService>();
 
@@ -56,6 +58,9 @@ namespace TwoWorlds.AI
 
             if (isActive)
                 EndSession();
+
+            if (Instance == this)
+                Instance = null;
         }
 
         public void StartSession(AIChatTrigger trigger, PlayerInventory inventory, string openingMessageOverride = null)
@@ -68,6 +73,8 @@ namespace TwoWorlds.AI
                 Debug.LogError("[AIChatSession] AIChatUI is missing.");
                 return;
             }
+
+            DismissRoamingInterruptIfNeeded();
 
             currentTrigger = trigger;
             currentInventory = inventory;
@@ -162,6 +169,15 @@ namespace TwoWorlds.AI
             var remaining = Mathf.Max(0, maxQuestions - questionsAsked);
             chatUI.UpdateRemainingQuestions(remaining, maxQuestions);
             chatUI.SetQuickQuestionsInteractable(setButtonsInteractable);
+        }
+
+        static void DismissRoamingInterruptIfNeeded()
+        {
+            var interrupter = Object.FindFirstObjectByType<TwoWorlds.RoamingNpc.RoamingNpcInterrupter>();
+            if (interrupter == null)
+                return;
+
+            interrupter.DismissInterrupt();
         }
     }
 }

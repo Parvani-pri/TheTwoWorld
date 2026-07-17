@@ -43,6 +43,14 @@ namespace TwoWorlds.RoamingNpc
                 TwoWorlds.Dialogue.DialogueManager.Instance.IsPlaying)
                 return;
 
+            var chatSession = TwoWorlds.AI.AIChatSession.FindInstance();
+            if (chatSession != null && chatSession.IsActive)
+                return;
+
+            var readinessSession = TwoWorlds.Progress.EnterYinReadinessSession.FindInstance();
+            if (readinessSession != null && readinessSession.IsActive)
+                return;
+
             if (interruptDialogueUI == null || !interruptDialogueUI.IsShowing)
                 return;
 

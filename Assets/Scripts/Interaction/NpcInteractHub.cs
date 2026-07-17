@@ -1,4 +1,3 @@
-using TwoWorlds.AI;
 using TwoWorlds.Core;
 using TwoWorlds.Dialogue;
 using TwoWorlds.Progress;
@@ -13,20 +12,12 @@ namespace TwoWorlds.Interaction
         [SerializeField] ChapterDialogueTrigger chapterDialogueTrigger;
         [SerializeField] StagedDialogueTrigger stagedDialogueTrigger;
         [SerializeField] DialogueTrigger dialogueTrigger;
-        [SerializeField] AIChatTrigger aiChatTrigger;
-        [SerializeField] AIChatSession chatSession;
+        [SerializeField] EnterYinReadinessTrigger enterYinReadinessTrigger;
+        [SerializeField] EnterYinReadinessSession enterYinReadinessSession;
         [SerializeField] GameProgress gameProgress;
 
         [Header("Presentation")]
         [SerializeField] string promptText = "交谈";
-
-        [Header("Post Dialogue AI")]
-        [SerializeField] bool enterAiAfterScriptDialogue = true;
-        [TextArea(2, 4)]
-        [SerializeField] string postDialogueOpeningMessage = "有什么想问的吗？选一个话题吧。";
-
-        GameObject pendingInteractor;
-        bool waitingForScriptDialogueEnd;
 
         void Awake()
         {
@@ -39,23 +30,14 @@ namespace TwoWorlds.Interaction
             if (dialogueTrigger == null)
                 dialogueTrigger = GetComponent<DialogueTrigger>();
 
-            if (aiChatTrigger == null)
-                aiChatTrigger = GetComponent<AIChatTrigger>();
+            if (enterYinReadinessTrigger == null)
+                enterYinReadinessTrigger = GetComponent<EnterYinReadinessTrigger>();
 
-            if (chatSession == null)
-                chatSession = FindFirstObjectByType<AIChatSession>();
+            if (enterYinReadinessSession == null)
+                enterYinReadinessSession = EnterYinReadinessSession.FindInstance();
 
             if (gameProgress == null)
                 gameProgress = GameProgress.Instance ?? FindFirstObjectByType<GameProgress>();
-        }
-
-        void OnEnable() => GameEvents.ScriptDialogueEnded += OnScriptDialogueEnded;
-
-        void OnDisable()
-        {
-            GameEvents.ScriptDialogueEnded -= OnScriptDialogueEnded;
-            waitingForScriptDialogueEnd = false;
-            pendingInteractor = null;
         }
 
         public bool CanInteract(GameObject interactor)
@@ -63,7 +45,7 @@ namespace TwoWorlds.Interaction
             if (IsBusy())
                 return false;
 
-            return IsDialogueAvailable(interactor) || IsAIChatAvailable(interactor);
+            return IsDialogueAvailable(interactor) || IsEnterYinReadinessAvailable();
         }
 
         public void Interact(GameObject interactor)
@@ -71,16 +53,14 @@ namespace TwoWorlds.Interaction
             if (IsBusy())
                 return;
 
-            pendingInteractor = interactor;
-
             if (IsDialogueAvailable(interactor))
             {
                 StartScriptDialogue(interactor);
                 return;
             }
 
-            if (IsAIChatAvailable(interactor))
-                StartAIChat(interactor);
+            if (IsEnterYinReadinessAvailable())
+                StartEnterYinReadiness();
         }
 
         public string GetPromptText() => promptText;
@@ -88,29 +68,29 @@ namespace TwoWorlds.Interaction
         bool IsDialogueAvailable(GameObject interactor) =>
             ResolveDialogueSource(interactor)?.IsDialogueAvailable(interactor) ?? false;
 
-        bool IsAIChatAvailable(GameObject interactor) =>
-            aiChatTrigger != null && aiChatTrigger.IsAIChatAvailable(interactor);
+        bool IsEnterYinReadinessAvailable()
+        {
+            if (enterYinReadinessSession == null)
+                enterYinReadinessSession = EnterYinReadinessSession.FindInstance();
+
+            return enterYinReadinessSession != null && enterYinReadinessSession.IsAvailable();
+        }
 
         bool IsBusy()
         {
             if (DialogueManager.Instance != null && DialogueManager.Instance.IsPlaying)
                 return true;
 
-            if (chatSession == null)
-                chatSession = FindFirstObjectByType<AIChatSession>();
+            if (enterYinReadinessSession == null)
+                enterYinReadinessSession = EnterYinReadinessSession.FindInstance();
 
-            return chatSession != null && chatSession.IsActive;
+            return enterYinReadinessSession != null && enterYinReadinessSession.IsActive;
         }
 
         void StartScriptDialogue(GameObject interactor)
         {
             var source = ResolveDialogueSource(interactor);
-            if (source == null)
-                return;
-
-            pendingInteractor = interactor;
-            waitingForScriptDialogueEnd = ShouldEnterAiAfterScriptDialogue(interactor);
-            source.TriggerDialogue(interactor);
+            source?.TriggerDialogue(interactor);
         }
 
         IScriptDialogueSource ResolveDialogueSource(GameObject interactor)
@@ -127,41 +107,12 @@ namespace TwoWorlds.Interaction
             return null;
         }
 
-        bool ShouldEnterAiAfterScriptDialogue(GameObject interactor)
+        void StartEnterYinReadiness()
         {
-            if (!enterAiAfterScriptDialogue || !IsAIChatAvailable(interactor))
-                return false;
+            if (enterYinReadinessSession == null)
+                enterYinReadinessSession = EnterYinReadinessSession.FindInstance();
 
-            if (gameProgress == null)
-                gameProgress = GameProgress.Instance ?? FindFirstObjectByType<GameProgress>();
-
-            return gameProgress == null || gameProgress.IsAiDialogueWindowOpen();
-        }
-
-        void StartAIChat(GameObject interactor, string openingMessageOverride = null)
-        {
-            if (aiChatTrigger == null)
-                return;
-
-            waitingForScriptDialogueEnd = false;
-            pendingInteractor = interactor;
-            aiChatTrigger.TriggerAIChat(interactor, openingMessageOverride);
-        }
-
-        void OnScriptDialogueEnded(DialogueEndInfo info)
-        {
-            if (!waitingForScriptDialogueEnd)
-                return;
-
-            waitingForScriptDialogueEnd = false;
-
-            if (!info.HasInteractor || info.Interactor != pendingInteractor)
-                return;
-
-            if (!IsAIChatAvailable(info.Interactor))
-                return;
-
-            StartAIChat(info.Interactor, postDialogueOpeningMessage);
+            enterYinReadinessSession?.ShowPrompt();
         }
     }
 }

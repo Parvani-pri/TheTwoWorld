@@ -122,7 +122,7 @@ namespace TwoWorlds.AI
             }
 
             var systemPrompt = contextBuilder.BuildInterruptPrompt(inventory, personaOverride);
-            Ask(systemPrompt, "请生成一句你突然跑到玩家面前说的话。", onSuccess, onError);
+            Ask(systemPrompt, "请生成一句你追上许负、当面随口对他说的话。", onSuccess, onError);
         }
 
         public void AskItemInterpretation(

@@ -59,11 +59,16 @@ namespace TwoWorlds.Dialogue
 
         public void FacePlanarTarget(Vector3 worldTarget)
         {
-            var deltaX = worldTarget.x - transform.position.x;
-            if (spriteRenderer == null || Mathf.Abs(deltaX) < 0.01f)
+            var horizontal = worldTarget.x - transform.position.x;
+            if (Mathf.Approximately(horizontal, 0f))
                 return;
 
-            spriteRenderer.flipX = deltaX < 0f;
+            var scale = transform.localScale;
+            scale.x = horizontal > 0f ? Mathf.Abs(scale.x) : -Mathf.Abs(scale.x);
+            transform.localScale = scale;
+
+            if (spriteRenderer != null)
+                spriteRenderer.flipX = false;
         }
 
         public void StopMoving()

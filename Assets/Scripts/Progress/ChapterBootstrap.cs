@@ -25,7 +25,7 @@ namespace TwoWorlds.Progress
 
             gameProgress.SetChapter(chapterId, chapterLabel, stageLabel);
 
-            if (initializeChapterProgress)
+            if (initializeChapterProgress && !gameProgress.HasPersistedChapterState())
                 gameProgress.SetChapterProgress(chapterNumber, ChapterSegment.None);
         }
     }

@@ -61,6 +61,12 @@ namespace TwoWorlds.RoamingNpc
             UpdateUnlockState();
             TrackBrainTransitions();
 
+            if (ShouldYieldToScriptOrAiChat())
+            {
+                AbortInterruptForExternalDialogue();
+                return;
+            }
+
             if (brain == null)
                 return;
 
@@ -188,8 +194,7 @@ namespace TwoWorlds.RoamingNpc
             if (config == null || controller == null || brain == null)
                 return;
 
-            if (TwoWorlds.Dialogue.DialogueManager.Instance != null &&
-                TwoWorlds.Dialogue.DialogueManager.Instance.IsPlaying)
+            if (ShouldYieldToScriptOrAiChat())
                 return;
 
             var direction = transform.position - playerPosition;
@@ -321,6 +326,13 @@ namespace TwoWorlds.RoamingNpc
         {
             waitingForAi = false;
 
+            if (ShouldYieldToScriptOrAiChat())
+            {
+                brain?.SetState(RoamingNpcState.Roaming);
+                controller?.WakeUpWander();
+                return;
+            }
+
             if (config == null)
             {
                 brain?.SetState(RoamingNpcState.Roaming);
@@ -367,6 +379,39 @@ namespace TwoWorlds.RoamingNpc
             var dx = a.x - b.x;
             var dz = a.z - b.z;
             return Mathf.Sqrt(dx * dx + dz * dz);
+        }
+
+        public static bool ShouldYieldToScriptOrAiChat()
+        {
+            if (TwoWorlds.Dialogue.DialogueManager.Instance != null &&
+                TwoWorlds.Dialogue.DialogueManager.Instance.IsPlaying)
+                return true;
+
+            var chatSession = AIChatSession.FindInstance();
+            if (chatSession != null && chatSession.IsActive)
+                return true;
+
+            var readinessSession = EnterYinReadinessSession.FindInstance();
+            return readinessSession != null && readinessSession.IsActive;
+        }
+
+        void AbortInterruptForExternalDialogue()
+        {
+            if (waitingForAi)
+            {
+                waitingForAi = false;
+                activeRequestId++;
+                StopInterruptTimeout();
+            }
+
+            if (interruptDialogueUI != null && interruptDialogueUI.IsShowing)
+            {
+                DismissInterrupt();
+                return;
+            }
+
+            if (brain != null && brain.State == RoamingNpcState.Approaching)
+                CancelApproach(0f);
         }
     }
 }

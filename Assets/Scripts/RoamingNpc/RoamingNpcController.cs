@@ -8,10 +8,17 @@ namespace TwoWorlds.RoamingNpc
         [SerializeField] RoamingNpcConfig config;
         [SerializeField] RoamingNpcBrain brain;
         [SerializeField] Transform wanderAnchor;
+        [SerializeField] Animator animator;
+        [SerializeField] string speedParameter = "speed";
+        [SerializeField] float idleSpeedValue;
+        [SerializeField] float wanderSpeedValue = 0.5f;
+        [SerializeField] float approachSpeedValue = 1f;
+
+        static readonly int SpeedHash = Animator.StringToHash("speed");
 
         Vector3 anchorPosition;
         Vector3 moveTarget;
-        float nextPickTime;
+        float nextWanderDecisionTime;
         bool movementEnabled = true;
         bool scriptedOverride;
         bool hasMoveTarget;
@@ -27,11 +34,14 @@ namespace TwoWorlds.RoamingNpc
             if (brain == null)
                 brain = GetComponent<RoamingNpcBrain>();
 
+            if (animator == null)
+                animator = GetComponent<Animator>();
+
             if (wanderAnchor == null)
                 wanderAnchor = transform;
 
             anchorPosition = wanderAnchor.position;
-            ScheduleNextWanderTarget();
+            ScheduleWanderIdle();
         }
 
         public void SetMovementEnabled(bool enabled)
@@ -39,7 +49,10 @@ namespace TwoWorlds.RoamingNpc
             movementEnabled = enabled;
 
             if (!enabled && !scriptedOverride)
+            {
                 IsMovingToTarget = false;
+                UpdateAnimatorSpeed();
+            }
         }
 
         public void SetScriptedOverride(bool enabled)
@@ -65,7 +78,6 @@ namespace TwoWorlds.RoamingNpc
             moveTarget.y = transform.position.y;
             hasMoveTarget = true;
             IsMovingToTarget = true;
-            ScheduleNextWanderTarget();
         }
 
         public void MoveTo(Vector3 worldTarget)
@@ -88,11 +100,12 @@ namespace TwoWorlds.RoamingNpc
         {
             hasMoveTarget = false;
             IsMovingToTarget = false;
+            UpdateAnimatorSpeed();
         }
 
         public void WakeUpWander()
         {
-            nextPickTime = Time.time;
+            nextWanderDecisionTime = Time.time;
 
             if (brain == null ||
                 (brain.State != RoamingNpcState.Roaming && brain.State != RoamingNpcState.Cooldown) ||
@@ -101,7 +114,7 @@ namespace TwoWorlds.RoamingNpc
                 return;
             }
 
-            PickWanderTarget();
+            TryBeginWanderMove();
         }
 
         void Update()
@@ -115,50 +128,116 @@ namespace TwoWorlds.RoamingNpc
                                brain.IsScriptedBeatActive;
 
             if (!scriptedOverride && (!movementEnabled || !allowByBrain))
+            {
+                UpdateAnimatorSpeed();
                 return;
+            }
 
             if (brain != null &&
                 !scriptedOverride &&
                 (brain.State == RoamingNpcState.Roaming || brain.State == RoamingNpcState.Cooldown) &&
-                Time.time >= nextPickTime &&
+                Time.time >= nextWanderDecisionTime &&
                 !hasMoveTarget)
             {
-                PickWanderTarget();
+                TryBeginWanderMove();
             }
 
             if (!hasMoveTarget)
+            {
+                UpdateAnimatorSpeed();
                 return;
+            }
 
             var current = transform.position;
-            var step = config.MoveSpeed * Time.deltaTime;
+            var step = GetCurrentMoveSpeed() * Time.deltaTime;
             var next = Vector3.MoveTowards(current, moveTarget, step);
             next.y = current.y;
             transform.position = next;
 
-            FacePlanarDirection(moveTarget.x - current.x);
+            var planarDeltaX = next.x - current.x;
+            FacePlanarDirection(planarDeltaX != 0f ? planarDeltaX : moveTarget.x - current.x);
 
             if (GetPlanarDistance(next, moveTarget) <= config.ArriveThreshold)
             {
                 hasMoveTarget = false;
                 IsMovingToTarget = false;
+
+                if (brain != null &&
+                    !scriptedOverride &&
+                    (brain.State == RoamingNpcState.Roaming || brain.State == RoamingNpcState.Cooldown))
+                {
+                    ScheduleWanderIdle();
+                }
             }
+
+            UpdateAnimatorSpeed();
         }
 
-        void ScheduleNextWanderTarget()
+        void UpdateAnimatorSpeed()
+        {
+            if (animator == null)
+                return;
+
+            var speed = idleSpeedValue;
+
+            if (hasMoveTarget || IsMovingToTarget)
+            {
+                speed = brain != null && brain.State == RoamingNpcState.Approaching
+                    ? approachSpeedValue
+                    : wanderSpeedValue;
+            }
+
+            var parameterHash = string.IsNullOrWhiteSpace(speedParameter)
+                ? SpeedHash
+                : Animator.StringToHash(speedParameter);
+
+            animator.SetFloat(parameterHash, speed);
+        }
+
+        void TryBeginWanderMove()
         {
             if (config == null)
                 return;
 
-            var delay = Random.Range(config.PickTargetIntervalMin, config.PickTargetIntervalMax);
-            nextPickTime = Time.time + delay;
+            if (Random.value <= config.WanderMoveChance)
+            {
+                PickWanderTarget();
+                return;
+            }
+
+            ScheduleWanderIdle();
         }
 
-        void FacePlanarDirection(float deltaX)
+        void ScheduleWanderIdle()
         {
-            if (spriteRenderer == null || Mathf.Abs(deltaX) < 0.01f)
+            if (config == null)
                 return;
 
-            spriteRenderer.flipX = deltaX < 0f;
+            var idleDuration = Random.Range(config.WanderIdleDurationMin, config.WanderIdleDurationMax);
+            nextWanderDecisionTime = Time.time + idleDuration;
+        }
+
+        float GetCurrentMoveSpeed()
+        {
+            if (config == null)
+                return 0f;
+
+            return brain != null && brain.State == RoamingNpcState.Approaching
+                ? config.MoveSpeed
+                : config.WanderMoveSpeed;
+        }
+
+        void FacePlanarDirection(float horizontal)
+        {
+            if (Mathf.Approximately(horizontal, 0f))
+                return;
+
+            var scale = transform.localScale;
+            scale.x = horizontal > 0f ? Mathf.Abs(scale.x) : -Mathf.Abs(scale.x);
+            transform.localScale = scale;
+
+            if (spriteRenderer != null)
+                spriteRenderer.flipX = false;
         }
 
         static float GetPlanarDistance(Vector3 a, Vector3 b)

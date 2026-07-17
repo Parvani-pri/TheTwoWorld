@@ -10,13 +10,15 @@ namespace TwoWorlds.RoamingNpc
         [SerializeField] Sprite portrait;
         [TextArea(3, 6)]
         [SerializeField] string interruptPersona =
-            "你是「小妹」，玩家的助手，性格活泼、调皮，偶尔跑来打断玩家。";
+            "你是「小妹」，许负的助手，性格活泼、调皮，偶尔追上来打断许负。";
 
         [Header("Roaming")]
         [SerializeField] float moveSpeed = 2f;
+        [SerializeField] float wanderMoveSpeed = 0.75f;
         [SerializeField] float wanderRadius = 10f;
-        [SerializeField] float pickTargetIntervalMin = 3f;
-        [SerializeField] float pickTargetIntervalMax = 7f;
+        [SerializeField, Range(0f, 1f)] float wanderMoveChance = 0.55f;
+        [SerializeField] float wanderIdleDurationMin = 2f;
+        [SerializeField] float wanderIdleDurationMax = 6f;
         [SerializeField] float arriveThreshold = 0.25f;
 
         [Header("Interrupt")]
@@ -41,9 +43,11 @@ namespace TwoWorlds.RoamingNpc
         public Sprite Portrait => portrait;
         public string InterruptPersona => interruptPersona;
         public float MoveSpeed => moveSpeed;
+        public float WanderMoveSpeed => wanderMoveSpeed;
         public float WanderRadius => wanderRadius;
-        public float PickTargetIntervalMin => pickTargetIntervalMin;
-        public float PickTargetIntervalMax => pickTargetIntervalMax;
+        public float WanderMoveChance => wanderMoveChance;
+        public float WanderIdleDurationMin => wanderIdleDurationMin;
+        public float WanderIdleDurationMax => wanderIdleDurationMax;
         public float ArriveThreshold => arriveThreshold;
         public float InterruptCooldownSeconds => interruptCooldownSeconds;
         public float SenseRadius => senseRadius;

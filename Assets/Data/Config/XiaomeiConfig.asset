@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.RoamingNpc.RoamingNpcConfig
   displayName: "\u5C0F\u59B9"
   portrait: {fileID: 0}
-  interruptPersona: "\u4F60\u662F\u300C\u5C0F\u59B9\u300D\uFF0C\u73A9\u5BB6\u7684\u52A9\u624B\uFF0C\u6027\u683C\u6D3B\u6CFC\u3001\u8C03\u76AE\uFF0C\u5076\u5C14\u8DD1\u6765\u6253\u65AD\u73A9\u5BB6\u3002"
+  interruptPersona: "\u4F60\u662F\u300C\u5C0F\u59B9\u300D\uFF0C\u8BB8\u8D1F\u7684\u52A9\u624B\uFF0C\u6027\u683C\u6D3B\u6CFC\u3001\u8C03\u76AE\uFF0C\u5076\u5C14\u8FFD\u4E0A\u6765\u6253\u65AD\u8BB8\u8D1F\u3002"
   moveSpeed: 2
+  wanderMoveSpeed: 0.75
   wanderRadius: 10
-  pickTargetIntervalMin: 3
-  pickTargetIntervalMax: 7
+  wanderMoveChance: 0.55
+  wanderIdleDurationMin: 2
+  wanderIdleDurationMax: 6
   arriveThreshold: 0.25
   interruptCooldownSeconds: 10
   senseRadius: 12

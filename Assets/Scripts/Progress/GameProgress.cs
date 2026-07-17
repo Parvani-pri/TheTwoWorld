@@ -47,6 +47,7 @@ namespace TwoWorlds.Progress
             }
 
             Instance = this;
+            DontDestroyOnLoad(gameObject);
             currentChapterId = defaultChapterId;
             currentChapterLabel = defaultChapterLabel;
             currentStageLabel = defaultStageLabel;
@@ -193,16 +194,30 @@ namespace TwoWorlds.Progress
             }
         }
 
-        public bool IsAiDialogueWindowOpen()
+        public bool IsAiDialogueWindowOpen() => IsEnterYinReadinessWindowOpen();
+
+        public bool IsEnterYinReadinessWindowOpen() => TryGetEnterYinReadinessChapter(out _);
+
+        public bool TryGetEnterYinReadinessChapter(out int chapter)
         {
-            if (currentChapterNumber < 1)
-                return false;
+            for (var ch = 1; ch <= ChapterProgressCatalog.MaxChapter; ch++)
+            {
+                var preBattleId = ChapterProgressCatalog.GetDialogueId(ch, ChapterSegment.PreBattle);
+                var enterYinId = ChapterProgressCatalog.GetDialogueId(ch, ChapterSegment.EnterYin);
 
-            var preBattleId = ChapterProgressCatalog.GetDialogueId(currentChapterNumber, ChapterSegment.PreBattle);
-            var enterYinId = ChapterProgressCatalog.GetDialogueId(currentChapterNumber, ChapterSegment.EnterYin);
+                if (HasDialogue(preBattleId) && !HasDialogue(enterYinId))
+                {
+                    chapter = ch;
+                    return true;
+                }
+            }
 
-            return HasDialogue(preBattleId) && !HasDialogue(enterYinId);
+            chapter = 0;
+            return false;
         }
+
+        public bool HasPersistedChapterState() =>
+            completedDialogueIds.Count > 0 || storyFlags.Count > 0;
 
         public void UnlockEnterYin(int chapter)
         {
@@ -276,8 +291,8 @@ namespace TwoWorlds.Progress
             if (!string.IsNullOrWhiteSpace(currentStageLabel))
                 builder.Append("\n当前阶段：").Append(currentStageLabel);
 
-            if (IsAiDialogueWindowOpen())
-                builder.Append("\n当前可与助手自由交谈（战前与入阴之间）。");
+            if (IsEnterYinReadinessWindowOpen())
+                builder.Append("\n当前可确认是否入阴（战前与入阴之间）。");
 
             if (level == AIContextLevel.Full && completedDialogueIds.Count > 0)
             {

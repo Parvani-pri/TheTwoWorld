@@ -38,6 +38,18 @@ namespace TwoWorlds.RoamingNpc
 
         void Update()
         {
+            if (RoamingNpcInterrupter.ShouldYieldToScriptOrAiChat())
+            {
+                if (state == RoamingNpcState.InterruptShowing ||
+                    state == RoamingNpcState.Approaching)
+                    interrupter?.DismissInterrupt();
+
+                if (state != RoamingNpcState.ExternalDialogue)
+                    SetState(RoamingNpcState.ExternalDialogue);
+
+                return;
+            }
+
             if (state == RoamingNpcState.InterruptShowing)
                 return;
 
@@ -107,6 +119,10 @@ namespace TwoWorlds.RoamingNpc
 
             var chatSession = TwoWorlds.AI.AIChatSession.FindInstance();
             if (chatSession != null && chatSession.IsActive)
+                return true;
+
+            var readinessSession = TwoWorlds.Progress.EnterYinReadinessSession.FindInstance();
+            if (readinessSession != null && readinessSession.IsActive)
                 return true;
 
             return TwoWorlds.Core.GameEvents.IsInventoryOpen;
