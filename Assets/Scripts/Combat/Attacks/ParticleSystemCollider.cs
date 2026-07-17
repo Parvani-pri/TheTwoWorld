@@ -30,7 +30,6 @@ public class ParticleSystemCollider : MonoBehaviour
         if (hitComponent.TryGetComponent(out Collider collider3D))
         {
             var ps_temp = GetComponent<ParticleSystem>();
-            print(ps_temp == null);
             var triggerModule = ps_temp.trigger;
 
             // 2. Enable the module
@@ -47,7 +46,6 @@ public class ParticleSystemCollider : MonoBehaviour
         else if (hitComponent.TryGetComponent(out Collider2D collider2D))
         {
             var ps_temp = GetComponent<ParticleSystem>();
-            print(ps_temp == null);
             var triggerModule = ps_temp.trigger;
 
             // 2. Enable the module
