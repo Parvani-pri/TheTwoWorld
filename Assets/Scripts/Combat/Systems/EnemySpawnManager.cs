@@ -4,10 +4,7 @@ using UnityEngine;
 public class EnemySpawnManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> normalEnemies;
-<<<<<<< Updated upstream
     List<GameObject> existingEnemies;
-=======
->>>>>>> Stashed changes
     [SerializeField] int targetSpawnAmount;
     [SerializeField] float spawnInterval = 10f;
     float spawnTimer;
@@ -22,15 +19,17 @@ public class EnemySpawnManager : MonoBehaviour
 
     private void Update()
     {
+        if (spawnTimer > 0f)
+        {
+            spawnTimer -= Time.deltaTime;
+        }
+
         if (canSpawn && spawnCount < targetSpawnAmount && spawnTimer <= 0f)
         {
-<<<<<<< Updated upstream
             int spawnIndex = Random.Range(0, normalEnemies.Count);
-            existingEnemiesInstantiate
+            existingEnemies.Add(Instantiate(normalEnemies[spawnIndex], Vector3.zero, Quaternion.identity));
+            spawnTimer = spawnInterval;
             spawnCount++;
-=======
-
->>>>>>> Stashed changes
         }
     }
 

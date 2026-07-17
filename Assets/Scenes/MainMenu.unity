@@ -439,6 +439,50 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31d55c80331609841a470d54bcc62ac5, type: 3}
+--- !u!1 &862857220
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 862857221}
+  - component: {fileID: 862857222}
+  m_Layer: 0
+  m_Name: MainMenuManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &862857221
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862857220}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.7253, y: 0, z: -0.65426}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &862857222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862857220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0443ec9c671d9714ebbe1afb43ac8ef0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainMenuManager
 --- !u!1001 &979091813
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -590,7 +634,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1157197328}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 862857222}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_MethodName: Quit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1157197328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -832,8 +888,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u96E2\u958B\u904A\u6232"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2b55a424930c1f44f8d070ae2f867250, type: 2}
-  m_sharedMaterial: {fileID: 2345287185280276575, guid: 2b55a424930c1f44f8d070ae2f867250, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 798b3c874cc214947be6927926492b22, type: 2}
+  m_sharedMaterial: {fileID: -8322937069544618012, guid: 798b3c874cc214947be6927926492b22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1200,8 +1256,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u958B\u59CB\u904A\u6232"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2b55a424930c1f44f8d070ae2f867250, type: 2}
-  m_sharedMaterial: {fileID: 2345287185280276575, guid: 2b55a424930c1f44f8d070ae2f867250, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 798b3c874cc214947be6927926492b22, type: 2}
+  m_sharedMaterial: {fileID: -8322937069544618012, guid: 798b3c874cc214947be6927926492b22, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1360,7 +1416,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1837084682}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 862857222}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_MethodName: EnterGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1837084682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1601,3 +1669,4 @@ SceneRoots:
   - {fileID: 1353682822}
   - {fileID: 2078885588}
   - {fileID: 760720845}
+  - {fileID: 862857221}
