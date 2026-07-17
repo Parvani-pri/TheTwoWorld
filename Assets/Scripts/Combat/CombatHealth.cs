@@ -54,7 +54,12 @@ namespace TwoWorlds.Combat
             if (IsDead)
             {
                 Died?.Invoke(this);
+                animator.ResetTrigger(PlayerAnimParams.ATTACK);
+                animator.SetInteger(PlayerAnimParams.ATTACK_INDEX, -1);
+                animator.SetBool(PlayerAnimParams.IS_WALK, false);
+                animator.ResetTrigger(PlayerAnimParams.ON_HURT);
                 animator.SetTrigger(PlayerAnimParams.ON_DIE);
+                GetComponent<CombatActor>().SetTransformLock(1);
                 GameEvents.RaiseActorDied(this);
 
 
