@@ -1754,6 +1754,7 @@ Transform:
   - {fileID: 338224893}
   - {fileID: 1645761273}
   - {fileID: 755123965}
+  - {fileID: 1664251574}
   - {fileID: 514024453}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 20, z: 0}
@@ -3456,6 +3457,74 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1037640363}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1664251573
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1664251574}
+  - component: {fileID: 1664251576}
+  - component: {fileID: 1664251575}
+  m_Layer: 0
+  m_Name: Hurtbox (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1664251574
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664251573}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.26, y: 1.96, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1037640363}
+  m_LocalEulerAnglesHint: {x: 0, y: -20, z: 0}
+--- !u!65 &1664251575
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664251573}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3, y: 3, z: 3}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1664251576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664251573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2d3e4f5a6b7489012aabbccddeeff04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.CombatHurtbox
+  owner: {fileID: 1037640362}
+  health: {fileID: 1037640361}
 --- !u!1001 &1709274823
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3466,11 +3535,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1790470724794015652, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.7
+      value: 2.33
       objectReference: {fileID: 0}
     - target: {fileID: 1790470724794015652, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.55
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2029716946296000595, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
       propertyPath: m_LocalScale.x
@@ -3524,6 +3593,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: XuFu 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3974946848623581199, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 1709274829}
+    - target: {fileID: 3974946848623581199, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
+      propertyPath: health
+      value: 
+      objectReference: {fileID: 1709274830}
     - target: {fileID: 6935476639196451371, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
       propertyPath: TriggerModule.enter
       value: 2
@@ -3534,11 +3611,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6935476639196451371, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
       propertyPath: TriggerModule.enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6935476639196451371, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
       propertyPath: TriggerModule.outside
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935476639196451371, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6935476639196451371, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
       propertyPath: CollisionModule.collisionMode
@@ -3797,6 +3878,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1751563113}
   - component: {fileID: 1751563114}
+  - component: {fileID: 1751563115}
   m_Layer: 0
   m_Name: EnemyHealthBar
   m_TagString: Untagged
@@ -3839,6 +3921,19 @@ MonoBehaviour:
   targetHealth: {fileID: 1037640361}
   enemyHealthFill: {fileID: 2043255242}
   hideWhenFull: 0
+--- !u!114 &1751563115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751563112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad26bd4524f086c4aa7d85ac5432ba59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemColliderManager
+  ps: {fileID: 0}
 --- !u!1 &1860209172
 GameObject:
   m_ObjectHideFlags: 0
