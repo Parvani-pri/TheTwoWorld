@@ -256,6 +256,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 78053888}
   m_CullTransparentMesh: 1
+--- !u!114 &94293933 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7587025929789796296, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+  m_PrefabInstance: {fileID: 794974340}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f3beb56e135aa4bb330d7b02bb1e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemCollider
 --- !u!1001 &137718129
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -922,6 +933,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 94932bddf8ccb614c8ff52dcc9574d7b, type: 3}
   m_PrefabInstance: {fileID: 806828629}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &471265949 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1399059822078449195, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+  m_PrefabInstance: {fileID: 794974340}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f3beb56e135aa4bb330d7b02bb1e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemCollider
 --- !u!1 &487936874
 GameObject:
   m_ObjectHideFlags: 0
@@ -1495,6 +1517,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9ad0937bd03f61348b7c64805dfd255c, type: 3}
   m_PrefabInstance: {fileID: 589110456}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &604693196 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4670703538459628669, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+  m_PrefabInstance: {fileID: 794974340}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f3beb56e135aa4bb330d7b02bb1e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemCollider
 --- !u!1 &616932835
 GameObject:
   m_ObjectHideFlags: 0
@@ -1978,6 +2011,17 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &665964548 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5392694332657394854, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+  m_PrefabInstance: {fileID: 794974340}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f3beb56e135aa4bb330d7b02bb1e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemCollider
 --- !u!1 &675271117
 GameObject:
   m_ObjectHideFlags: 0
@@ -2969,6 +3013,78 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1793749967584463933, guid: f96bdd9dd78857e4ab5f2a0d213dae67, type: 3}
+      propertyPath: pscList.Array.size
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1793749967584463933, guid: f96bdd9dd78857e4ab5f2a0d213dae67, type: 3}
+      propertyPath: 'pscList.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1181425272}
+    - target: {fileID: 1793749967584463933, guid: f96bdd9dd78857e4ab5f2a0d213dae67, type: 3}
+      propertyPath: 'pscList.Array.data[1]'
+      value: 
+      objectReference: {fileID: 665964548}
+    - target: {fileID: 1793749967584463933, guid: f96bdd9dd78857e4ab5f2a0d213dae67, type: 3}
+      propertyPath: 'pscList.Array.data[2]'
+      value: 
+      objectReference: {fileID: 94293933}
+    - target: {fileID: 1793749967584463933, guid: f96bdd9dd78857e4ab5f2a0d213dae67, type: 3}
+      propertyPath: 'pscList.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1995538191}
+    - target: {fileID: 1793749967584463933, guid: f96bdd9dd78857e4ab5f2a0d213dae67, type: 3}
+      propertyPath: 'pscList.Array.data[4]'
+      value: 
+      objectReference: {fileID: 1114929637}
+    - target: {fileID: 1793749967584463933, guid: f96bdd9dd78857e4ab5f2a0d213dae67, type: 3}
+      propertyPath: 'pscList.Array.data[5]'
+      value: 
+      objectReference: {fileID: 1277018650}
+    - target: {fileID: 1793749967584463933, guid: f96bdd9dd78857e4ab5f2a0d213dae67, type: 3}
+      propertyPath: 'pscList.Array.data[6]'
+      value: 
+      objectReference: {fileID: 604693196}
+    - target: {fileID: 1793749967584463933, guid: f96bdd9dd78857e4ab5f2a0d213dae67, type: 3}
+      propertyPath: 'pscList.Array.data[7]'
+      value: 
+      objectReference: {fileID: 2047465233}
+    - target: {fileID: 1793749967584463933, guid: f96bdd9dd78857e4ab5f2a0d213dae67, type: 3}
+      propertyPath: 'pscList.Array.data[8]'
+      value: 
+      objectReference: {fileID: 1594502591}
+    - target: {fileID: 1793749967584463933, guid: f96bdd9dd78857e4ab5f2a0d213dae67, type: 3}
+      propertyPath: 'pscList.Array.data[9]'
+      value: 
+      objectReference: {fileID: 1948490634}
+    - target: {fileID: 1793749967584463933, guid: f96bdd9dd78857e4ab5f2a0d213dae67, type: 3}
+      propertyPath: 'pscList.Array.data[10]'
+      value: 
+      objectReference: {fileID: 1302495205}
+    - target: {fileID: 1793749967584463933, guid: f96bdd9dd78857e4ab5f2a0d213dae67, type: 3}
+      propertyPath: 'pscList.Array.data[11]'
+      value: 
+      objectReference: {fileID: 1922758534}
+    - target: {fileID: 1793749967584463933, guid: f96bdd9dd78857e4ab5f2a0d213dae67, type: 3}
+      propertyPath: 'pscList.Array.data[12]'
+      value: 
+      objectReference: {fileID: 471265949}
+    - target: {fileID: 1793749967584463933, guid: f96bdd9dd78857e4ab5f2a0d213dae67, type: 3}
+      propertyPath: 'pscList.Array.data[13]'
+      value: 
+      objectReference: {fileID: 1024492812}
+    - target: {fileID: 1793749967584463933, guid: f96bdd9dd78857e4ab5f2a0d213dae67, type: 3}
+      propertyPath: 'pscList.Array.data[14]'
+      value: 
+      objectReference: {fileID: 1313749287}
+    - target: {fileID: 1793749967584463933, guid: f96bdd9dd78857e4ab5f2a0d213dae67, type: 3}
+      propertyPath: 'pscList.Array.data[15]'
+      value: 
+      objectReference: {fileID: 1124445435}
+    - target: {fileID: 1793749967584463933, guid: f96bdd9dd78857e4ab5f2a0d213dae67, type: 3}
+      propertyPath: 'pscList.Array.data[16]'
+      value: 
+      objectReference: {fileID: 1117550438}
     - target: {fileID: 4590101040769282379, guid: f96bdd9dd78857e4ab5f2a0d213dae67, type: 3}
       propertyPath: m_Name
       value: WangLiang_Scripted
@@ -3018,6 +3134,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f96bdd9dd78857e4ab5f2a0d213dae67, type: 3}
+--- !u!114 &1024492812 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6886214176871963318, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+  m_PrefabInstance: {fileID: 794974340}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f3beb56e135aa4bb330d7b02bb1e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemCollider
 --- !u!1 &1040716917
 GameObject:
   m_ObjectHideFlags: 0
@@ -3466,6 +3593,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1067820626}
   m_CullTransparentMesh: 1
+--- !u!114 &1114929637 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7780272146742130078, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+  m_PrefabInstance: {fileID: 794974340}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f3beb56e135aa4bb330d7b02bb1e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemCollider
+--- !u!114 &1117550438 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4925218247589501722, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+  m_PrefabInstance: {fileID: 794974340}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f3beb56e135aa4bb330d7b02bb1e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemCollider
+--- !u!114 &1124445435 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8584170285281608948, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+  m_PrefabInstance: {fileID: 794974340}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f3beb56e135aa4bb330d7b02bb1e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemCollider
 --- !u!1 &1157019437
 GameObject:
   m_ObjectHideFlags: 0
@@ -3587,6 +3747,17 @@ RectTransform:
   m_AnchoredPosition: {x: 280, y: -190}
   m_SizeDelta: {x: -640, y: -420}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1181425272 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1918016116414955666, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+  m_PrefabInstance: {fileID: 794974340}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f3beb56e135aa4bb330d7b02bb1e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemCollider
 --- !u!1 &1243776757
 GameObject:
   m_ObjectHideFlags: 0
@@ -3763,6 +3934,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1891032428}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1277018650 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2900501422334084932, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+  m_PrefabInstance: {fileID: 794974340}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f3beb56e135aa4bb330d7b02bb1e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemCollider
 --- !u!1 &1291680018
 GameObject:
   m_ObjectHideFlags: 0
@@ -3890,6 +4072,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1891032428}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1302495205 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7641104151311259820, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+  m_PrefabInstance: {fileID: 794974340}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f3beb56e135aa4bb330d7b02bb1e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemCollider
+--- !u!114 &1313749287 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 684331425468946166, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+  m_PrefabInstance: {fileID: 794974340}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f3beb56e135aa4bb330d7b02bb1e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemCollider
 --- !u!1 &1366355024
 GameObject:
   m_ObjectHideFlags: 0
@@ -4190,6 +4394,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1891032428}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 98.418}
+--- !u!114 &1594502591 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3987076678354267269, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+  m_PrefabInstance: {fileID: 794974340}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f3beb56e135aa4bb330d7b02bb1e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemCollider
 --- !u!1 &1774514060
 GameObject:
   m_ObjectHideFlags: 0
@@ -4875,6 +5090,39 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1922758534 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1930749620886605778, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+  m_PrefabInstance: {fileID: 794974340}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f3beb56e135aa4bb330d7b02bb1e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemCollider
+--- !u!114 &1948490634 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7568063101378764470, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+  m_PrefabInstance: {fileID: 794974340}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f3beb56e135aa4bb330d7b02bb1e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemCollider
+--- !u!114 &1995538191 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6462476959035955079, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+  m_PrefabInstance: {fileID: 794974340}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f3beb56e135aa4bb330d7b02bb1e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemCollider
 --- !u!1 &1998202624
 GameObject:
   m_ObjectHideFlags: 0
@@ -5130,6 +5378,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2832489091158435334}
   m_LocalEulerAnglesHint: {x: 20, y: 45, z: 0}
+--- !u!114 &2047465233 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4630704725890515403, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+  m_PrefabInstance: {fileID: 794974340}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f3beb56e135aa4bb330d7b02bb1e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemCollider
 --- !u!1 &2048271725
 GameObject:
   m_ObjectHideFlags: 0
