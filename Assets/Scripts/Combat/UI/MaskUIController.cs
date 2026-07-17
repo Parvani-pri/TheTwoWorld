@@ -21,7 +21,6 @@ public class MaskUIController : MonoBehaviour
         startPos = hiddenPos.position;
         endPos = shownPos.position;
 
-        targetCanvas.position = startPos;
 
         if (inputReader == null)
             inputReader = FindFirstObjectByType<InputReader>();
