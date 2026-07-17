@@ -19,8 +19,10 @@ namespace TwoWorlds.RoamingNpc
         [SerializeField] InterruptDialogueUI interruptDialogueUI;
 
         RoamingNpcState state = RoamingNpcState.Disabled;
+        int scriptedBeatDepth;
 
         public RoamingNpcState State => state;
+        public bool IsScriptedBeatActive => scriptedBeatDepth > 0;
 
         void Awake()
         {
@@ -62,6 +64,18 @@ namespace TwoWorlds.RoamingNpc
             ApplyState();
         }
 
+        public void BeginScriptedBeat()
+        {
+            scriptedBeatDepth++;
+            ApplyState();
+        }
+
+        public void EndScriptedBeat()
+        {
+            scriptedBeatDepth = Mathf.Max(0, scriptedBeatDepth - 1);
+            ApplyState();
+        }
+
         public bool AllowRoamingMovement() =>
             state == RoamingNpcState.Roaming || state == RoamingNpcState.Cooldown;
 
@@ -71,7 +85,12 @@ namespace TwoWorlds.RoamingNpc
         void ApplyState()
         {
             if (controller != null)
-                controller.SetMovementEnabled(AllowRoamingMovement() || state == RoamingNpcState.Approaching);
+            {
+                var allowMove = AllowRoamingMovement() ||
+                                state == RoamingNpcState.Approaching ||
+                                IsScriptedBeatActive;
+                controller.SetMovementEnabled(allowMove);
+            }
 
             if (interrupter != null)
                 interrupter.SetInterruptEnabled(AllowInterruptLogic());

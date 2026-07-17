@@ -15,6 +15,7 @@ namespace TwoWorlds.Dialogue
         const string HeaderRewardItemId = "reward_item_id";
         const string HeaderRewardAmount = "reward_amount";
         const string HeaderProgressNote = "progress_note";
+        const string HeaderAction = "action";
 
         public static Dictionary<string, DialogueSessionData> Parse(
             string csvText,
@@ -68,6 +69,7 @@ namespace TwoWorlds.Dialogue
                 var rewardItemId = GetCell(row, columnIndex, HeaderRewardItemId);
                 var rewardAmount = ParseInt(GetCell(row, columnIndex, HeaderRewardAmount), 1);
                 var progressNote = GetCell(row, columnIndex, HeaderProgressNote);
+                var action = GetCell(row, columnIndex, HeaderAction);
                 itemLookup.TryGetValue(rewardItemId, out var rewardItem);
 
                 var meta = groupedMeta[dialogueId];
@@ -85,7 +87,7 @@ namespace TwoWorlds.Dialogue
 
                 groupedMeta[dialogueId] = meta;
 
-                lines.Add(new DialogueLine(speaker, text, portraitDatabase?.GetPortrait(speaker)));
+                lines.Add(new DialogueLine(speaker, text, portraitDatabase?.GetPortrait(speaker), action));
             }
 
             foreach (var pair in groupedLines)

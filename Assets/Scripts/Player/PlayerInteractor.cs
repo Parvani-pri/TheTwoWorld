@@ -19,10 +19,12 @@ namespace TwoWorlds.Player
         bool gameplayBlocked;
         bool inventoryOpen;
         CombatActor combatActor;
+        Collider2D bodyCollider;
 
         void Awake()
         {
             combatActor = GetComponent<CombatActor>();
+            bodyCollider = GetComponent<Collider2D>();
         }
 
         void Start()
@@ -86,8 +88,9 @@ namespace TwoWorlds.Player
                 useTriggers = true
             };
 
+            var origin = GetInteractOrigin();
             var hits = new Collider2D[16];
-            var hitCount = Physics2D.OverlapCircle(transform.position, interactRadius, filter, hits);
+            var hitCount = Physics2D.OverlapCircle(origin, interactRadius, filter, hits);
 
             IInteractable closest = null;
             var closestDistance = float.MaxValue;
@@ -95,14 +98,14 @@ namespace TwoWorlds.Player
             for (var i = 0; i < hitCount; i++)
             {
                 var hit = hits[i];
-                if (hit.transform == transform)
+                if (hit == bodyCollider)
                     continue;
 
                 var interactable = GetInteractable(hit, gameObject);
                 if (interactable == null)
                     continue;
 
-                if (Mathf.Abs(transform.position.z - hit.transform.position.z) > depthTolerance)
+                if (Mathf.Abs(origin.z - hit.transform.position.z) > depthTolerance)
                     continue;
 
                 var distance = GetGroundDistance(hit.transform.position);
@@ -124,7 +127,13 @@ namespace TwoWorlds.Player
                 return Vector2.Distance(ground, new Vector2(targetPosition.x, targetPosition.z));
             }
 
-            return Vector2.Distance(transform.position, targetPosition);
+            return Vector2.Distance(GetInteractOrigin(), targetPosition);
+        }
+
+        Vector3 GetInteractOrigin()
+        {
+            var collider = bodyCollider != null ? bodyCollider : GetComponent<Collider2D>();
+            return collider != null ? collider.bounds.center : transform.position;
         }
 
         static IInteractable GetInteractable(Collider2D collider, GameObject interactor)
@@ -161,7 +170,7 @@ namespace TwoWorlds.Player
                 return;
 
             Gizmos.color = currentTarget != null ? Color.green : Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, interactRadius);
+            Gizmos.DrawWireSphere(GetInteractOrigin(), interactRadius);
         }
     }
 }

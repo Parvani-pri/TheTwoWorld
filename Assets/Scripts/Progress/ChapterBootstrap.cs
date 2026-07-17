@@ -9,6 +9,8 @@ namespace TwoWorlds.Progress
         [SerializeField] string chapterId = "ch1_grave";
         [SerializeField] string chapterLabel = "第一章 · 祖坟";
         [SerializeField] string stageLabel = "调查祖坟";
+        [SerializeField] int chapterNumber = 1;
+        [SerializeField] bool initializeChapterProgress = true;
 
         void Awake()
         {
@@ -22,6 +24,9 @@ namespace TwoWorlds.Progress
                 return;
 
             gameProgress.SetChapter(chapterId, chapterLabel, stageLabel);
+
+            if (initializeChapterProgress)
+                gameProgress.SetChapterProgress(chapterNumber, ChapterSegment.None);
         }
     }
 }

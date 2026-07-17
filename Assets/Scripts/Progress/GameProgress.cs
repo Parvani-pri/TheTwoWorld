@@ -11,7 +11,7 @@ namespace TwoWorlds.Progress
         public static GameProgress Instance { get; private set; }
 
         [Header("Unlock Rules")]
-        [SerializeField] string xiaomeiIntroDialogueId = "xiaomei_intro";
+        [SerializeField] string xiaomeiIntroDialogueId = "1001";
         [SerializeField] string xiaomeiUnlockFlag = "xiaomei_unlocked";
 
         [Header("Default Chapter (optional)")]
@@ -28,10 +28,15 @@ namespace TwoWorlds.Progress
         string currentStageLabel;
         string lastCompletedDialogueId;
 
+        int currentChapterNumber = ChapterProgressCatalog.PrologueChapter;
+        ChapterSegment currentSegment = ChapterSegment.None;
+
         public string CurrentChapterId => currentChapterId;
         public string CurrentChapterLabel => currentChapterLabel;
         public string CurrentStageLabel => currentStageLabel;
         public string LastCompletedDialogueId => lastCompletedDialogueId;
+        public int CurrentChapterNumber => currentChapterNumber;
+        public ChapterSegment CurrentSegment => currentSegment;
 
         void Awake()
         {
@@ -45,6 +50,7 @@ namespace TwoWorlds.Progress
             currentChapterId = defaultChapterId;
             currentChapterLabel = defaultChapterLabel;
             currentStageLabel = defaultStageLabel;
+            SyncChapterFlags();
         }
 
         void OnEnable() => GameEvents.ScriptDialogueEnded += OnScriptDialogueEnded;
@@ -81,6 +87,21 @@ namespace TwoWorlds.Progress
         {
             if (!string.IsNullOrWhiteSpace(stageLabel))
                 currentStageLabel = stageLabel.Trim();
+        }
+
+        public void SetChapterProgress(int chapterNumber, ChapterSegment segment)
+        {
+            currentChapterNumber = Mathf.Clamp(chapterNumber, ChapterProgressCatalog.PrologueChapter, ChapterProgressCatalog.MaxChapter);
+            currentSegment = segment;
+            SyncChapterFlags();
+
+            if (ChapterProgressCatalog.TryGetChapterMeta(currentChapterNumber, out var chapterId, out var chapterLabel))
+            {
+                currentChapterId = chapterId;
+                currentChapterLabel = chapterLabel;
+            }
+
+            currentStageLabel = BuildStageLabel(currentChapterNumber, segment);
         }
 
         public void SetFlag(string flagId, bool value)
@@ -134,6 +155,104 @@ namespace TwoWorlds.Progress
             progressNotes.Add(note);
         }
 
+        public bool CanStartChapterDialogue(int chapter, ChapterSegment segment)
+        {
+            if (segment == ChapterSegment.None)
+                return false;
+
+            var dialogueId = ChapterProgressCatalog.GetDialogueId(chapter, segment);
+            if (HasDialogue(dialogueId))
+                return false;
+
+            switch (segment)
+            {
+                case ChapterSegment.PreBattle when chapter == ChapterProgressCatalog.PrologueChapter:
+                    return true;
+
+                case ChapterSegment.PreBattle:
+                    if (chapter == 1)
+                        return HasDialogue(ChapterProgressCatalog.GetDialogueId(ChapterProgressCatalog.PrologueChapter, ChapterSegment.PreBattle));
+
+                    var previousEpilogueId = ChapterProgressCatalog.GetDialogueId(chapter - 1, ChapterSegment.Epilogue);
+                    return HasDialogue(previousEpilogueId);
+
+                case ChapterSegment.EnterYin:
+                    return HasFlag(ChapterProgressCatalog.GetPreBattleDoneFlag(chapter)) &&
+                           HasFlag(ChapterProgressCatalog.GetEnterYinUnlockedFlag(chapter));
+
+                case ChapterSegment.PostBattle:
+                    return HasDialogue(ChapterProgressCatalog.GetDialogueId(chapter, ChapterSegment.EnterYin)) &&
+                           HasFlag(ChapterProgressCatalog.GetCombatDoneFlag(chapter));
+
+                case ChapterSegment.Epilogue:
+                    return HasDialogue(ChapterProgressCatalog.GetDialogueId(chapter, ChapterSegment.PostBattle)) &&
+                           HasFlag(ChapterProgressCatalog.GetExitBattleUnlockedFlag(chapter));
+
+                default:
+                    return false;
+            }
+        }
+
+        public bool IsAiDialogueWindowOpen()
+        {
+            if (currentChapterNumber < 1)
+                return false;
+
+            var preBattleId = ChapterProgressCatalog.GetDialogueId(currentChapterNumber, ChapterSegment.PreBattle);
+            var enterYinId = ChapterProgressCatalog.GetDialogueId(currentChapterNumber, ChapterSegment.EnterYin);
+
+            return HasDialogue(preBattleId) && !HasDialogue(enterYinId);
+        }
+
+        public void UnlockEnterYin(int chapter)
+        {
+            SetFlag(ChapterProgressCatalog.GetEnterYinUnlockedFlag(chapter), true);
+            SetStageLabel($"{ChapterProgressCatalog.GetSegmentLabel(ChapterSegment.EnterYin)}准备");
+        }
+
+        public void UnlockExitBattle(int chapter)
+        {
+            SetFlag(ChapterProgressCatalog.GetExitBattleUnlockedFlag(chapter), true);
+            SetStageLabel($"{ChapterProgressCatalog.GetSegmentLabel(ChapterSegment.Epilogue)}准备");
+        }
+
+        public void MarkCombatDone(int chapter)
+        {
+            SetFlag(ChapterProgressCatalog.GetCombatDoneFlag(chapter), true);
+            SetStageLabel($"{ChapterProgressCatalog.GetSegmentLabel(ChapterSegment.PostBattle)}准备");
+        }
+
+        public void CompleteChapterSegment(int chapter, ChapterSegment segment)
+        {
+            switch (segment)
+            {
+                case ChapterSegment.PreBattle when chapter == ChapterProgressCatalog.PrologueChapter:
+                    SetChapterProgress(1, ChapterSegment.None);
+                    break;
+
+                case ChapterSegment.PreBattle:
+                    SetChapterProgress(chapter, segment);
+                    SetFlag(ChapterProgressCatalog.GetPreBattleDoneFlag(chapter), true);
+                    SetFlag(ChapterProgressCatalog.GetAiWindowFlag(chapter), true);
+                    break;
+
+                case ChapterSegment.EnterYin:
+                    SetChapterProgress(chapter, segment);
+                    SetFlag(ChapterProgressCatalog.GetAiWindowFlag(chapter), false);
+                    break;
+
+                case ChapterSegment.Epilogue when chapter < ChapterProgressCatalog.MaxChapter:
+                    SetChapterProgress(chapter + 1, ChapterSegment.None);
+                    break;
+
+                default:
+                    SetChapterProgress(chapter, segment);
+                    break;
+            }
+
+            SyncChapterFlags();
+        }
+
         public string BuildProgressSummary(AIContextLevel level)
         {
             if (level == AIContextLevel.None)
@@ -148,8 +267,17 @@ namespace TwoWorlds.Progress
             if (!string.IsNullOrWhiteSpace(currentChapterId))
                 builder.Append("（").Append(currentChapterId).Append('）');
 
+            if (currentChapterNumber >= 0)
+            {
+                builder.Append("\n章节编号：").Append(currentChapterNumber);
+                builder.Append("\n章节进度：").Append(ChapterProgressCatalog.GetSegmentLabel(currentSegment));
+            }
+
             if (!string.IsNullOrWhiteSpace(currentStageLabel))
                 builder.Append("\n当前阶段：").Append(currentStageLabel);
+
+            if (IsAiDialogueWindowOpen())
+                builder.Append("\n当前可与助手自由交谈（战前与入阴之间）。");
 
             if (level == AIContextLevel.Full && completedDialogueIds.Count > 0)
             {
@@ -190,5 +318,32 @@ namespace TwoWorlds.Progress
             progressNotes.Count > 0 ? progressNotes[progressNotes.Count - 1] : null;
 
         public bool IsXiaomeiInterruptUnlocked() => HasFlag(xiaomeiUnlockFlag) || HasDialogue(xiaomeiIntroDialogueId);
+
+        void SyncChapterFlags()
+        {
+            for (var chapter = 1; chapter <= ChapterProgressCatalog.MaxChapter; chapter++)
+                SetFlag(ChapterProgressCatalog.GetChapterFlag(chapter), chapter == currentChapterNumber);
+
+            if (currentChapterNumber >= 1)
+                SetFlag(ChapterProgressCatalog.GetSegmentFlag(currentChapterNumber), true);
+
+            SetFlag("story_chapter", true);
+            SetFlag($"story_chapter_value_{currentChapterNumber}", true);
+            SetFlag($"story_segment_value_{(int)currentSegment}", true);
+        }
+
+        static string BuildStageLabel(int chapterNumber, ChapterSegment segment)
+        {
+            if (chapterNumber <= ChapterProgressCatalog.PrologueChapter)
+                return "序章";
+
+            if (!ChapterProgressCatalog.TryGetChapterMeta(chapterNumber, out _, out var chapterLabel))
+                return ChapterProgressCatalog.GetSegmentLabel(segment);
+
+            if (segment == ChapterSegment.None)
+                return chapterLabel;
+
+            return $"{chapterLabel} · {ChapterProgressCatalog.GetSegmentLabel(segment)}";
+        }
     }
 }

@@ -1,6 +1,7 @@
 using TwoWorlds.AI;
 using TwoWorlds.Core;
 using TwoWorlds.Dialogue;
+using TwoWorlds.Progress;
 using UnityEngine;
 
 namespace TwoWorlds.Interaction
@@ -9,9 +10,12 @@ namespace TwoWorlds.Interaction
     public class NpcInteractHub : MonoBehaviour, IInteractable
     {
         [Header("Capabilities")]
+        [SerializeField] ChapterDialogueTrigger chapterDialogueTrigger;
+        [SerializeField] StagedDialogueTrigger stagedDialogueTrigger;
         [SerializeField] DialogueTrigger dialogueTrigger;
         [SerializeField] AIChatTrigger aiChatTrigger;
         [SerializeField] AIChatSession chatSession;
+        [SerializeField] GameProgress gameProgress;
 
         [Header("Presentation")]
         [SerializeField] string promptText = "交谈";
@@ -26,6 +30,12 @@ namespace TwoWorlds.Interaction
 
         void Awake()
         {
+            if (chapterDialogueTrigger == null)
+                chapterDialogueTrigger = GetComponent<ChapterDialogueTrigger>();
+
+            if (stagedDialogueTrigger == null)
+                stagedDialogueTrigger = GetComponent<StagedDialogueTrigger>();
+
             if (dialogueTrigger == null)
                 dialogueTrigger = GetComponent<DialogueTrigger>();
 
@@ -34,6 +44,9 @@ namespace TwoWorlds.Interaction
 
             if (chatSession == null)
                 chatSession = FindFirstObjectByType<AIChatSession>();
+
+            if (gameProgress == null)
+                gameProgress = GameProgress.Instance ?? FindFirstObjectByType<GameProgress>();
         }
 
         void OnEnable() => GameEvents.ScriptDialogueEnded += OnScriptDialogueEnded;
@@ -73,7 +86,7 @@ namespace TwoWorlds.Interaction
         public string GetPromptText() => promptText;
 
         bool IsDialogueAvailable(GameObject interactor) =>
-            dialogueTrigger != null && dialogueTrigger.IsDialogueAvailable(interactor);
+            ResolveDialogueSource(interactor)?.IsDialogueAvailable(interactor) ?? false;
 
         bool IsAIChatAvailable(GameObject interactor) =>
             aiChatTrigger != null && aiChatTrigger.IsAIChatAvailable(interactor);
@@ -91,12 +104,38 @@ namespace TwoWorlds.Interaction
 
         void StartScriptDialogue(GameObject interactor)
         {
-            if (dialogueTrigger == null)
+            var source = ResolveDialogueSource(interactor);
+            if (source == null)
                 return;
 
             pendingInteractor = interactor;
-            waitingForScriptDialogueEnd = enterAiAfterScriptDialogue && IsAIChatAvailable(interactor);
-            dialogueTrigger.TriggerDialogue(interactor);
+            waitingForScriptDialogueEnd = ShouldEnterAiAfterScriptDialogue(interactor);
+            source.TriggerDialogue(interactor);
+        }
+
+        IScriptDialogueSource ResolveDialogueSource(GameObject interactor)
+        {
+            if (chapterDialogueTrigger != null && chapterDialogueTrigger.IsDialogueAvailable(interactor))
+                return chapterDialogueTrigger;
+
+            if (stagedDialogueTrigger != null && stagedDialogueTrigger.IsDialogueAvailable(interactor))
+                return stagedDialogueTrigger;
+
+            if (dialogueTrigger != null && dialogueTrigger.IsDialogueAvailable(interactor))
+                return dialogueTrigger;
+
+            return null;
+        }
+
+        bool ShouldEnterAiAfterScriptDialogue(GameObject interactor)
+        {
+            if (!enterAiAfterScriptDialogue || !IsAIChatAvailable(interactor))
+                return false;
+
+            if (gameProgress == null)
+                gameProgress = GameProgress.Instance ?? FindFirstObjectByType<GameProgress>();
+
+            return gameProgress == null || gameProgress.IsAiDialogueWindowOpen();
         }
 
         void StartAIChat(GameObject interactor, string openingMessageOverride = null)

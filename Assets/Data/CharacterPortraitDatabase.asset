@@ -13,7 +13,19 @@ MonoBehaviour:
   m_Name: CharacterPortraitDatabase
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.CharacterPortraitDatabase
   entries:
-  - speakerName: NPC_Elder
-    portrait: {fileID: -803321122, guid: 836ba81373ddf664c8a192783efe0ecd, type: 3}
-  - speakerName: Player
-    portrait: {fileID: 21300000, guid: 35fb4e802305325478d6a8e1f4150cab, type: 3}
+  - speakerName: "\u65C1\u767D"
+    portrait: {fileID: 0}
+  - speakerName: "\u5C0F\u59B9"
+    portrait: {fileID: 0}
+  - speakerName: "\u8A31\u8CA0"
+    portrait: {fileID: 0}
+  - speakerName: "\u75C5\u4EBA"
+    portrait: {fileID: 0}
+  - speakerName: "\u9B4D\u9B4E"
+    portrait: {fileID: 0}
+  - speakerName: "\u5A66\u4EBA"
+    portrait: {fileID: 0}
+  - speakerName: "\u9B51"
+    portrait: {fileID: 0}
+  - speakerName: "\u9B45"
+    portrait: {fileID: 0}

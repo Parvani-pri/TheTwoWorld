@@ -39,6 +39,10 @@ namespace TwoWorlds.RoamingNpc
 
         void OnAdvance(InputAction.CallbackContext _)
         {
+            if (TwoWorlds.Dialogue.DialogueManager.Instance != null &&
+                TwoWorlds.Dialogue.DialogueManager.Instance.IsPlaying)
+                return;
+
             if (interruptDialogueUI == null || !interruptDialogueUI.IsShowing)
                 return;
 

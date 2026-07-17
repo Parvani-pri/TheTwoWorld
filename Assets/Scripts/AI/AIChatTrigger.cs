@@ -1,5 +1,6 @@
 using TwoWorlds.Core;
 using TwoWorlds.Inventory;
+using TwoWorlds.Progress;
 using UnityEngine;
 
 namespace TwoWorlds.AI
@@ -8,7 +9,9 @@ namespace TwoWorlds.AI
     public class AIChatTrigger : MonoBehaviour, IInteractable
     {
         [SerializeField] AIChatSession chatSession;
+        [SerializeField] GameProgress gameProgress;
         [SerializeField] bool requireInteractHub;
+        [SerializeField] bool requireAiDialogueWindow = true;
         [SerializeField] string npcName = "小梅";
         [TextArea(3, 6)]
         [SerializeField] string npcPersona =
@@ -32,6 +35,12 @@ namespace TwoWorlds.AI
         public int MaxQuestionsPerSession => maxQuestionsPerSession;
         public string[] QuickQuestions => quickQuestions;
 
+        void Awake()
+        {
+            if (gameProgress == null)
+                gameProgress = GameProgress.Instance ?? FindFirstObjectByType<GameProgress>();
+        }
+
         public bool CanInteract(GameObject interactor)
         {
             if (requireInteractHub)
@@ -45,7 +54,16 @@ namespace TwoWorlds.AI
             if (chatSession == null)
                 chatSession = FindFirstObjectByType<AIChatSession>();
 
-            return chatSession != null && !chatSession.IsActive;
+            if (chatSession == null || chatSession.IsActive)
+                return false;
+
+            if (!requireAiDialogueWindow)
+                return true;
+
+            if (gameProgress == null)
+                gameProgress = GameProgress.Instance ?? FindFirstObjectByType<GameProgress>();
+
+            return gameProgress != null && gameProgress.IsAiDialogueWindowOpen();
         }
 
         public void Interact(GameObject interactor) => TriggerAIChat(interactor);

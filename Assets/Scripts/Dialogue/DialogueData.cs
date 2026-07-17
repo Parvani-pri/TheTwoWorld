@@ -10,21 +10,24 @@ namespace TwoWorlds.Dialogue
         [TextArea(2, 5)]
         [SerializeField] string text;
         [SerializeField] Sprite portrait;
+        [SerializeField] string action;
 
         public DialogueLine()
         {
         }
 
-        public DialogueLine(string speaker, string lineText, Sprite linePortrait = null)
+        public DialogueLine(string speaker, string lineText, Sprite linePortrait = null, string lineAction = null)
         {
             speakerName = speaker;
             text = lineText;
             portrait = linePortrait;
+            action = lineAction;
         }
 
         public string SpeakerName => speakerName;
         public string Text => text;
         public Sprite Portrait => portrait;
+        public string Action => action ?? string.Empty;
     }
 
     [CreateAssetMenu(fileName = "NewDialogue", menuName = "Two Worlds/Dialogue Data")]

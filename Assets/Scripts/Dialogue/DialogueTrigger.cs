@@ -11,7 +11,7 @@ namespace TwoWorlds.Dialogue
     }
 
     [RequireComponent(typeof(Collider2D))]
-    public class DialogueTrigger : MonoBehaviour, IInteractable
+    public class DialogueTrigger : MonoBehaviour, IInteractable, IScriptDialogueSource
     {
         [SerializeField] DialogueSourceMode sourceMode = DialogueSourceMode.Asset;
         [SerializeField] DialogueData dialogue;

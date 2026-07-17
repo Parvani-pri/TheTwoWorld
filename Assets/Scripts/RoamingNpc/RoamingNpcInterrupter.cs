@@ -16,6 +16,8 @@ namespace TwoWorlds.RoamingNpc
         [SerializeField] GameProgress gameProgress;
         [SerializeField] float postDialogueApproachDelay = 2f;
         [SerializeField] float interruptAiTimeoutSeconds = 12f;
+        [Tooltip("After any of these dialogue IDs complete, roaming interrupt stays disabled.")]
+        [SerializeField] string[] disableAfterDialogueIds;
 
         Transform playerTransform;
         float cooldownUntil;
@@ -136,6 +138,18 @@ namespace TwoWorlds.RoamingNpc
             if (brain == null || gameProgress == null)
                 return;
 
+            if (IsInterruptPermanentlyDisabled())
+            {
+                if (brain.State != RoamingNpcState.Disabled &&
+                    brain.State != RoamingNpcState.ExternalDialogue &&
+                    brain.State != RoamingNpcState.InterruptShowing)
+                {
+                    brain.SetState(RoamingNpcState.Disabled);
+                }
+
+                return;
+            }
+
             if (!gameProgress.IsXiaomeiInterruptUnlocked())
             {
                 if (brain.State != RoamingNpcState.Disabled &&
@@ -155,9 +169,27 @@ namespace TwoWorlds.RoamingNpc
             }
         }
 
+        bool IsInterruptPermanentlyDisabled()
+        {
+            if (disableAfterDialogueIds == null || gameProgress == null)
+                return false;
+
+            foreach (var dialogueId in disableAfterDialogueIds)
+            {
+                if (!string.IsNullOrWhiteSpace(dialogueId) && gameProgress.HasDialogue(dialogueId))
+                    return true;
+            }
+
+            return false;
+        }
+
         void BeginApproach(Vector3 playerPosition)
         {
             if (config == null || controller == null || brain == null)
+                return;
+
+            if (TwoWorlds.Dialogue.DialogueManager.Instance != null &&
+                TwoWorlds.Dialogue.DialogueManager.Instance.IsPlaying)
                 return;
 
             var direction = transform.position - playerPosition;

@@ -13,10 +13,12 @@ namespace TwoWorlds.RoamingNpc
         Vector3 moveTarget;
         float nextPickTime;
         bool movementEnabled = true;
+        bool scriptedOverride;
         bool hasMoveTarget;
         SpriteRenderer spriteRenderer;
 
         public bool IsMovingToTarget { get; private set; }
+        public bool IsScriptedOverride => scriptedOverride;
 
         void Awake()
         {
@@ -36,7 +38,15 @@ namespace TwoWorlds.RoamingNpc
         {
             movementEnabled = enabled;
 
-            if (!enabled)
+            if (!enabled && !scriptedOverride)
+                IsMovingToTarget = false;
+        }
+
+        public void SetScriptedOverride(bool enabled)
+        {
+            scriptedOverride = enabled;
+
+            if (!enabled && !movementEnabled)
                 IsMovingToTarget = false;
         }
 
@@ -96,13 +106,19 @@ namespace TwoWorlds.RoamingNpc
 
         void Update()
         {
-            if (!movementEnabled || config == null)
+            if (config == null)
                 return;
 
-            if (brain != null && !brain.AllowRoamingMovement() && brain.State != RoamingNpcState.Approaching)
+            var allowByBrain = brain == null ||
+                               brain.AllowRoamingMovement() ||
+                               brain.State == RoamingNpcState.Approaching ||
+                               brain.IsScriptedBeatActive;
+
+            if (!scriptedOverride && (!movementEnabled || !allowByBrain))
                 return;
 
             if (brain != null &&
+                !scriptedOverride &&
                 (brain.State == RoamingNpcState.Roaming || brain.State == RoamingNpcState.Cooldown) &&
                 Time.time >= nextPickTime &&
                 !hasMoveTarget)

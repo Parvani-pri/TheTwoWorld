@@ -59,6 +59,19 @@ namespace TwoWorlds.Dialogue
             ShowCurrentLine();
         }
 
+        void RaiseLineShownEvent()
+        {
+            if (currentDialogue == null || lastInteractor == null)
+                return;
+
+            var line = currentDialogue.Lines[currentLineIndex];
+            GameEvents.RaiseDialogueLineShown(new DialogueLineShownInfo(
+                currentDialogue.DialogueId,
+                currentLineIndex,
+                line,
+                lastInteractor));
+        }
+
         public void AdvanceDialogue()
         {
             if (!isPlaying)
@@ -88,6 +101,7 @@ namespace TwoWorlds.Dialogue
             if (typingRoutine != null)
                 StopCoroutine(typingRoutine);
 
+            RaiseLineShownEvent();
             typingRoutine = StartCoroutine(TypeLine(line));
         }
 
