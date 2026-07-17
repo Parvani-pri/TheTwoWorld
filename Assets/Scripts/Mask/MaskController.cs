@@ -145,6 +145,30 @@ private void SetIfChanged(string animName)
             hasBaseMaskPosition = true;
         }
 
+        public void EquipMask_Int(int maskID)
+        {
+            switch (maskID)
+            {
+                case 1:
+                    if (quickMasks[0] != null)
+                    {
+                        EquipMask(quickMasks[0]);
+                    }
+                    break;
+                case 2:
+                    if (quickMasks[1] != null)
+                    {
+                        EquipMask(quickMasks[1]);
+                    }
+                    break;
+                case 3:
+                        EquipMask(null);
+                    break;
+                default:
+                    break;
+            }
+        }
+
         public void SetMaskIndex(int index)
         {
             if (index <= 0)

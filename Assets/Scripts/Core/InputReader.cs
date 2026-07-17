@@ -20,6 +20,7 @@ namespace TwoWorlds.Core
         InputAction attackAction2;
         InputAction attackAction3;
         InputAction sprintAction;
+        InputAction toggleMenu;
 
         public InputAction InteractAction => interactAction;
         public InputAction SubmitAction => submitAction;
@@ -31,6 +32,7 @@ namespace TwoWorlds.Core
         public InputAction AttackAction2 => attackAction2;
         public InputAction AttackAction3 => attackAction3;
         public InputAction SprintAction => sprintAction;
+        public InputAction ToggleMenu => toggleMenu;
 
 
 
@@ -48,6 +50,7 @@ namespace TwoWorlds.Core
             interactAction = playerMap.FindAction("Interact", true);
             submitAction = uiMap.FindAction("Submit", true);
             cancelAction = uiMap.FindAction("Cancel", true);
+            toggleMenu = uiMap.FindAction("ToggleMenu", true);
 
             inventoryAction = playerMap.FindAction("Inventory", true);
             moveAction = playerMap.FindAction("Move", true);
@@ -56,6 +59,7 @@ namespace TwoWorlds.Core
             attackAction2 = playerMap.FindAction("Attack2", true);
             attackAction3 = playerMap.FindAction("Attack3", true);
             sprintAction = playerMap.FindAction("Sprint", true);
+
         }
 
         void OnEnable()
