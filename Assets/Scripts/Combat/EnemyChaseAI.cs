@@ -18,13 +18,15 @@ namespace TwoWorlds.Combat
         [Tooltip("Height difference below which the enemy stops adjusting altitude.")]
         [SerializeField] float heightTolerance = 0.15f;
         [SerializeField] Animator animator;
-
+        [SerializeField] Collider2D col;
         
         SpriteRenderer spriteRenderer;
+
 
         CombatActor actor;
         IEnemyAttackRangeProvider attackAI;
         bool gameplayBlocked;
+        bool hasTriggeredOnDie = false;
 
         void Awake()
         {
@@ -53,7 +55,11 @@ namespace TwoWorlds.Combat
             var target = CombatActor.FindClosest(CombatFaction.Player, actor.GroundPosition);
             if (target == null)
                 return;
-            ChaseGround(target);
+            if (!hasTriggeredOnDie)
+            {
+                ChaseGround(target);
+            }
+
 
 
             if (canFly)
@@ -62,6 +68,14 @@ namespace TwoWorlds.Combat
 
         void ChaseGround(CombatActor target)
         {
+            if (GetComponent<CombatHealth>().IsDead)
+            {
+                print("triggered");
+                animator.SetTrigger(PlayerAnimParams.ON_DIE);
+                animator.SetBool(PlayerAnimParams.IS_WALK, false);
+                hasTriggeredOnDie = true;
+                return;
+            }
             var toTarget = target.GroundPosition - actor.GroundPosition;
             if (toTarget.magnitude <= stopDistance + 0.02f && !GetComponent<EnemyAttackAI>().isPlayerDead)
             {
@@ -77,6 +91,7 @@ namespace TwoWorlds.Combat
                 FaceTarget(toTarget.x);
             }
 
+
         }
 
         void ChaseHeight(CombatActor target)
@@ -91,7 +106,12 @@ namespace TwoWorlds.Combat
 
         void FaceTarget(float horizontal)
         {
-            spriteRenderer.flipX = horizontal <= 0f;
+            transform.localScale = new Vector3(horizontal <= 0f ? -Mathf.Abs(transform.localScale.x) : Mathf.Abs(transform.localScale.x),
+                transform.localScale.y, transform.localScale.z);
+            //spriteRenderer.flipX = horizontal <= 0f;
+            //col.transform.localScale = new Vector3(horizontal <= 0f ? -Mathf.Abs(col.transform.localScale.x) : Mathf.Abs(col.transform.localScale.x),
+            //    col.transform.localScale.y, col.transform.localScale.z);
+
             if (Mathf.Approximately(horizontal, 0f))
                 return;
 
