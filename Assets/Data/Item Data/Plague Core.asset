@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b207e10d75d92024fb9491f5c0dc1573, type: 3}
-  m_Name: YinShaResidue
+  m_Name: Plague Core
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Inventory.ItemData
-  itemId: yin_sha_residue
-  displayName: 阴煞残气
-  description: 从墓灵、疫鬼身上剥离的阴煞之气，是制作儺面的基础材料。
+  itemId: 
+  displayName: 
+  description: 
   icon: {fileID: 0}
   itemType: 0
-  maxStackSize: 30
+  maxStackSize: 99
   isUnique: 0

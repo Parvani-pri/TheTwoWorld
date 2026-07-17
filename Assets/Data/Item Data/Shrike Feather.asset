@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b207e10d75d92024fb9491f5c0dc1573, type: 3}
-  m_Name: SoulNail
+  m_Name: Shrike Feather
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Inventory.ItemData
-  itemId: soul_nail
-  displayName: 镇魂钉
-  description: 钉入祖坟以强改命数的铁钉，怨由此而生。
+  itemId: 
+  displayName: 
+  description: 
   icon: {fileID: 0}
-  itemType: 4
-  maxStackSize: 1
-  isUnique: 1
+  itemType: 0
+  maxStackSize: 99
+  isUnique: 0
