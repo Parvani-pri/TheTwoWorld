@@ -49,16 +49,20 @@ namespace TwoWorlds.Combat
         void ChaseGround(CombatActor target)
         {
             var toTarget = target.GroundPosition - actor.GroundPosition;
-            if (toTarget.magnitude <= stopDistance + 0.02f)
+            if (toTarget.magnitude <= stopDistance + 0.02f && !GetComponent<EnemyAttackAI>().isPlayerDead)
             {
                 animator.SetTrigger(PlayerAnimParams.ATTACK);
                 animator.SetBool(PlayerAnimParams.IS_WALK, false);
                 return;
             }
-            animator.SetBool(PlayerAnimParams.IS_WALK, true);
-            var step = toTarget.normalized * moveSpeed * Time.deltaTime;
-            actor.MoveGround(step);
-            FaceTarget(toTarget.x);
+            if (!GetComponent<EnemyAttackAI>().isPlayerDead)
+            {
+                animator.SetBool(PlayerAnimParams.IS_WALK, true);
+                var step = toTarget.normalized * moveSpeed * Time.deltaTime;
+                actor.MoveGround(step);
+                FaceTarget(toTarget.x);
+            }
+
         }
 
         void ChaseHeight(CombatActor target)

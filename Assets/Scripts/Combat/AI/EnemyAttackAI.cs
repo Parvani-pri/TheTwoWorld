@@ -14,6 +14,7 @@ namespace TwoWorlds.Combat
         [SerializeField] float attackCD = 3f;
 
         bool canAttack = true;
+        public bool isPlayerDead = false;
         bool shouldCountdown = false;
         CombatActor actor;
         CombatActor target;
@@ -38,6 +39,7 @@ namespace TwoWorlds.Combat
                     break;
 
             }
+            animator.SetInteger(PlayerAnimParams.ATTACK_INDEX, nextAttackID);
             actor = GetComponent<CombatActor>();
 
             if (hitbox == null)
@@ -72,7 +74,7 @@ namespace TwoWorlds.Combat
 
             }
 
-            if (cooldownTimer > 0f && shouldCountdown)
+            if (cooldownTimer > 0f && shouldCountdown && !isPlayerDead)
             {
                 cooldownTimer -= Time.deltaTime;
                 return;
@@ -87,7 +89,7 @@ namespace TwoWorlds.Combat
                 return;
 
             FaceTarget(target);
-            if (canAttack)
+            if (canAttack && cooldownTimer <= 0f && !isPlayerDead)
             {
                 cooldownTimer = attackCD;
                 switch (nextAttackID)
@@ -122,10 +124,11 @@ namespace TwoWorlds.Combat
 
                 }
             }
-
-
-
-
+            else if (isPlayerDead)
+            {
+                animator.ResetTrigger(PlayerAnimParams.ATTACK);
+                animator.SetInteger(PlayerAnimParams.ATTACK_INDEX, -1);
+            }
         }
 
         void FaceTarget(CombatActor chaseTarget)
@@ -160,5 +163,12 @@ namespace TwoWorlds.Combat
             animator.ResetTrigger(PlayerAnimParams.ATTACK);
             shouldCountdown = true;
         }
+
+        public void IsPlayerDead(bool isDead)
+        {
+            animator.SetBool(PlayerAnimParams.IS_WALK, false);
+            isPlayerDead = isDead;
+        }
+
     }
 }

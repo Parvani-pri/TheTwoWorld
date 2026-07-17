@@ -139,7 +139,6 @@ namespace TwoWorlds.Combat
             switch (attackID)
             {
                 case 1:
-                    hitbox.Activate(attack1Data, 1);
                     cooldownTimer1 = attack1Data.Cooldown;
                     PlayerAttackUI.OnAttackLaunched(1, attack1Data.Cooldown);
                     break;
@@ -150,7 +149,6 @@ namespace TwoWorlds.Combat
                     PlayerAttackUI.OnAttackLaunched(2, attack2Data.Cooldown);
                     break;
                 case 3:
-                    hitbox.Activate(attack3Data, 1);
                     cooldownTimer3 = attack3Data.Cooldown;
                     PlayerAttackUI.OnAttackLaunched(3, attack3Data.Cooldown);
                     break;

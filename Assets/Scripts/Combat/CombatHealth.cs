@@ -43,7 +43,6 @@ namespace TwoWorlds.Combat
                 return;
 
             animator.SetTrigger(PlayerAnimParams.ON_HURT);
-            combatActor.SetTransformLock(1);
             CurrentHealth = Mathf.Max(0, CurrentHealth - amount);
             invincibleUntil = Time.time + invincibilityDuration;
 
@@ -55,12 +54,19 @@ namespace TwoWorlds.Combat
             if (IsDead)
             {
                 Died?.Invoke(this);
+                animator.SetTrigger(PlayerAnimParams.ON_DIE);
                 GameEvents.RaiseActorDied(this);
 
-                if (destroyOnDeath)
-                    Destroy(gameObject);
+
             }
         }
+
+        public void DestroyAfterDeathAnim()
+        {
+            if (destroyOnDeath)
+                Destroy(gameObject);
+        }
+
 
         public void Heal(int amount)
         {

@@ -19,6 +19,7 @@ namespace TwoWorlds.Combat
         AttackData activeAttack;
         float activeTimer;
         bool isActive;
+        bool canAttack = true;
 
         public bool IsActive => isActive;
 
@@ -89,6 +90,7 @@ namespace TwoWorlds.Combat
 
         void TryHit(Collider2D other, float accumulatedMultiplier)
         {
+            if (!canAttack) return;
             if (!isActive || activeAttack == null)
                 return;
             var hurtbox = other.GetComponent<CombatHurtbox>()
@@ -111,8 +113,16 @@ namespace TwoWorlds.Combat
             }
 
             hitThisActivation.Add(hurtbox);
-            print(accumulatedMultiplier);
             hurtbox.Health.TakeDamage((int)(activeAttack.Damage * accumulatedMultiplier), owner);
+            if (hurtbox.Health.CurrentHealth <= 0 && owner.Faction == CombatFaction.Enemy)
+            {
+                print("condition 1 checked");
+                if (GetComponentInParent<EnemyAttackAI>() != null)
+                {
+                    print("condition 2 checked");
+                    GetComponentInParent<EnemyAttackAI>().IsPlayerDead(true);
+                }
+            }
         }
     }
 }
