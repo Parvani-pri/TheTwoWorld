@@ -91,8 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2d3e4f5a6b7489012aabbccddeeff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.CombatHurtbox
-  owner: {fileID: 0}
-  health: {fileID: 0}
+  owner: {fileID: 5965617158335617430}
+  health: {fileID: 944333697097958019}
   pscList:
   - {fileID: 0}
   - {fileID: 0}
@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1c2d3e4f5a6478993aabbccddeeff05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.CombatHitbox
-  owner: {fileID: 0}
+  owner: {fileID: 5965617158335617430}
   hitCollider: {fileID: 940929144735530654}
 --- !u!1 &5963754252220017845
 GameObject:
@@ -511,7 +511,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6147716946319866998}
   - component: {fileID: 7598254063291484882}
-  - component: {fileID: 7943076103014666460}
   m_Layer: 0
   m_Name: EnemyHealthBar
   m_TagString: Untagged
@@ -551,91 +550,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74427a8eea60cbf4eb488749f96e69c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.EnemyHealthBarUI
-  targetHealth: {fileID: 0}
+  targetHealth: {fileID: 944333697097958019}
   enemyHealthFill: {fileID: 3385216773218815514}
   hideWhenFull: 0
---- !u!114 &7943076103014666460
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8881654330577693824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad26bd4524f086c4aa7d85ac5432ba59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemColliderManager
-  ps: {fileID: 0}
---- !u!1 &9168851467071023684
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7275461780644042614}
-  - component: {fileID: 5288812318891156970}
-  - component: {fileID: 474707361434524631}
-  m_Layer: 0
-  m_Name: Hurtbox (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &7275461780644042614
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9168851467071023684}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.0171504, y: 4.9, z: 0.5338934}
-  m_LocalScale: {x: -2.4999998, y: 2.5, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2473982799451229267}
-  m_LocalEulerAnglesHint: {x: 0, y: -20, z: 0}
---- !u!114 &5288812318891156970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9168851467071023684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2d3e4f5a6b7489012aabbccddeeff04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.CombatHurtbox
-  owner: {fileID: 0}
-  health: {fileID: 0}
-  pscList: []
---- !u!65 &474707361434524631
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9168851467071023684}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3, y: 3, z: 3}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1840494174563332829
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -644,6 +561,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 42590687507936725, guid: 95af2b54e4874c544bb55db70301a8fd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 4314419361188314766, guid: 95af2b54e4874c544bb55db70301a8fd, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -654,7 +575,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4314419361188314766, guid: 95af2b54e4874c544bb55db70301a8fd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.2
+      value: -12.60332
       objectReference: {fileID: 0}
     - target: {fileID: 4314419361188314766, guid: 95af2b54e4874c544bb55db70301a8fd, type: 3}
       propertyPath: m_LocalPosition.y
@@ -662,7 +583,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4314419361188314766, guid: 95af2b54e4874c544bb55db70301a8fd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.86
+      value: 0.88285
       objectReference: {fileID: 0}
     - target: {fileID: 4314419361188314766, guid: 95af2b54e4874c544bb55db70301a8fd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -696,6 +617,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sMonster1_lvl1 Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 5018095969544553325, guid: 95af2b54e4874c544bb55db70301a8fd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7414534758635255313, guid: 95af2b54e4874c544bb55db70301a8fd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -722,9 +647,6 @@ PrefabInstance:
       addedObject: {fileID: 6246821212987574941}
     - targetCorrespondingSourceObject: {fileID: 4314419361188314766, guid: 95af2b54e4874c544bb55db70301a8fd, type: 3}
       insertIndex: 3
-      addedObject: {fileID: 7275461780644042614}
-    - targetCorrespondingSourceObject: {fileID: 4314419361188314766, guid: 95af2b54e4874c544bb55db70301a8fd, type: 3}
-      insertIndex: 4
       addedObject: {fileID: 3576312085294229220}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5018095969544553325, guid: 95af2b54e4874c544bb55db70301a8fd, type: 3}
@@ -802,12 +724,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b3e6c1d8f4a42e7b2c5a9d0f6e83b72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.EnemyChaseAI
-  moveSpeed: 3
+  moveSpeed: 1
   verticalSpeed: 2
   stopDistance: 1.2
   canFly: 1
   heightTolerance: 0.15
   animator: {fileID: 8258398418915471639}
+  col: {fileID: 0}
 --- !u!114 &1724973626378174136
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -327,7 +327,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8653769039163597484
 Transform:
   m_ObjectHideFlags: 0
@@ -847,7 +847,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3183442450048757667}
   - component: {fileID: 8645361716032976026}
-  - component: {fileID: 3776105291054791129}
   m_Layer: 0
   m_Name: EnemyHealthBar
   m_TagString: Untagged
@@ -890,16 +889,3 @@ MonoBehaviour:
   targetHealth: {fileID: 1701127211270985138}
   enemyHealthFill: {fileID: 7071823468649070730}
   hideWhenFull: 0
---- !u!114 &3776105291054791129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6602366835061630750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad26bd4524f086c4aa7d85ac5432ba59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemColliderManager
-  ps: {fileID: 0}
