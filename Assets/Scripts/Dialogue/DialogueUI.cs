@@ -20,7 +20,13 @@ namespace TwoWorlds.Dialogue
         public void Show()
         {
             if (panelRoot != null)
+            {
+                var canvas = panelRoot.GetComponentInParent<Canvas>(true);
+                if (canvas != null)
+                    canvas.gameObject.SetActive(true);
+
                 panelRoot.SetActive(true);
+            }
 
             if (continueHint != null)
                 continueHint.SetActive(true);

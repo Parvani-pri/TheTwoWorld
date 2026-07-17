@@ -7,8 +7,8 @@ namespace TwoWorlds.Dialogue
 {
     /// <summary>
     /// Plays one chapter segment dialogue (1101/1102/1103/1104 pattern) when its unlock rules are met.
+    /// Add a Collider2D only when this object should be approached and interacted with manually.
     /// </summary>
-    [RequireComponent(typeof(Collider2D))]
     public class ChapterDialogueTrigger : MonoBehaviour, IInteractable, IScriptDialogueSource
     {
         [SerializeField] DialogueCsvLibrary csvLibrary;
@@ -43,10 +43,15 @@ namespace TwoWorlds.Dialogue
 
         public void TriggerDialogue(GameObject interactor)
         {
-            if (!IsDialogueAvailable(interactor))
-                return;
-
             var dialogueId = ChapterProgressCatalog.GetDialogueId(chapterNumber, segment);
+
+            if (!IsDialogueAvailable(interactor))
+            {
+                Debug.LogWarning(
+                    $"[ChapterDialogueTrigger] Dialogue not available: {dialogueId} (chapter={chapterNumber}, segment={segment}).");
+                return;
+            }
+
             if (!csvLibrary.TryGetDialogue(dialogueId, out var sessionData))
             {
                 Debug.LogWarning($"[ChapterDialogueTrigger] Missing CSV dialogue: {dialogueId}");
@@ -55,6 +60,8 @@ namespace TwoWorlds.Dialogue
 
             if (DialogueManager.Instance != null)
                 DialogueManager.Instance.StartDialogue(sessionData, interactor);
+            else
+                Debug.LogError("[ChapterDialogueTrigger] DialogueManager.Instance is null.");
         }
 
         public string GetPromptText() => promptText;
