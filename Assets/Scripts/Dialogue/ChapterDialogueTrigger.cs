@@ -20,22 +20,37 @@ namespace TwoWorlds.Dialogue
 
         void Awake()
         {
-            if (gameProgress == null)
-                gameProgress = GameProgress.Instance ?? FindFirstObjectByType<GameProgress>();
+            ResolveGameProgress();
+        }
+
+        GameProgress Progress
+        {
+            get
+            {
+                if (gameProgress == null)
+                    ResolveGameProgress();
+
+                return gameProgress;
+            }
+        }
+
+        void ResolveGameProgress()
+        {
+            gameProgress = GameProgress.Instance ?? FindFirstObjectByType<GameProgress>();
         }
 
         public bool CanInteract(GameObject interactor) => IsDialogueAvailable(interactor);
 
         public bool IsDialogueAvailable(GameObject interactor)
         {
-            if (csvLibrary == null || gameProgress == null)
+            if (csvLibrary == null || Progress == null)
                 return false;
 
             var dialogueId = ChapterProgressCatalog.GetDialogueId(chapterNumber, segment);
-            if (playOnce && gameProgress.HasDialogue(dialogueId))
+            if (playOnce && Progress.HasDialogue(dialogueId))
                 return false;
 
-            return gameProgress.CanStartChapterDialogue(chapterNumber, segment) &&
+            return Progress.CanStartChapterDialogue(chapterNumber, segment) &&
                    csvLibrary.TryGetDialogue(dialogueId, out _);
         }
 

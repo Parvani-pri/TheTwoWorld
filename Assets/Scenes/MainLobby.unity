@@ -7588,6 +7588,7 @@ GameObject:
   - component: {fileID: 1528944088}
   - component: {fileID: 1528944095}
   - component: {fileID: 1528944096}
+  - component: {fileID: 1528944097}
   m_Layer: 0
   m_Name: AISystem
   m_TagString: Untagged
@@ -7739,6 +7740,19 @@ MonoBehaviour:
   promptMessage: "\u8BB8\u8D1F\uFF0C\u4F60\u51C6\u5907\u597D\u5165\u9634\u4E86\u5417\uFF1F"
   readyButtonLabel: "\u51C6\u5907\u597D\u4E86"
   notReadyButtonLabel: "\u6CA1\u51C6\u5907\u597D"
+--- !u!114 &1528944097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1528944087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9c4d5e6f7489012345678abcdef0123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Progress.ChapterReturnToLobbyController
+  gameProgress: {fileID: 1528944090}
 --- !u!1 &1547058354
 GameObject:
   m_ObjectHideFlags: 0
@@ -11789,7 +11803,7 @@ MonoBehaviour:
   - csvDialogueId: 1001
     requiresDialogueId: 
     requiresAllDialogueIds: []
-    blockedByDialogueId: 
+    blockedByDialogueId: 1103
     requiresUnlockFlag: 
     blockedByFlag: 
     requiredItem: {fileID: 0}
@@ -11799,14 +11813,14 @@ MonoBehaviour:
   - csvDialogueId: 1101
     requiresDialogueId: 1001
     requiresAllDialogueIds: []
-    blockedByDialogueId: 
+    blockedByDialogueId: 1103
     requiresUnlockFlag: 
     blockedByFlag: 
     requiredItem: {fileID: 0}
     requiredItemAmount: 1
     requiredStageLabel: 
     playOnce: 1
-  gameProgress: {fileID: 1528944090}
+  gameProgress: {fileID: 0}
   promptText: "\u5BF9\u8BDD"
 --- !u!4 &7527233504928182914 stripped
 Transform:
@@ -11899,7 +11913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.ChapterDialogueTrigger
   csvLibrary: {fileID: 11400000, guid: 709a92fdc576e5442881e723b7c528a0, type: 2}
-  gameProgress: {fileID: 1528944090}
+  gameProgress: {fileID: 0}
   chapterNumber: 1
   segment: 4
   playOnce: 1

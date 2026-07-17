@@ -13,6 +13,13 @@ namespace TwoWorlds.Progress
                 return;
             }
 
+            LoadScene(sceneName);
+        }
+
+        public static void LoadMainLobby() => LoadScene("MainLobby");
+
+        static void LoadScene(string sceneName)
+        {
             if (!Application.CanStreamedLevelBeLoaded(sceneName))
             {
                 Debug.LogError(
@@ -20,7 +27,7 @@ namespace TwoWorlds.Progress
                 return;
             }
 
-            Debug.Log($"[SceneFlow] Loading yin level scene '{sceneName}' for chapter {chapter}.");
+            Debug.Log($"[SceneFlow] Loading scene '{sceneName}'.");
             SceneManager.LoadScene(sceneName);
         }
     }

@@ -58,8 +58,23 @@ namespace TwoWorlds.Dialogue
 
         void Awake()
         {
-            if (gameProgress == null)
-                gameProgress = GameProgress.Instance ?? FindFirstObjectByType<GameProgress>();
+            ResolveGameProgress();
+        }
+
+        GameProgress Progress
+        {
+            get
+            {
+                if (gameProgress == null)
+                    ResolveGameProgress();
+
+                return gameProgress;
+            }
+        }
+
+        void ResolveGameProgress()
+        {
+            gameProgress = GameProgress.Instance ?? FindFirstObjectByType<GameProgress>();
         }
 
         public bool CanInteract(GameObject interactor) => IsDialogueAvailable(interactor);
@@ -160,29 +175,29 @@ namespace TwoWorlds.Dialogue
 
         bool MatchesStageLabel(string requiredLabel)
         {
-            if (gameProgress == null || string.IsNullOrWhiteSpace(requiredLabel))
+            if (Progress == null || string.IsNullOrWhiteSpace(requiredLabel))
                 return false;
 
             return string.Equals(
-                gameProgress.CurrentStageLabel?.Trim(),
+                Progress.CurrentStageLabel?.Trim(),
                 requiredLabel.Trim(),
                 StringComparison.Ordinal);
         }
 
         bool HasCompletedDialogue(string dialogueId)
         {
-            if (gameProgress == null)
+            if (Progress == null)
                 return false;
 
-            return gameProgress.HasDialogue(dialogueId);
+            return Progress.HasDialogue(dialogueId);
         }
 
         bool HasFlag(string flagId)
         {
-            if (gameProgress == null)
+            if (Progress == null)
                 return false;
 
-            return gameProgress.HasFlag(flagId);
+            return Progress.HasFlag(flagId);
         }
     }
 }

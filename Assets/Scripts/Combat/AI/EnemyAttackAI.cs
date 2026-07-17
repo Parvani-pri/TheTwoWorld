@@ -1,3 +1,4 @@
+using TwoWorlds.Core;
 using UnityEngine;
 
 namespace TwoWorlds.Combat
@@ -14,6 +15,7 @@ namespace TwoWorlds.Combat
         [SerializeField] float attackCD = 3f;
 
         bool canAttack = true;
+        bool gameplayBlocked;
         public bool isPlayerDead = false;
         bool shouldCountdown = false;
         CombatActor actor;
@@ -46,8 +48,15 @@ namespace TwoWorlds.Combat
                 hitbox = GetComponentInChildren<CombatHitbox>();
         }
 
+        void OnEnable() => GameEvents.GameplayInputBlocked += OnGameplayInputBlocked;
+
+        void OnDisable() => GameEvents.GameplayInputBlocked -= OnGameplayInputBlocked;
+
         void Update()
         {
+            if (gameplayBlocked)
+                return;
+
             target = CombatActor.FindClosest(CombatFaction.Player, actor.GroundPosition);
             //IsInAttackRange = false;
 
@@ -168,6 +177,18 @@ namespace TwoWorlds.Combat
         {
             animator.SetBool(PlayerAnimParams.IS_WALK, false);
             isPlayerDead = isDead;
+        }
+
+        void OnGameplayInputBlocked(bool blocked)
+        {
+            gameplayBlocked = blocked;
+
+            if (!blocked || animator == null)
+                return;
+
+            animator.ResetTrigger(PlayerAnimParams.ATTACK);
+            animator.SetInteger(PlayerAnimParams.ATTACK_INDEX, -1);
+            hitbox?.Deactivate();
         }
 
     }

@@ -1,3 +1,4 @@
+using TwoWorlds.Core;
 using UnityEngine;
 
 namespace TwoWorlds.Combat
@@ -23,6 +24,7 @@ namespace TwoWorlds.Combat
 
         CombatActor actor;
         IEnemyAttackRangeProvider attackAI;
+        bool gameplayBlocked;
 
         void Awake()
         {
@@ -31,8 +33,20 @@ namespace TwoWorlds.Combat
             attackAI = GetComponent<IEnemyAttackRangeProvider>();
         }
 
+        void OnEnable() => GameEvents.GameplayInputBlocked += OnGameplayInputBlocked;
+
+        void OnDisable() => GameEvents.GameplayInputBlocked -= OnGameplayInputBlocked;
+
         void Update()
         {
+            if (gameplayBlocked)
+            {
+                if (animator != null)
+                    animator.SetBool(PlayerAnimParams.IS_WALK, false);
+
+                return;
+            }
+
             if (attackAI != null && attackAI.IsInAttackRange)
                 return;
 
@@ -87,5 +101,7 @@ namespace TwoWorlds.Combat
         {
             this.stopDistance = stopDistance;
         }
+
+        void OnGameplayInputBlocked(bool blocked) => gameplayBlocked = blocked;
     }
 }

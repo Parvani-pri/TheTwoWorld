@@ -71,6 +71,9 @@ namespace TwoWorlds.Combat
             if (cooldownTimer3 > 0f)
                 cooldownTimer3 -= Time.deltaTime;
 
+            if (IsInputBlocked())
+                return;
+
             if (inputReader?.AttackAction1 != null && inputReader.AttackAction1.WasPerformedThisFrame() && cooldownTimer1 <= 0f &&  canAttack)
             {
 

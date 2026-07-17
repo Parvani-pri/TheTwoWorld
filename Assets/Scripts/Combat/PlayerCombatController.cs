@@ -32,7 +32,12 @@ namespace TwoWorlds.Combat
         protected override void Update()
         {
             if (IsInputBlocked() || inputReader == null)
+            {
+                if (animator != null)
+                    animator.SetFloat(PlayerAnimParams.SPEED, 0f);
+
                 return;
+            }
 
             base.Update();
             float speedValue = Read2DInput() == Vector2.zero ? 0f : ReadSprintInput() == 0f && remainingSprintDuration > 0f ? 0.5f : 1f;
