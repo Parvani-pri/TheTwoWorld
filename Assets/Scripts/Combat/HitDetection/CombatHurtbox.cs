@@ -26,7 +26,7 @@ namespace TwoWorlds.Combat
                 health = GetComponentInParent<CombatHealth>();
         }
 
-        private void Start()
+        private void OnEnable()
         {
             if (owner.Faction == CombatFaction.Enemy)
             {

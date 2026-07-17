@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MaskUIController : MonoBehaviour
 {
+    [SerializeField] Color originalColor;
     [SerializeField] RectTransform targetCanvas;
     [SerializeField] RectTransform hiddenPos;
     [SerializeField] RectTransform shownPos;
