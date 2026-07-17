@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 namespace TwoWorlds.Combat
 {
@@ -9,6 +11,7 @@ namespace TwoWorlds.Combat
     {
         [SerializeField] CombatActor owner;
         [SerializeField] CombatHealth health;
+        [SerializeField] List<ParticleSystemCollider> pscList;
 
         public CombatActor Owner => owner;
         public CombatHealth Health => health;
@@ -22,5 +25,29 @@ namespace TwoWorlds.Combat
             if (health == null)
                 health = GetComponentInParent<CombatHealth>();
         }
+
+        private void Start()
+        {
+            if (owner.Faction == CombatFaction.Enemy)
+            {
+                if (TryGetComponent(out Collider2D collider2D))
+                {
+                    foreach (ParticleSystemCollider psc in pscList)
+                    {
+                        psc.AddCollider(collider2D);
+                    }
+
+                }
+                else if (TryGetComponent(out Collider collider3D))
+                {
+                    foreach (ParticleSystemCollider psc in pscList)
+                    {
+                        psc.AddCollider(collider3D);
+                    }
+
+                }
+            }
+        }
+
     }
 }
