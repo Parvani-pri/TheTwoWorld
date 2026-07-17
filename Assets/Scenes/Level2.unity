@@ -2317,8 +2317,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1119939806924613663, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 573533602}
   m_SourcePrefab: {fileID: 100100000, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+--- !u!1 &573533603 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1119939806924613663, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+  m_PrefabInstance: {fileID: 573533601}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &573533602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573533603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3958207a31048d49bdc32daf2c9242b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Inventory.PlayerInventory
+  capacity: 20
+  slots: []
 --- !u!1 &577878827
 GameObject:
   m_ObjectHideFlags: 0
@@ -3147,6 +3169,8 @@ GameObject:
   - component: {fileID: 782196558}
   - component: {fileID: 782196560}
   - component: {fileID: 782196559}
+  - component: {fileID: 782196562}
+  - component: {fileID: 782196563}
   m_Layer: 0
   m_Name: GameSystem
   m_TagString: Untagged
@@ -3210,6 +3234,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &782196562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782196557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f63739e27cbbee841bc3cf82ab67949d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Progress.ChapterDialogueAutoTrigger
+  dialogueTrigger: {fileID: 782196563}
+  startDelaySeconds: 0
+--- !u!114 &782196563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782196557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dbc0bdf400daf54d9b70466882efbd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.ChapterDialogueTrigger
+  csvLibrary: {fileID: 11400000, guid: 709a92fdc576e5442881e723b7c528a0, type: 2}
+  gameProgress: {fileID: 0}
+  chapterNumber: 2
+  segment: 2
+  playOnce: 1
+  promptText: "\u5BF9\u8BDD"
 --- !u!1 &823173019
 GameObject:
   m_ObjectHideFlags: 0
@@ -6400,11 +6456,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Progress.ChapterBootstrap
   gameProgress: {fileID: 0}
-  chapterId: ch1_grave
-  chapterLabel: "\u7B2C\u4E00\u7AE0 \xB7 \u7956\u575F"
-  stageLabel: "\u8C03\u67E5\u7956\u575F"
-  chapterNumber: 1
-  initializeChapterProgress: 1
+  chapterId: ch2_nail
+  chapterLabel: "\u7B2C\u4E8C\u7AE0 \xB7 \u9547\u9B42\u9489"
+  stageLabel: "\u8C03\u67E5\u9634\u5B85"
+  chapterNumber: 2
+  initializeChapterProgress: 0
 --- !u!114 &1592525039
 MonoBehaviour:
   m_ObjectHideFlags: 0

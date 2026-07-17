@@ -53,14 +53,14 @@ namespace TwoWorlds.Interaction
             if (IsBusy())
                 return;
 
-            if (IsDialogueAvailable(interactor))
+            if (IsEnterYinReadinessAvailable())
             {
-                StartScriptDialogue(interactor);
+                StartEnterYinReadiness();
                 return;
             }
 
-            if (IsEnterYinReadinessAvailable())
-                StartEnterYinReadiness();
+            if (IsDialogueAvailable(interactor))
+                StartScriptDialogue(interactor);
         }
 
         public string GetPromptText() => promptText;
@@ -95,8 +95,11 @@ namespace TwoWorlds.Interaction
 
         IScriptDialogueSource ResolveDialogueSource(GameObject interactor)
         {
-            if (chapterDialogueTrigger != null && chapterDialogueTrigger.IsDialogueAvailable(interactor))
-                return chapterDialogueTrigger;
+            foreach (var trigger in GetComponents<ChapterDialogueTrigger>())
+            {
+                if (trigger != null && trigger.IsDialogueAvailable(interactor))
+                    return trigger;
+            }
 
             if (stagedDialogueTrigger != null && stagedDialogueTrigger.IsDialogueAvailable(interactor))
                 return stagedDialogueTrigger;

@@ -32,6 +32,22 @@ namespace TwoWorlds.RoamingNpc
             if (interrupter == null)
                 interrupter = GetComponent<RoamingNpcInterrupter>();
 
+            ResolveInterruptDialogueUI();
+        }
+
+        InterruptDialogueUI InterruptUI
+        {
+            get
+            {
+                if (interruptDialogueUI == null)
+                    ResolveInterruptDialogueUI();
+
+                return interruptDialogueUI;
+            }
+        }
+
+        void ResolveInterruptDialogueUI()
+        {
             if (interruptDialogueUI == null)
                 interruptDialogueUI = FindFirstObjectByType<InterruptDialogueUI>(FindObjectsInactive.Include);
         }
@@ -110,7 +126,7 @@ namespace TwoWorlds.RoamingNpc
 
         bool IsExternalDialogueBlocking()
         {
-            if (interruptDialogueUI != null && interruptDialogueUI.IsShowing)
+            if (InterruptUI != null && InterruptUI.IsShowing)
                 return false;
 
             if (TwoWorlds.Dialogue.DialogueManager.Instance != null &&

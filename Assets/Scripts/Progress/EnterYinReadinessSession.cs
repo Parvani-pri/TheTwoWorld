@@ -1,5 +1,6 @@
 using TwoWorlds.Core;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace TwoWorlds.Progress
 {
@@ -32,30 +33,19 @@ namespace TwoWorlds.Progress
         void Awake()
         {
             Instance = this;
-
-            if (readinessUI == null)
-                readinessUI = FindFirstObjectByType<EnterYinReadinessUI>(FindObjectsInactive.Include);
-
-            if (gameProgress == null)
-                gameProgress = GameProgress.Instance ?? FindFirstObjectByType<GameProgress>();
+            ResolveReferences();
         }
 
         void OnEnable()
         {
-            if (readinessUI == null)
-                return;
-
-            readinessUI.ReadySelected += OnReadySelected;
-            readinessUI.NotReadySelected += OnNotReadySelected;
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            RefreshUIBindings();
         }
 
         void OnDisable()
         {
-            if (readinessUI == null)
-                return;
-
-            readinessUI.ReadySelected -= OnReadySelected;
-            readinessUI.NotReadySelected -= OnNotReadySelected;
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            UnbindUIEvents();
 
             if (isActive)
                 EndSession();
@@ -64,27 +54,60 @@ namespace TwoWorlds.Progress
                 Instance = null;
         }
 
+        void OnSceneLoaded(Scene _, LoadSceneMode __) => RefreshUIBindings();
+
+        void RefreshUIBindings()
+        {
+            UnbindUIEvents();
+            ResolveReferences();
+            BindUIEvents();
+        }
+
+        void ResolveReferences()
+        {
+            readinessUI = FindFirstObjectByType<EnterYinReadinessUI>(FindObjectsInactive.Include);
+
+            if (gameProgress == null)
+                gameProgress = GameProgress.Instance ?? FindFirstObjectByType<GameProgress>();
+        }
+
+        void BindUIEvents()
+        {
+            if (readinessUI == null)
+                return;
+
+            readinessUI.ReadySelected += OnReadySelected;
+            readinessUI.NotReadySelected += OnNotReadySelected;
+        }
+
+        void UnbindUIEvents()
+        {
+            if (readinessUI == null)
+                return;
+
+            readinessUI.ReadySelected -= OnReadySelected;
+            readinessUI.NotReadySelected -= OnNotReadySelected;
+        }
+
         public bool IsAvailable()
         {
             if (isActive)
                 return false;
 
-            if (gameProgress == null)
-                gameProgress = GameProgress.Instance ?? FindFirstObjectByType<GameProgress>();
+            ResolveReferences();
 
             return gameProgress != null && gameProgress.IsEnterYinReadinessWindowOpen();
         }
 
         public void ShowPrompt()
         {
+            ResolveReferences();
+
             if (readinessUI == null)
             {
                 Debug.LogError("[EnterYinReadinessSession] EnterYinReadinessUI is missing.");
                 return;
             }
-
-            if (gameProgress == null)
-                gameProgress = GameProgress.Instance ?? FindFirstObjectByType<GameProgress>();
 
             if (gameProgress == null || !gameProgress.TryGetEnterYinReadinessChapter(out pendingChapter))
                 return;

@@ -191,7 +191,24 @@ namespace TwoWorlds.RoamingNpc
                 ? SpeedHash
                 : Animator.StringToHash(speedParameter);
 
+            if (!AnimatorHasFloatParameter(animator, parameterHash))
+                return;
+
             animator.SetFloat(parameterHash, speed);
+        }
+
+        static bool AnimatorHasFloatParameter(Animator targetAnimator, int parameterHash)
+        {
+            foreach (var parameter in targetAnimator.parameters)
+            {
+                if (parameter.nameHash == parameterHash &&
+                    parameter.type == AnimatorControllerParameterType.Float)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         void TryBeginWanderMove()

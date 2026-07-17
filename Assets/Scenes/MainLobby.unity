@@ -1776,7 +1776,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &385316750
 Transform:
   m_ObjectHideFlags: 0
@@ -4211,7 +4211,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2041718208016989599, guid: 31d55c80331609841a470d54bcc62ac5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.49
+      value: -8.2
       objectReference: {fileID: 0}
     - target: {fileID: 2041718208016989599, guid: 31d55c80331609841a470d54bcc62ac5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4219,7 +4219,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2041718208016989599, guid: 31d55c80331609841a470d54bcc62ac5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.39
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 2041718208016989599, guid: 31d55c80331609841a470d54bcc62ac5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4255,12 +4255,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2615892762786401040, guid: 31d55c80331609841a470d54bcc62ac5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2615892762786401040, guid: 31d55c80331609841a470d54bcc62ac5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 881901002}
+    - targetCorrespondingSourceObject: {fileID: 2615892762786401040, guid: 31d55c80331609841a470d54bcc62ac5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 881901004}
+    - targetCorrespondingSourceObject: {fileID: 2615892762786401040, guid: 31d55c80331609841a470d54bcc62ac5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 881901005}
   m_SourcePrefab: {fileID: 100100000, guid: 31d55c80331609841a470d54bcc62ac5, type: 3}
 --- !u!1001 &875020493
 PrefabInstance:
@@ -4410,6 +4419,287 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d859e153b0258ab4c91d413db4e9c4b6, type: 3}
   m_PrefabInstance: {fileID: 878277752}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &881901001 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2615892762786401040, guid: 31d55c80331609841a470d54bcc62ac5, type: 3}
+  m_PrefabInstance: {fileID: 864701214}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &881901002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881901001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edff4ac508db6d54d8328a69cf257858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.DialogueActorController
+  actorKey: patient
+  moveSpeed: 1.6
+  arriveThreshold: 0.25
+  roamingController: {fileID: 0}
+  roamingBrain: {fileID: 0}
+--- !u!114 &881901004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881901001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7e4c9a21d3f48e6b5a2907c4d8e1f32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.StoryNpcPresence
+  gameProgress: {fileID: 0}
+  showAfterDialogueId: 1101
+  dismissAfterDialogueId: 1104
+  spawnMarkerId: patient_spawn
+  presentMarkerId: patient_consult
+  exitMarkerId: patient_exit
+--- !u!114 &881901005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881901001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8a91c2d4e6b4051a9c3d7e5b1f20486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.StoryNpcAnimator
+  animator: {fileID: 0}
+  actorController: {fileID: 881901002}
+  walkBoolParameter: isWalk
+--- !u!1 &881902000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 881902001}
+  m_Layer: 0
+  m_Name: DialogueAnchors
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &881902001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881902000}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 881902011}
+  - {fileID: 1461364879}
+  - {fileID: 1680035598}
+  - {fileID: 881902021}
+  - {fileID: 881902031}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &881902010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 881902011}
+  - component: {fileID: 881902012}
+  m_Layer: 0
+  m_Name: patient_spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &881902011
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881902010}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -13.84, y: 0.07, z: -5.37}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 881902001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &881902012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881902010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e237da72be456c9478edce91fc1b68f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.DialogueMoveMarker
+  markerId: patient_spawn
+--- !u!1 &881902020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 881902021}
+  - component: {fileID: 881902022}
+  m_Layer: 0
+  m_Name: patient_consult
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &881902021
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881902020}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.82, y: 0.26, z: -2.28}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 881902001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &881902022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881902020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e237da72be456c9478edce91fc1b68f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.DialogueMoveMarker
+  markerId: patient_consult
+--- !u!1 &881902030
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 881902031}
+  - component: {fileID: 881902032}
+  m_Layer: 0
+  m_Name: patient_exit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &881902031
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881902030}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -13.79, y: 0.1, z: -5.81}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 881902001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &881902032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881902030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e237da72be456c9478edce91fc1b68f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.DialogueMoveMarker
+  markerId: patient_exit
+--- !u!1 &881903001 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6877411666222535669, guid: 42c97c663bb81204a81da4743cde940f, type: 3}
+  m_PrefabInstance: {fileID: 3489792222621258959}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &881903002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881903001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edff4ac508db6d54d8328a69cf257858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.DialogueActorController
+  actorKey: woman
+  moveSpeed: 1.6
+  arriveThreshold: 0.25
+  roamingController: {fileID: 0}
+  roamingBrain: {fileID: 0}
+--- !u!114 &881903003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881903001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7e4c9a21d3f48e6b5a2907c4d8e1f32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.StoryNpcPresence
+  gameProgress: {fileID: 0}
+  showAfterDialogueId: 1201
+  dismissAfterDialogueId: 1204
+  spawnMarkerId: patient_spawn
+  presentMarkerId: patient_consult
+  exitMarkerId: patient_exit
+--- !u!114 &881903004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881903001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8a91c2d4e6b4051a9c3d7e5b1f20486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.StoryNpcAnimator
+  animator: {fileID: 0}
+  actorController: {fileID: 881903002}
+  walkBoolParameter: isWalk
 --- !u!1001 &883738141
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7032,6 +7322,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4a1d1c3460201df40b3136dca291a249, type: 3}
   m_PrefabInstance: {fileID: 1457693438}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1461364878
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1461364879}
+  - component: {fileID: 1461364880}
+  m_Layer: 0
+  m_Name: xiaomei
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1461364879
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461364878}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.51, y: 0.07, z: -3.72}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 881902001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1461364880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461364878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e237da72be456c9478edce91fc1b68f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.DialogueMoveMarker
+  markerId: xiaomei
 --- !u!1001 &1473874543
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7608,9 +7943,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c3a9f78e2d146b0a7e593824fc1de6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.RoamingNpc.InterruptDialogueInputHandler
-  inputReader: {fileID: 2047877180}
-  interruptDialogueUI: {fileID: 1135165521}
-  interrupter: {fileID: 7527233504928182915}
+  inputReader: {fileID: 0}
+  interruptDialogueUI: {fileID: 0}
+  interrupter: {fileID: 0}
 --- !u!114 &1528944089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8684,6 +9019,51 @@ Transform:
   - {fileID: 230314156}
   m_Father: {fileID: 2128285574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1680035597
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1680035598}
+  - component: {fileID: 1680035599}
+  m_Layer: 0
+  m_Name: xufu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1680035598
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680035597}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.38, y: 0.07, z: -3.29}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 881902001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1680035599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680035597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e237da72be456c9478edce91fc1b68f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.DialogueMoveMarker
+  markerId: xufu
 --- !u!1001 &1732569286
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11273,6 +11653,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2501018622194889917, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2109387776}
+    - targetCorrespondingSourceObject: {fileID: 2501018622194889917, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2109387777}
   m_SourcePrefab: {fileID: 100100000, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
 --- !u!1 &2109387769 stripped
 GameObject:
@@ -11411,6 +11794,23 @@ MonoBehaviour:
   ascendSpeedFactor: 5
   fallingAcceleration: 6
   animator: {fileID: 2109387781}
+--- !u!114 &2109387777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2109387769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edff4ac508db6d54d8328a69cf257858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.DialogueActorController
+  actorKey: xufu
+  moveSpeed: 2
+  arriveThreshold: 0.25
+  roamingController: {fileID: 0}
+  roamingBrain: {fileID: 0}
 --- !u!95 &2109387781 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 6832098908345908355, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
@@ -11586,7 +11986,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3071894088375259730, guid: 42c97c663bb81204a81da4743cde940f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.2
+      value: -8.55
       objectReference: {fileID: 0}
     - target: {fileID: 3071894088375259730, guid: 42c97c663bb81204a81da4743cde940f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -11594,7 +11994,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3071894088375259730, guid: 42c97c663bb81204a81da4743cde940f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.48
+      value: 4.04
       objectReference: {fileID: 0}
     - target: {fileID: 3071894088375259730, guid: 42c97c663bb81204a81da4743cde940f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11630,12 +12030,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6877411666222535669, guid: 42c97c663bb81204a81da4743cde940f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6877411666222535669, guid: 42c97c663bb81204a81da4743cde940f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 881903002}
+    - targetCorrespondingSourceObject: {fileID: 6877411666222535669, guid: 42c97c663bb81204a81da4743cde940f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 881903003}
+    - targetCorrespondingSourceObject: {fileID: 6877411666222535669, guid: 42c97c663bb81204a81da4743cde940f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 881903004}
   m_SourcePrefab: {fileID: 100100000, guid: 42c97c663bb81204a81da4743cde940f, type: 3}
 --- !u!1001 &7527233504928182910
 PrefabInstance:
@@ -11734,6 +12143,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7744587430497006610, guid: 7cc1144baea599d4b8a338a78cfa6ccc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7527233504928182917}
+    - targetCorrespondingSourceObject: {fileID: 7744587430497006610, guid: 7cc1144baea599d4b8a338a78cfa6ccc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7527233504928182922}
+    - targetCorrespondingSourceObject: {fileID: 7744587430497006610, guid: 7cc1144baea599d4b8a338a78cfa6ccc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7527233504928182923}
+    - targetCorrespondingSourceObject: {fileID: 7744587430497006610, guid: 7cc1144baea599d4b8a338a78cfa6ccc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7527233504928182924}
   m_SourcePrefab: {fileID: 100100000, guid: 7cc1144baea599d4b8a338a78cfa6ccc, type: 3}
 --- !u!1 &7527233504928182911 stripped
 GameObject:
@@ -11842,9 +12260,9 @@ MonoBehaviour:
   config: {fileID: 11400000, guid: 1d4d628dc87f6fd498765fc39306d659, type: 2}
   controller: {fileID: 7527233504928182917}
   brain: {fileID: 7527233504928182916}
-  interruptDialogueUI: {fileID: 1135165521}
-  aiService: {fileID: 1528944093}
-  gameProgress: {fileID: 1528944090}
+  interruptDialogueUI: {fileID: 0}
+  aiService: {fileID: 0}
+  gameProgress: {fileID: 0}
   postDialogueApproachDelay: 2
   interruptAiTimeoutSeconds: 12
   disableAfterDialogueIds: []
@@ -11862,7 +12280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.RoamingNpc.RoamingNpcBrain
   controller: {fileID: 7527233504928182917}
   interrupter: {fileID: 7527233504928182915}
-  interruptDialogueUI: {fileID: 1135165521}
+  interruptDialogueUI: {fileID: 0}
 --- !u!114 &7527233504928182917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11963,6 +12381,60 @@ MonoBehaviour:
   enterYinReadinessSession: {fileID: 1528944096}
   gameProgress: {fileID: 1528944090}
   promptText: "\u4EA4\u8C08"
+--- !u!114 &7527233504928182922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7527233504928182911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dbc0bdf400daf54d9b70466882efbd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.ChapterDialogueTrigger
+  csvLibrary: {fileID: 11400000, guid: 709a92fdc576e5442881e723b7c528a0, type: 2}
+  gameProgress: {fileID: 0}
+  chapterNumber: 2
+  segment: 1
+  playOnce: 1
+  promptText: "\u5BF9\u8BDD"
+--- !u!114 &7527233504928182923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7527233504928182911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dbc0bdf400daf54d9b70466882efbd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.ChapterDialogueTrigger
+  csvLibrary: {fileID: 11400000, guid: 709a92fdc576e5442881e723b7c528a0, type: 2}
+  gameProgress: {fileID: 0}
+  chapterNumber: 2
+  segment: 4
+  playOnce: 1
+  promptText: "\u5BF9\u8BDD"
+--- !u!114 &7527233504928182924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7527233504928182911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dbc0bdf400daf54d9b70466882efbd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.ChapterDialogueTrigger
+  csvLibrary: {fileID: 11400000, guid: 709a92fdc576e5442881e723b7c528a0, type: 2}
+  gameProgress: {fileID: 0}
+  chapterNumber: 3
+  segment: 1
+  playOnce: 1
+  promptText: "\u5BF9\u8BDD"
 --- !u!1001 &8523639893896796372
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12044,5 +12516,6 @@ SceneRoots:
   - {fileID: 1504808611}
   - {fileID: 2047877181}
   - {fileID: 1528944094}
+  - {fileID: 881902001}
   - {fileID: 1419078344}
   - {fileID: 1415547398}

@@ -1,6 +1,7 @@
 using TwoWorlds.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace TwoWorlds.RoamingNpc
 {
@@ -10,7 +11,28 @@ namespace TwoWorlds.RoamingNpc
         [SerializeField] InterruptDialogueUI interruptDialogueUI;
         [SerializeField] RoamingNpcInterrupter interrupter;
 
-        void Start()
+        void OnEnable()
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            RefreshBindings();
+        }
+
+        void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            UnsubscribeInput();
+        }
+
+        void OnSceneLoaded(Scene _, LoadSceneMode __) => RefreshBindings();
+
+        void RefreshBindings()
+        {
+            UnsubscribeInput();
+            ResolveReferences();
+            SubscribeInput();
+        }
+
+        void ResolveReferences()
         {
             if (inputReader == null)
                 inputReader = FindFirstObjectByType<InputReader>();
@@ -20,7 +42,10 @@ namespace TwoWorlds.RoamingNpc
 
             if (interrupter == null)
                 interrupter = FindFirstObjectByType<RoamingNpcInterrupter>();
+        }
 
+        void SubscribeInput()
+        {
             if (inputReader?.InteractAction != null)
                 inputReader.InteractAction.performed += OnAdvance;
 
@@ -28,7 +53,7 @@ namespace TwoWorlds.RoamingNpc
                 inputReader.SubmitAction.performed += OnAdvance;
         }
 
-        void OnDestroy()
+        void UnsubscribeInput()
         {
             if (inputReader?.InteractAction != null)
                 inputReader.InteractAction.performed -= OnAdvance;
@@ -39,6 +64,11 @@ namespace TwoWorlds.RoamingNpc
 
         void OnAdvance(InputAction.CallbackContext _)
         {
+            ResolveReferences();
+
+            if (interruptDialogueUI == null || !interruptDialogueUI.IsShowing)
+                return;
+
             if (TwoWorlds.Dialogue.DialogueManager.Instance != null &&
                 TwoWorlds.Dialogue.DialogueManager.Instance.IsPlaying)
                 return;
@@ -49,9 +79,6 @@ namespace TwoWorlds.RoamingNpc
 
             var readinessSession = TwoWorlds.Progress.EnterYinReadinessSession.FindInstance();
             if (readinessSession != null && readinessSession.IsActive)
-                return;
-
-            if (interruptDialogueUI == null || !interruptDialogueUI.IsShowing)
                 return;
 
             if (!interruptDialogueUI.LineFinished)

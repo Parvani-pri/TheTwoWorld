@@ -36,14 +36,48 @@ namespace TwoWorlds.RoamingNpc
             if (brain == null)
                 brain = GetComponent<RoamingNpcBrain>();
 
-            if (interruptDialogueUI == null)
-                interruptDialogueUI = FindFirstObjectByType<InterruptDialogueUI>(FindObjectsInactive.Include);
+            ResolveInterruptDialogueUI();
+            ResolveGameProgress();
+            ResolveAiService();
+        }
 
+        void ResolveAiService()
+        {
             if (aiService == null)
                 aiService = AIService.Instance ?? FindFirstObjectByType<AIService>();
+        }
 
-            if (gameProgress == null)
-                gameProgress = GameProgress.Instance ?? FindFirstObjectByType<GameProgress>();
+        InterruptDialogueUI InterruptUI
+        {
+            get
+            {
+                if (interruptDialogueUI == null)
+                    ResolveInterruptDialogueUI();
+
+                return interruptDialogueUI;
+            }
+        }
+
+        GameProgress Progress
+        {
+            get
+            {
+                if (gameProgress == null)
+                    ResolveGameProgress();
+
+                return gameProgress;
+            }
+        }
+
+        void ResolveInterruptDialogueUI()
+        {
+            if (interruptDialogueUI == null)
+                interruptDialogueUI = FindFirstObjectByType<InterruptDialogueUI>(FindObjectsInactive.Include);
+        }
+
+        void ResolveGameProgress()
+        {
+            gameProgress = GameProgress.Instance ?? FindFirstObjectByType<GameProgress>();
         }
 
         void Start()
@@ -129,7 +163,7 @@ namespace TwoWorlds.RoamingNpc
             activeRequestId++;
             StopInterruptTimeout();
 
-            interruptDialogueUI?.Hide();
+            InterruptUI?.Hide();
 
             if (config != null)
                 cooldownUntil = Time.time + config.InterruptCooldownSeconds;
@@ -141,7 +175,7 @@ namespace TwoWorlds.RoamingNpc
 
         void UpdateUnlockState()
         {
-            if (brain == null || gameProgress == null)
+            if (brain == null || Progress == null)
                 return;
 
             if (IsInterruptPermanentlyDisabled())
@@ -156,7 +190,7 @@ namespace TwoWorlds.RoamingNpc
                 return;
             }
 
-            if (!gameProgress.IsXiaomeiInterruptUnlocked())
+            if (!Progress.IsXiaomeiInterruptUnlocked())
             {
                 if (brain.State != RoamingNpcState.Disabled &&
                     brain.State != RoamingNpcState.ExternalDialogue &&
@@ -177,12 +211,12 @@ namespace TwoWorlds.RoamingNpc
 
         bool IsInterruptPermanentlyDisabled()
         {
-            if (disableAfterDialogueIds == null || gameProgress == null)
+            if (disableAfterDialogueIds == null || Progress == null)
                 return false;
 
             foreach (var dialogueId in disableAfterDialogueIds)
             {
-                if (!string.IsNullOrWhiteSpace(dialogueId) && gameProgress.HasDialogue(dialogueId))
+                if (!string.IsNullOrWhiteSpace(dialogueId) && Progress.HasDialogue(dialogueId))
                     return true;
             }
 
@@ -340,7 +374,7 @@ namespace TwoWorlds.RoamingNpc
                 return;
             }
 
-            if (interruptDialogueUI == null)
+            if (InterruptUI == null)
             {
                 Debug.LogWarning("[RoamingNpcInterrupter] InterruptDialogueUI is missing.");
                 brain?.SetState(RoamingNpcState.Roaming);
@@ -349,7 +383,7 @@ namespace TwoWorlds.RoamingNpc
             }
 
             var text = string.IsNullOrWhiteSpace(line) ? config.GetRandomFallbackLine() : line;
-            interruptDialogueUI.Show(
+            InterruptUI.Show(
                 config.DisplayName,
                 config.Portrait,
                 text,
@@ -404,7 +438,7 @@ namespace TwoWorlds.RoamingNpc
                 StopInterruptTimeout();
             }
 
-            if (interruptDialogueUI != null && interruptDialogueUI.IsShowing)
+            if (InterruptUI != null && InterruptUI.IsShowing)
             {
                 DismissInterrupt();
                 return;
