@@ -14160,6 +14160,10 @@ PrefabInstance:
       propertyPath: inputReader
       value: 
       objectReference: {fileID: 783498261}
+    - target: {fileID: 1896462449403119450, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+      propertyPath: hitbox
+      value: 
+      objectReference: {fileID: 1714475728}
     - target: {fileID: 3536650286331317489, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -16.82
@@ -14204,7 +14208,7 @@ PrefabInstance:
       propertyPath: healthBarTransform
       value: 
       objectReference: {fileID: 520347209}
-    - target: {fileID: 6380719469098037954, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+    - target: {fileID: 8481240108570144352, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
       propertyPath: inputReader
       value: 
       objectReference: {fileID: 783498261}
@@ -14220,6 +14224,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1714475726}
   m_SourcePrefab: {fileID: 100100000, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+--- !u!114 &1714475728 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 454353220785182171, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
+  m_PrefabInstance: {fileID: 1714475724}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c2d3e4f5a6478993aabbccddeeff05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.CombatHitbox
 --- !u!114 &1714475725 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4246430339642010077, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}

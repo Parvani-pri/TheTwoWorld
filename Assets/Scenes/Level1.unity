@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: hitbox
       value: 
       objectReference: {fileID: 100973719}
+    - target: {fileID: 1896462449403119450, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+      propertyPath: inputReader
+      value: 
+      objectReference: {fileID: 1820472274}
     - target: {fileID: 3536650286331317489, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.57
@@ -179,7 +183,7 @@ PrefabInstance:
       propertyPath: healthBarTransform
       value: 
       objectReference: {fileID: 966451243}
-    - target: {fileID: 6380719469098037954, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+    - target: {fileID: 8481240108570144352, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
       propertyPath: inputReader
       value: 
       objectReference: {fileID: 1820472274}
@@ -190,11 +194,33 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1119939806924613663, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 100973737}
   m_SourcePrefab: {fileID: 100100000, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+--- !u!114 &100973737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100973738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3958207a31048d49bdc32daf2c9242b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Inventory.PlayerInventory
+  capacity: 20
+  slots: []
+--- !u!1 &100973738 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1119939806924613663, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+  m_PrefabInstance: {fileID: 100973718}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &100973719 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3130454350420969849, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+  m_CorrespondingSourceObject: {fileID: 454353220785182171, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
   m_PrefabInstance: {fileID: 100973718}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -5567,7 +5593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c9a88cf18a54f41b49e2880bf49cb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Inventory.CraftingUI
-  playerInventory: {fileID: 0}
+  playerInventory: {fileID: 100973737}
   recipeDatabase: {fileID: 11400000, guid: 190ae15fe74ce134fa6a8b4d4ead2f31, type: 2}
   craftOpenButton: {fileID: 541443447}
   craftCloseButton: {fileID: 1219056952}
@@ -5607,7 +5633,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Inventory.InventoryUI
   inputReader: {fileID: 1820472274}
-  playerInventory: {fileID: 0}
+  playerInventory: {fileID: 100973737}
   panelRoot: {fileID: 812210872}
   slotContainer: {fileID: 1049194056}
   slotPrefab: {fileID: 2418484913273652437, guid: 2c692f7071c60a343a0f78e7f36ff1c5, type: 3}
