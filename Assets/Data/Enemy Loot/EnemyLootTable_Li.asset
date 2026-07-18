@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8cbb54a55137a74aa8a2e231af3e5fb, type: 3}
+  m_Name: EnemyLootTable_Li
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.EnemyLootTable
+  drops:
+  - item: {fileID: 11400000, guid: 14a9a5abfac8c6b4393e64259e5b6dc9, type: 2}
+    amountMode: 0
+    amount: 1
+    minAmount: 1
+    maxAmount: 1
+    dropChance: 1
+  - item: {fileID: 11400000, guid: c9edca65bbf3aff49976dc25ed4c9e27, type: 2}
+    amountMode: 1
+    amount: 1
+    minAmount: 3
+    maxAmount: 5
+    dropChance: 1
+  scatterRadius: 0.35

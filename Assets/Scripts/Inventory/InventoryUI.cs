@@ -308,13 +308,7 @@ namespace TwoWorlds.Inventory
                 itemMetaText.text = BuildMetaText(slot);
 
             if (itemDescriptionText != null)
-            {
-                var description = slot.item.Description;
-                if (itemMetaText == null)
-                    description = $"{BuildMetaText(slot)}\n{description}";
-
-                itemDescriptionText.text = description;
-            }
+                itemDescriptionText.text = slot.item.Description;
 
             itemInterpretUI?.BindItem(slot.item);
         }

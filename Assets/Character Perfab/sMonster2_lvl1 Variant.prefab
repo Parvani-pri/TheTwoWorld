@@ -649,6 +649,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1923957399223970130, guid: 5816546f8dd31f442b275e87b85d79a1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6575205893499295178}
+    - targetCorrespondingSourceObject: {fileID: 1923957399223970130, guid: 5816546f8dd31f442b275e87b85d79a1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7192202569553760339}
   m_SourcePrefab: {fileID: 100100000, guid: 5816546f8dd31f442b275e87b85d79a1, type: 3}
 --- !u!212 &994351286855197813 stripped
 SpriteRenderer:
@@ -734,6 +737,21 @@ MonoBehaviour:
   heightTolerance: 0.15
   animator: {fileID: 8175002705967229576}
   col: {fileID: 6223458423390458602}
+--- !u!114 &7192202569553760339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2620063814176416821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e95e1d360bc0d1d41a622e2519e27f89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.EnemyLootDropper
+  lootTable: {fileID: 11400000, guid: 88b88baef1daedc489f83cccc13710d2, type: 2}
+  dropOffset: {x: 0, y: 0, z: 0}
+  dropOnlyOnce: 1
 --- !u!4 &6081148276660603711 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7677378444047943256, guid: 5816546f8dd31f442b275e87b85d79a1, type: 3}

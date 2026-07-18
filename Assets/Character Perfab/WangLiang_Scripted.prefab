@@ -321,6 +321,7 @@ GameObject:
   - component: {fileID: 570024351178493715}
   - component: {fileID: 4409395180486440580}
   - component: {fileID: 3566977763929021396}
+  - component: {fileID: 3044733745399488139}
   m_Layer: 0
   m_Name: WangLiang_Scripted
   m_TagString: Untagged
@@ -572,6 +573,21 @@ MonoBehaviour:
   splashTime: 0.78
   splashVisibleDuration: 0.3
   extraDestroyDelay: 0.1
+--- !u!114 &3044733745399488139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4590101040769282379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e95e1d360bc0d1d41a622e2519e27f89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.EnemyLootDropper
+  lootTable: {fileID: 11400000, guid: 251301106d337c248b957c2562e614a7, type: 2}
+  dropOffset: {x: 0, y: 0, z: 0}
+  dropOnlyOnce: 1
 --- !u!1 &5719612288023630976
 GameObject:
   m_ObjectHideFlags: 0
