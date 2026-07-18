@@ -21,6 +21,7 @@ namespace TwoWorlds.Core
         InputAction attackAction3;
         InputAction sprintAction;
         InputAction toggleMenu;
+        InputAction maskAbilityAction;
 
         public InputAction InteractAction => interactAction;
         public InputAction SubmitAction => submitAction;
@@ -33,7 +34,7 @@ namespace TwoWorlds.Core
         public InputAction AttackAction3 => attackAction3;
         public InputAction SprintAction => sprintAction;
         public InputAction ToggleMenu => toggleMenu;
-
+        public InputAction MaskAbilityAction => maskAbilityAction;
 
 
         void Awake()
@@ -59,6 +60,7 @@ namespace TwoWorlds.Core
             attackAction2 = playerMap.FindAction("Attack2", true);
             attackAction3 = playerMap.FindAction("Attack3", true);
             sprintAction = playerMap.FindAction("Sprint", true);
+            maskAbilityAction = playerMap.FindAction("MaskAbility", true);
 
         }
 
