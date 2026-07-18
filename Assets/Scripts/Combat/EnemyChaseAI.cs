@@ -70,7 +70,6 @@ namespace TwoWorlds.Combat
         {
             if (GetComponent<CombatHealth>().IsDead)
             {
-                print("triggered");
                 animator.SetTrigger(PlayerAnimParams.ON_DIE);
                 animator.SetBool(PlayerAnimParams.IS_WALK, false);
                 hasTriggeredOnDie = true;
@@ -108,9 +107,6 @@ namespace TwoWorlds.Combat
         {
             transform.localScale = new Vector3(horizontal <= 0f ? -Mathf.Abs(transform.localScale.x) : Mathf.Abs(transform.localScale.x),
                 transform.localScale.y, transform.localScale.z);
-            //spriteRenderer.flipX = horizontal <= 0f;
-            //col.transform.localScale = new Vector3(horizontal <= 0f ? -Mathf.Abs(col.transform.localScale.x) : Mathf.Abs(col.transform.localScale.x),
-            //    col.transform.localScale.y, col.transform.localScale.z);
 
             if (Mathf.Approximately(horizontal, 0f))
                 return;

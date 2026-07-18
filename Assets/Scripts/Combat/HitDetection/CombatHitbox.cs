@@ -130,12 +130,10 @@ namespace TwoWorlds.Combat
                     PlayerAttackUI.OnMaskAbilityCast(1, 10f);
                     MaskController.maskAbilityTimer = 10f;
                     hurtbox.transform.parent.GetComponentInChildren<Shield>(true).gameObject.SetActive(false);
-                    print("block successful");
                     return;
                 }
             }
 
-            print("will take damage");
             hurtbox.Health.TakeDamage((int)(activeAttack.Damage * accumulatedMultiplier), owner);
             if (hurtbox.Health.CurrentHealth <= 0 && owner.Faction == CombatFaction.Enemy)
             {

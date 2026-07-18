@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1178760141024260481}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 1.43}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -67,7 +67,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 1.5, y: 0}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -138,8 +138,8 @@ Transform:
   m_GameObject: {fileID: 1800163305156625832}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.2, z: 2.27}
-  m_LocalScale: {x: -2.5, y: 2.5, z: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2473982799451229267}
@@ -178,7 +178,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 1.32, y: 0}
+  m_Offset: {x: 1.77, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -188,7 +188,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 1.5, y: 3}
   m_EdgeRadius: 0
 --- !u!114 &3257322041119757629
 MonoBehaviour:
@@ -619,7 +619,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5018095969544553325, guid: 95af2b54e4874c544bb55db70301a8fd, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7414534758635255313, guid: 95af2b54e4874c544bb55db70301a8fd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -767,8 +767,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.EnemyLootDropper
   lootTable: {fileID: 11400000, guid: 9e31cf6bbc384914f831128e69ed2217, type: 2}
-  dropOffset: {x: 0, y: 0, z: 0}
   dropOnlyOnce: 1
+  dropOffset: {x: 0, y: 0, z: 0}
+  popDuration: 0.18
+  flyDuration: 0.42
 --- !u!95 &8258398418915471639 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7714954406120080330, guid: 95af2b54e4874c544bb55db70301a8fd, type: 3}

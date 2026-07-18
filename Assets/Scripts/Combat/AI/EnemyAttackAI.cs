@@ -118,7 +118,7 @@ namespace TwoWorlds.Combat
                 }
                 canAttack = false;
                 nextAttackID = Random.Range(1, 4);
-
+                animator.SetInteger(PlayerAnimParams.ATTACK_INDEX, nextAttackID);
                 switch (nextAttackID)
                 {
                     case 1:
