@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using TwoWorlds.Combat;
 using TwoWorlds.Core;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace XuFu.MaskSystem
 {
@@ -8,6 +10,9 @@ namespace XuFu.MaskSystem
     {
         [SerializeField] InputReader inputReader;
         [SerializeField] GameObject shield;
+        float mask1AbilityCD = 10f;
+        float mask2AbilityCD = 20f;
+        public static float maskAbilityTimer;
 
         [Header("Animation Follow Strength")]
         public float runFollowStrength;
@@ -45,15 +50,20 @@ namespace XuFu.MaskSystem
 
         void Start()
         {
+<<<<<<< Updated upstream
             if (inputReader == null)
                 inputReader = FindFirstObjectByType<InputReader>();
 
+=======
+            maskAbilityTimer = 0f;
+>>>>>>> Stashed changes
             SetAnimation(currentAnimation);
             EquipMask(equippedMask);
         }
 
         private void Update()
         {
+<<<<<<< Updated upstream
             if (equippedMask == null || string.IsNullOrEmpty(equippedMask.maskId))
                 return;
 
@@ -70,17 +80,45 @@ namespace XuFu.MaskSystem
                     return;
 
                 if (maskAbility.IsPressed())
+=======
+            if (maskAbilityTimer > 0f)
+            {
+                maskAbilityTimer -= Time.deltaTime;
+            }
+
+            if (equippedMask.maskId == "mask_blank") return;
+
+            if (equippedMask.maskId == "bird_mask")
+            {
+               if (inputReader.MaskAbilityAction.IsPressed() && maskAbilityTimer <= 0f)
+                {
+>>>>>>> Stashed changes
                     shield.SetActive(true);
                 else if (maskAbility.WasReleasedThisFrame())
                     shield.SetActive(false);
             }
             else if (equippedMask.maskId == "zhong_mask")
             {
+<<<<<<< Updated upstream
                 if (maskAbility.WasPressedThisFrame())
                 {
                     if (Camera.main != null)
                         transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
+=======
+                if (inputReader.MaskAbilityAction.WasPressedThisFrame() && maskAbilityTimer <= 0f)
+                {
+                    maskAbilityTimer = mask2AbilityCD;
+                    Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+
+                    if (Physics.Raycast(ray, out RaycastHit hit))
+                    {
+                        // This gives you the exact intersection point on a 3D collider
+                        transform.position = hit.point;
+                        GetComponent<CombatActor>().SetGroundPosition(new Vector2 (transform.position.x, transform.position.z));
+                    }
+                    //transform.position = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+>>>>>>> Stashed changes
                     PlayerAttackUI.OnMaskAbilityCast(2, 20f);
                 }
             }
