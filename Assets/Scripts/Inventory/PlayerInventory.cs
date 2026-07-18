@@ -155,6 +155,47 @@ namespace TwoWorlds.Inventory
             return total;
         }
 
+        public bool CanAddItem(ItemData item, int amount = 1)
+        {
+            if (item == null || amount <= 0)
+                return false;
+
+            EnsureCapacity();
+
+            var remaining = amount;
+
+            if (!item.IsUnique)
+            {
+                foreach (var slot in slots)
+                {
+                    if (slot.IsEmpty || slot.item != item)
+                        continue;
+
+                    var space = item.MaxStackSize - slot.quantity;
+                    if (space <= 0)
+                        continue;
+
+                    remaining -= Mathf.Min(space, remaining);
+                    if (remaining <= 0)
+                        return true;
+                }
+            }
+
+            foreach (var slot in slots)
+            {
+                if (!slot.IsEmpty)
+                    continue;
+
+                var stackAmount = item.IsUnique ? 1 : Mathf.Min(remaining, item.MaxStackSize);
+                remaining -= stackAmount;
+
+                if (remaining <= 0)
+                    return true;
+            }
+
+            return false;
+        }
+
         public bool TryTakeFromSlot(int slotIndex, int amount, out ItemData item, out int taken)
         {
             item = null;

@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.18039216, g: 0.15294118, b: 0.12941177, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -138,6 +138,9 @@ MonoBehaviour:
   iconImage: {fileID: 5885907134110217173}
   quantityText: {fileID: 6436862763370350608}
   button: {fileID: 5716970076701475156}
+  backgroundImage: {fileID: 0}
+  selectedColor: {r: 1, g: 0.92, b: 0.55, a: 1}
+  dragStartThreshold: 8
 --- !u!1 &2509054045538028418
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b207e10d75d92024fb9491f5c0dc1573, type: 3}
   m_Name: Plague Core
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Inventory.ItemData
-  itemId: 
-  displayName: 
-  description: 
-  icon: {fileID: 0}
+  itemId: 004
+  displayName: "\u75AB\u715E\u9748\u6838"
+  description: "\u4E00\u9846\u860A\u542B\u8457\u5287\u6BD2\u80FD\u91CF\u8207\u9ED1\u6697\u8A5B\u5492\u7684\u58AE\u843D\u7D50\u6676\u3002"
+  icon: {fileID: 21300000, guid: ec3177b299ad02448b93e25a625385b9, type: 3}
   itemType: 0
   maxStackSize: 99
   isUnique: 0
