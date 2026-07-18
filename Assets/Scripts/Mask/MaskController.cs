@@ -50,37 +50,16 @@ namespace XuFu.MaskSystem
 
         void Start()
         {
-<<<<<<< Updated upstream
             if (inputReader == null)
                 inputReader = FindFirstObjectByType<InputReader>();
 
-=======
             maskAbilityTimer = 0f;
->>>>>>> Stashed changes
             SetAnimation(currentAnimation);
             EquipMask(equippedMask);
         }
 
         private void Update()
         {
-<<<<<<< Updated upstream
-            if (equippedMask == null || string.IsNullOrEmpty(equippedMask.maskId))
-                return;
-
-            if (equippedMask.maskId == "mask_blank")
-                return;
-
-            var maskAbility = inputReader?.MaskAbilityAction;
-            if (maskAbility == null)
-                return;
-
-            if (equippedMask.maskId == "bird_mask")
-            {
-                if (shield == null)
-                    return;
-
-                if (maskAbility.IsPressed())
-=======
             if (maskAbilityTimer > 0f)
             {
                 maskAbilityTimer -= Time.deltaTime;
@@ -90,22 +69,18 @@ namespace XuFu.MaskSystem
 
             if (equippedMask.maskId == "bird_mask")
             {
-               if (inputReader.MaskAbilityAction.IsPressed() && maskAbilityTimer <= 0f)
+                if (inputReader.MaskAbilityAction.IsPressed() && maskAbilityTimer <= 0f)
                 {
->>>>>>> Stashed changes
                     shield.SetActive(true);
-                else if (maskAbility.WasReleasedThisFrame())
+                }
+                else if (inputReader.MaskAbilityAction.WasReleasedThisFrame())
+                {
                     shield.SetActive(false);
+                }
+
             }
             else if (equippedMask.maskId == "zhong_mask")
             {
-<<<<<<< Updated upstream
-                if (maskAbility.WasPressedThisFrame())
-                {
-                    if (Camera.main != null)
-                        transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-=======
                 if (inputReader.MaskAbilityAction.WasPressedThisFrame() && maskAbilityTimer <= 0f)
                 {
                     maskAbilityTimer = mask2AbilityCD;
@@ -118,17 +93,15 @@ namespace XuFu.MaskSystem
                         GetComponent<CombatActor>().SetGroundPosition(new Vector2 (transform.position.x, transform.position.z));
                     }
                     //transform.position = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
->>>>>>> Stashed changes
                     PlayerAttackUI.OnMaskAbilityCast(2, 20f);
                 }
             }
         }
 
-        void LateUpdate()
+        private void LateUpdate()
         {
             UpdateAnimationFromAnimator();
             UpdateMaskFromCurrentBodySprite();
-            
         }
 
         private void UpdateAnimationFromAnimator()
