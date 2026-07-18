@@ -1814,11 +1814,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd26c0179a2952446afce333ec4bf9c2, type: 3}
---- !u!1 &246341998 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2620063814176416821, guid: cd26c0179a2952446afce333ec4bf9c2, type: 3}
-  m_PrefabInstance: {fileID: 246341997}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &250239983
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2514,11 +2509,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e2b12efd29a6f840b58d886fbf1c885, type: 3}
---- !u!1 &354364773 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6640949084473536944, guid: 8e2b12efd29a6f840b58d886fbf1c885, type: 3}
-  m_PrefabInstance: {fileID: 354364772}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &358988863
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6302,10 +6292,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawnManager
   normalEnemies:
-  - {fileID: 354364773}
-  - {fileID: 246341998}
-  - {fileID: 881801994}
-  - {fileID: 1152805160}
   - {fileID: 1389623038}
   - {fileID: 2032557775}
   boss: {fileID: 4925578}
@@ -7194,11 +7180,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59c99963bb58fb545a4191c82dc26f74, type: 3}
---- !u!1 &881801994 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6831782933637853608, guid: 59c99963bb58fb545a4191c82dc26f74, type: 3}
-  m_PrefabInstance: {fileID: 881801993}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &904844637
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9637,11 +9618,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3b1c3797bbc75443a339b621190fedf, type: 3}
---- !u!1 &1152805160 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1760791329184165282, guid: c3b1c3797bbc75443a339b621190fedf, type: 3}
-  m_PrefabInstance: {fileID: 1152805159}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1155251364
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14228,6 +14204,10 @@ PrefabInstance:
       propertyPath: healthBarTransform
       value: 
       objectReference: {fileID: 520347209}
+    - target: {fileID: 6380719469098037954, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+      propertyPath: inputReader
+      value: 
+      objectReference: {fileID: 783498261}
     - target: {fileID: 6719955143066674890, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
       propertyPath: inputReader
       value: 
@@ -14240,11 +14220,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1714475726}
   m_SourcePrefab: {fileID: 100100000, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
---- !u!1 &1714475727 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1119939806924613663, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+--- !u!114 &1714475725 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4246430339642010077, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
   m_PrefabInstance: {fileID: 1714475724}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714475727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c8a1f3e9d5b47a2c4e7b0d8f2a95c16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.CombatHealth
 --- !u!114 &1714475726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14259,17 +14245,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Inventory.PlayerInventory
   capacity: 20
   slots: []
---- !u!114 &1714475725 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4246430339642010077, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+--- !u!1 &1714475727 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1119939806924613663, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
   m_PrefabInstance: {fileID: 1714475724}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c8a1f3e9d5b47a2c4e7b0d8f2a95c16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.CombatHealth
 --- !u!1001 &1715165516
 PrefabInstance:
   m_ObjectHideFlags: 0

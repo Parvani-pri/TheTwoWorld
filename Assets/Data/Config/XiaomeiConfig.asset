@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: XiaomeiConfig
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.RoamingNpc.RoamingNpcConfig
   displayName: "\u5C0F\u59B9"
-  portrait: {fileID: 0}
+  portrait: {fileID: 21300000, guid: a2d28113e49b4854189f6b00982efb22, type: 3}
   interruptPersona: "\u4F60\u662F\u300C\u5C0F\u59B9\u300D\uFF0C\u8BB8\u8D1F\u7684\u52A9\u624B\uFF0C\u6027\u683C\u6D3B\u6CFC\u3001\u8C03\u76AE\uFF0C\u5076\u5C14\u8FFD\u4E0A\u6765\u6253\u65AD\u8BB8\u8D1F\u3002"
   moveSpeed: 2
   wanderMoveSpeed: 0.75

@@ -2113,11 +2113,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e2b12efd29a6f840b58d886fbf1c885, type: 3}
---- !u!1 &412455177 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6640949084473536944, guid: 8e2b12efd29a6f840b58d886fbf1c885, type: 3}
-  m_PrefabInstance: {fileID: 412455176}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &438656526 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7587025929789796296, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
@@ -2936,11 +2931,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a93ee62bb2650a04ca2c6b88b9b7e7ed, type: 3}
---- !u!1 &563859093 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1633026597236042558, guid: a93ee62bb2650a04ca2c6b88b9b7e7ed, type: 3}
-  m_PrefabInstance: {fileID: 563859092}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &573533601
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3001,6 +2991,10 @@ PrefabInstance:
       propertyPath: healthBarTransform
       value: 
       objectReference: {fileID: 1505145377}
+    - target: {fileID: 6380719469098037954, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+      propertyPath: inputReader
+      value: 
+      objectReference: {fileID: 782196558}
     - target: {fileID: 6719955143066674890, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
       propertyPath: inputReader
       value: 
@@ -4196,14 +4190,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawnManager
   normalEnemies:
-  - {fileID: 412455177}
-  - {fileID: 1862046085}
   - {fileID: 25127433}
   - {fileID: 500173451}
-  - {fileID: 1648396089}
-  - {fileID: 563859093}
   boss: {fileID: 1472187826}
-  targetSpawnAmount: 2
+  targetSpawnAmount: 4
   spawnInterval: 10
 --- !u!1 &835267908
 GameObject:
@@ -8044,11 +8034,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b491ab63f87868c47b24610820629a88, type: 3}
---- !u!1 &1648396089 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7568020052120203311, guid: b491ab63f87868c47b24610820629a88, type: 3}
-  m_PrefabInstance: {fileID: 1648396088}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1675427422 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4630704725890515403, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
@@ -8887,11 +8872,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd26c0179a2952446afce333ec4bf9c2, type: 3}
---- !u!1 &1862046085 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2620063814176416821, guid: cd26c0179a2952446afce333ec4bf9c2, type: 3}
-  m_PrefabInstance: {fileID: 1862046084}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1877094908
 PrefabInstance:
   m_ObjectHideFlags: 0

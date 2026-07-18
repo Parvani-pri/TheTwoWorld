@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Inventory.ItemData
   itemId: 001
   displayName: "\u4F2F\u52DE\u9CE5\u7FBD\u6BDB"
-  description: A sharp, lightweight feather that grants swiftness to crafted items.
+  description: "\u92D2\u5229\u4E14\u8F15\u76C8\u7684\u7FBD\u6BDB\uFF0C\u80FD\u70BA\u88FD\u4F5C\u7684\u7269\u54C1\u8CE6\u4E88\u8FC5\u6377\u5C6C\u6027\u3002"
   icon: {fileID: 21300000, guid: 6ac9208ed080da34389f8dc26005f599, type: 3}
   itemType: 0
   maxStackSize: 99

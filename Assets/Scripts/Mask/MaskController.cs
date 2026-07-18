@@ -45,30 +45,42 @@ namespace XuFu.MaskSystem
 
         void Start()
         {
+            if (inputReader == null)
+                inputReader = FindFirstObjectByType<InputReader>();
+
             SetAnimation(currentAnimation);
             EquipMask(equippedMask);
         }
 
         private void Update()
         {
-            if (equippedMask.maskId == "mask_blank") return;
+            if (equippedMask == null || string.IsNullOrEmpty(equippedMask.maskId))
+                return;
+
+            if (equippedMask.maskId == "mask_blank")
+                return;
+
+            var maskAbility = inputReader?.MaskAbilityAction;
+            if (maskAbility == null)
+                return;
 
             if (equippedMask.maskId == "bird_mask")
             {
-               if (inputReader.MaskAbilityAction.IsPressed())
-                {
+                if (shield == null)
+                    return;
+
+                if (maskAbility.IsPressed())
                     shield.SetActive(true);
-                }
-               else if (inputReader.MaskAbilityAction.WasReleasedThisFrame())
-                {
+                else if (maskAbility.WasReleasedThisFrame())
                     shield.SetActive(false);
-                }
             }
             else if (equippedMask.maskId == "zhong_mask")
             {
-                if (inputReader.MaskAbilityAction.WasPressedThisFrame())
+                if (maskAbility.WasPressedThisFrame())
                 {
-                    transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    if (Camera.main != null)
+                        transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
                     PlayerAttackUI.OnMaskAbilityCast(2, 20f);
                 }
             }

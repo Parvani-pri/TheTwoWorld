@@ -27,6 +27,11 @@ namespace TwoWorlds.Inventory
             EnsureCapacity();
         }
 
+        void Start()
+        {
+            PlayerInventoryPersistence.Instance?.TryRestoreCurrentInventory();
+        }
+
         void EnsureCapacity()
         {
             while (slots.Count < capacity)
@@ -291,5 +296,50 @@ namespace TwoWorlds.Inventory
         }
 
         void NotifyChanged() => GameEvents.RaiseInventoryChanged(this);
+
+        public SavedInventorySlotEntry[] CapturePersistentState()
+        {
+            EnsureCapacity();
+            var saved = new SavedInventorySlotEntry[slots.Count];
+
+            for (var i = 0; i < slots.Count; i++)
+            {
+                var slot = slots[i];
+                saved[i] = slot.IsEmpty
+                    ? default
+                    : new SavedInventorySlotEntry { itemId = slot.item.ItemId, quantity = slot.quantity };
+            }
+
+            return saved;
+        }
+
+        public void ApplyPersistentState(IReadOnlyList<SavedInventorySlotEntry> saved, ItemDataCatalog catalog)
+        {
+            EnsureCapacity();
+
+            for (var i = 0; i < slots.Count; i++)
+                slots[i] = default;
+
+            if (saved == null || catalog == null)
+            {
+                NotifyChanged();
+                return;
+            }
+
+            var count = Mathf.Min(saved.Count, slots.Count);
+            for (var i = 0; i < count; i++)
+            {
+                var entry = saved[i];
+                if (entry.quantity <= 0 || string.IsNullOrWhiteSpace(entry.itemId))
+                    continue;
+
+                if (!catalog.TryGetItem(entry.itemId, out var item))
+                    continue;
+
+                slots[i] = new InventorySlot { item = item, quantity = entry.quantity };
+            }
+
+            NotifyChanged();
+        }
     }
 }

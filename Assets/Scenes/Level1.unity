@@ -2194,11 +2194,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b491ab63f87868c47b24610820629a88, type: 3}
---- !u!1 &629920088 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7568020052120203311, guid: b491ab63f87868c47b24610820629a88, type: 3}
-  m_PrefabInstance: {fileID: 629920087}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &642314586
 GameObject:
   m_ObjectHideFlags: 0
@@ -2722,6 +2717,10 @@ PrefabInstance:
       propertyPath: healthBarTransform
       value: 
       objectReference: {fileID: 966451243}
+    - target: {fileID: 6380719469098037954, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+      propertyPath: inputReader
+      value: 
+      objectReference: {fileID: 1820472274}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3429,11 +3428,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3b1c3797bbc75443a339b621190fedf, type: 3}
---- !u!1 &863645859 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1760791329184165282, guid: c3b1c3797bbc75443a339b621190fedf, type: 3}
-  m_PrefabInstance: {fileID: 863645858}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &865074701
 GameObject:
   m_ObjectHideFlags: 0
@@ -6912,12 +6906,8 @@ MonoBehaviour:
   normalEnemies:
   - {fileID: 1716304157}
   - {fileID: 490132101}
-  - {fileID: 1924800853}
-  - {fileID: 863645859}
-  - {fileID: 629920088}
-  - {fileID: 1901315594}
   boss: {fileID: 1997381870}
-  targetSpawnAmount: 2
+  targetSpawnAmount: 4
   spawnInterval: 10
 --- !u!1001 &1840015172
 PrefabInstance:
@@ -7446,11 +7436,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a93ee62bb2650a04ca2c6b88b9b7e7ed, type: 3}
---- !u!1 &1901315594 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1633026597236042558, guid: a93ee62bb2650a04ca2c6b88b9b7e7ed, type: 3}
-  m_PrefabInstance: {fileID: 1901315593}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1924800852
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7580,11 +7565,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59c99963bb58fb545a4191c82dc26f74, type: 3}
---- !u!1 &1924800853 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6831782933637853608, guid: 59c99963bb58fb545a4191c82dc26f74, type: 3}
-  m_PrefabInstance: {fileID: 1924800852}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1997381870 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4590101040769282379, guid: f96bdd9dd78857e4ab5f2a0d213dae67, type: 3}

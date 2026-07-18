@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4d5e6f708192a3b4c5d6e7f8091a2b3, type: 3}
+  m_Name: ItemDataCatalog
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Inventory.ItemDataCatalog
+  items:
+  - {fileID: 11400000, guid: 8d5b7d57df295cb4c84adb04947ff1b8, type: 2}
+  - {fileID: 11400000, guid: c9edca65bbf3aff49976dc25ed4c9e27, type: 2}
+  - {fileID: 11400000, guid: 4fe72804a6eb0474fb0722152c0ad3ab, type: 2}
+  - {fileID: 11400000, guid: 2a25b87a29a4b574b92bdcca68ee06a9, type: 2}
+  - {fileID: 11400000, guid: 14a9a5abfac8c6b4393e64259e5b6dc9, type: 2}
+  - {fileID: 11400000, guid: eac0e58dadacdca4080c863ee3b559e2, type: 2}
+  - {fileID: 11400000, guid: 098b301da11dda44c84c967bf1514a26, type: 2}
+  - {fileID: 11400000, guid: 1c65d046c0979314786172bc16107f5c, type: 2}
+  - {fileID: 11400000, guid: 9946fda5fbb30184a976db258a2f66e8, type: 2}

@@ -1,5 +1,6 @@
 using System.Collections;
 using TwoWorlds.AI;
+using TwoWorlds.Dialogue;
 using TwoWorlds.Inventory;
 using TwoWorlds.Progress;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace TwoWorlds.RoamingNpc
         [SerializeField] RoamingNpcController controller;
         [SerializeField] RoamingNpcBrain brain;
         [SerializeField] InterruptDialogueUI interruptDialogueUI;
+        [SerializeField] CharacterPortraitDatabase portraitDatabase;
         [SerializeField] AIService aiService;
         [SerializeField] GameProgress gameProgress;
         [SerializeField] float postDialogueApproachDelay = 2f;
@@ -385,10 +387,20 @@ namespace TwoWorlds.RoamingNpc
             var text = string.IsNullOrWhiteSpace(line) ? config.GetRandomFallbackLine() : line;
             InterruptUI.Show(
                 config.DisplayName,
-                config.Portrait,
+                ResolvePortrait(),
                 text,
                 config.InterruptTypewriterCps);
             brain.SetState(RoamingNpcState.InterruptShowing);
+        }
+
+        Sprite ResolvePortrait()
+        {
+            if (config?.Portrait != null)
+                return config.Portrait;
+
+            return portraitDatabase != null
+                ? portraitDatabase.GetPortrait(config.DisplayName)
+                : null;
         }
 
         bool TryGetPlayerPlanarPosition(out Vector3 playerPosition)

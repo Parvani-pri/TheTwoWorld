@@ -1,3 +1,4 @@
+using TwoWorlds.Inventory;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -28,6 +29,7 @@ namespace TwoWorlds.Progress
             }
 
             Debug.Log($"[SceneFlow] Loading scene '{sceneName}'.");
+            PlayerInventoryPersistence.CaptureBeforeSceneLoad();
             SceneManager.LoadScene(sceneName);
         }
     }

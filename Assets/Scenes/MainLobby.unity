@@ -13967,6 +13967,7 @@ MonoBehaviour:
   controller: {fileID: 7527233504928182917}
   brain: {fileID: 7527233504928182916}
   interruptDialogueUI: {fileID: 0}
+  portraitDatabase: {fileID: 11400000, guid: 0d3e31341ddabd14693c0ea38dac48f0, type: 2}
   aiService: {fileID: 0}
   gameProgress: {fileID: 0}
   postDialogueApproachDelay: 2
