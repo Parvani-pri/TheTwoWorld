@@ -2721,13 +2721,13 @@ PrefabInstance:
       propertyPath: inputReader
       value: 
       objectReference: {fileID: 1820472274}
-<<<<<<< Updated upstream
-=======
+
+
     - target: {fileID: 6719955143066674890, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
       propertyPath: inputReader
       value: 
       objectReference: {fileID: 1820472274}
->>>>>>> Stashed changes
+
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
