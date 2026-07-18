@@ -1,40 +1,53 @@
-using UnityEngine;
 using DG.Tweening;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class EndingFade : MonoBehaviour
 {
+    [SerializeField] CanvasGroup canvasGroup;
+    [SerializeField] TextMeshProUGUI text1;
+    [SerializeField] TextMeshProUGUI text2;
+    [SerializeField] string returnSceneName = "MainMenu";
 
-    public CanvasGroup _self;
-    public TextMeshProUGUI text1;
-    public TextMeshProUGUI text2;
+    bool isPlaying;
 
-    private void OnEnable() {
-        //_self.DOFade(1, 1f);
+    public void PlayEnding()
+    {
+        if (isPlaying)
+            return;
 
-        text1.DOFade(1, 1f);
-        text1.DOFade(0, 1f).SetDelay(3f).OnComplete(()=>{
-           text2.DOFade (1, 1f);
-           text2.DOFade(0, 1f).SetDelay(3f).OnComplete(()=>{
-            SceneManager.LoadScene(0);
-           });
+        isPlaying = true;
+        ResetTextAlpha();
 
+        text1.DOFade(1f, 1f);
+        text1.DOFade(0f, 1f).SetDelay(3f).OnComplete(() =>
+        {
+            text2.DOFade(1f, 1f);
+            text2.DOFade(0f, 1f).SetDelay(3f).OnComplete(() =>
+            {
+                SceneManager.LoadScene(returnSceneName);
+            });
         });
-        //SceneManager.LoadScene(1);
-        //});
-
-    }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    void ResetTextAlpha()
     {
-        
+        if (text1 != null)
+        {
+            var color = text1.color;
+            color.a = 0f;
+            text1.color = color;
+        }
+
+        if (text2 != null)
+        {
+            var color = text2.color;
+            color.a = 0f;
+            text2.color = color;
+        }
+
+        if (canvasGroup != null)
+            canvasGroup.alpha = 1f;
     }
 }

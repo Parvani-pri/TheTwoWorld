@@ -18,9 +18,6 @@ namespace TwoWorlds.Progress
             if (dialogueTrigger == null)
                 dialogueTrigger = GetComponent<ChapterDialogueTrigger>();
 
-            if (startDelaySeconds > 0f)
-                yield return new WaitForSeconds(startDelaySeconds);
-
             var player = FindFirstObjectByType<PlayerInventory>();
             if (player == null)
             {
@@ -33,6 +30,12 @@ namespace TwoWorlds.Progress
                 Debug.LogWarning("[ChapterDialogueAutoTrigger] ChapterDialogueTrigger is missing.");
                 yield break;
             }
+
+            if (!dialogueTrigger.IsDialogueAvailable(player.gameObject))
+                yield break;
+
+            if (startDelaySeconds > 0f)
+                yield return new WaitForSeconds(startDelaySeconds);
 
             if (!dialogueTrigger.IsDialogueAvailable(player.gameObject))
                 yield break;

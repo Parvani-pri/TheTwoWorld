@@ -3452,6 +3452,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2879044411373454801, guid: d991ca774b6ce204aafbc6e7580d3257, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 2879044411373454801, guid: d991ca774b6ce204aafbc6e7580d3257, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 7650548644703909220, guid: d991ca774b6ce204aafbc6e7580d3257, type: 3}
       propertyPath: targetHealth
       value: 
@@ -4221,6 +4229,10 @@ PrefabInstance:
     - target: {fileID: 2916847040964889232, guid: 5e96bc0701520db40b58dd4ad28e40da, type: 3}
       propertyPath: m_Name
       value: sMonster6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2916847040964889232, guid: 5e96bc0701520db40b58dd4ad28e40da, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7703671542218137513, guid: 5e96bc0701520db40b58dd4ad28e40da, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5824,8 +5836,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 150}
-  m_SizeDelta: {x: -100, y: 250}
+  m_AnchoredPosition: {x: 0, y: 100}
+  m_SizeDelta: {x: -100, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &773161329
 MonoBehaviour:
@@ -6347,6 +6359,8 @@ MonoBehaviour:
   chapterNumber: 3
   segment: 2
   playOnce: 1
+  stageMainLobbyActorsOnStart: 0
+  stageXiaomeiOnStart: 1
   promptText: "\u5BF9\u8BDD"
 --- !u!114 &783498268
 MonoBehaviour:
@@ -6365,6 +6379,8 @@ MonoBehaviour:
   chapterNumber: 3
   segment: 3
   playOnce: 1
+  stageMainLobbyActorsOnStart: 0
+  stageXiaomeiOnStart: 1
   promptText: "\u5BF9\u8BDD"
 --- !u!114 &783498269
 MonoBehaviour:
@@ -6618,8 +6634,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -7281,6 +7297,10 @@ PrefabInstance:
     - target: {fileID: 694726677904029026, guid: 03b21516012b8c94093e7f13363c8fc7, type: 3}
       propertyPath: m_Name
       value: sMonster5
+      objectReference: {fileID: 0}
+    - target: {fileID: 694726677904029026, guid: 03b21516012b8c94093e7f13363c8fc7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4356103645736409871, guid: 03b21516012b8c94093e7f13363c8fc7, type: 3}
       propertyPath: m_LocalScale.x
@@ -8079,7 +8099,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100.00002, y: -9.9999695}
+  m_AnchoredPosition: {x: 100.00002, y: -5}
   m_SizeDelta: {x: 120, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &930934280
@@ -12191,8 +12211,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -12558,8 +12578,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 60.000008, y: 49.999985}
-  m_SizeDelta: {x: 120, y: 120}
+  m_AnchoredPosition: {x: 60.000008, y: 45}
+  m_SizeDelta: {x: 110, y: 110}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1472086648
 MonoBehaviour:
@@ -15444,7 +15464,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Interpret
+  m_text: "\u89E3\u8B80"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0cc9c387d2f87bd4282d2db91c429f3c, type: 2}
   m_sharedMaterial: {fileID: 554406015342414914, guid: 0cc9c387d2f87bd4282d2db91c429f3c, type: 2}
@@ -18151,6 +18171,10 @@ PrefabInstance:
     - target: {fileID: 1412853180113774750, guid: e5996127fa4e077408c11b14fa4fde48, type: 3}
       propertyPath: m_Name
       value: Mei
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412853180113774750, guid: e5996127fa4e077408c11b14fa4fde48, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8534566893987217149, guid: e5996127fa4e077408c11b14fa4fde48, type: 3}
       propertyPath: m_LocalPosition.x

@@ -2138,8 +2138,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 60, y: 50}
-  m_SizeDelta: {x: 120, y: 120}
+  m_AnchoredPosition: {x: 60, y: 45}
+  m_SizeDelta: {x: 110, y: 110}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &335648333
 CanvasRenderer:
@@ -2447,7 +2447,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!225 &403431962
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2521,7 +2521,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!224 &403431966
 RectTransform:
@@ -2532,7 +2532,7 @@ RectTransform:
   m_GameObject: {fileID: 403431961}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 294820989}
@@ -2555,9 +2555,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 286ecdaef2913d341b8d1c841aa3e548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EndingFade
-  _self: {fileID: 403431962}
+  canvasGroup: {fileID: 403431962}
   text1: {fileID: 1963732659}
   text2: {fileID: 1551348590}
+  returnSceneName: MainMenu
 --- !u!1001 &416849892
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3380,8 +3381,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 60.000008, y: 49.999985}
-  m_SizeDelta: {x: 120, y: 120}
+  m_AnchoredPosition: {x: 60.000008, y: 45}
+  m_SizeDelta: {x: 110, y: 110}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &576470138
 MonoBehaviour:
@@ -4083,8 +4084,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 60, y: 50}
-  m_SizeDelta: {x: 120, y: 120}
+  m_AnchoredPosition: {x: 60, y: 45}
+  m_SizeDelta: {x: 110, y: 110}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &803518706
 MonoBehaviour:
@@ -4163,8 +4164,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.52, y: 0.08}
   m_AnchorMax: {x: 0.98, y: 0.92}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -22.5, y: 7.5}
+  m_SizeDelta: {x: -45, y: -55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &821156826
 MonoBehaviour:
@@ -4453,7 +4454,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Interpret text
+  m_text: "\u89E3\u8B80"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0cc9c387d2f87bd4282d2db91c429f3c, type: 2}
   m_sharedMaterial: {fileID: 554406015342414914, guid: 0cc9c387d2f87bd4282d2db91c429f3c, type: 2}
@@ -4480,8 +4481,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4871,7 +4872,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -10}
+  m_AnchoredPosition: {x: 100, y: -5}
   m_SizeDelta: {x: 120, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &856453146
@@ -6056,8 +6057,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 150}
-  m_SizeDelta: {x: -100, y: 250}
+  m_AnchoredPosition: {x: 0, y: 100}
+  m_SizeDelta: {x: -100, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1042250087
 MonoBehaviour:
@@ -6497,8 +6498,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6594,8 +6595,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 150}
-  m_SizeDelta: {x: -100, y: 250}
+  m_AnchoredPosition: {x: 0, y: 100}
+  m_SizeDelta: {x: -100, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1135165521
 MonoBehaviour:
@@ -8454,7 +8455,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100.00002, y: -9.9999695}
+  m_AnchoredPosition: {x: 100.00002, y: -5}
   m_SizeDelta: {x: 120, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1401441097
@@ -8781,8 +8782,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 150}
-  m_SizeDelta: {x: -100, y: 250}
+  m_AnchoredPosition: {x: 0, y: 100}
+  m_SizeDelta: {x: -100, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1433545237
 MonoBehaviour:
@@ -12371,7 +12372,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -10}
+  m_AnchoredPosition: {x: 100, y: -5}
   m_SizeDelta: {x: 120, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1914730776
@@ -13274,8 +13275,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.02, y: 0.08}
   m_AnchorMax: {x: 0.48, y: 0.92}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 22.5, y: 7.5}
+  m_SizeDelta: {x: -45, y: -55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1997112072
 MonoBehaviour:
@@ -13551,6 +13552,7 @@ GameObject:
   - component: {fileID: 2047877178}
   - component: {fileID: 2047877182}
   - component: {fileID: 2047877183}
+  - component: {fileID: 2047877184}
   m_Layer: 0
   m_Name: GameSystem
   m_TagString: Untagged
@@ -13641,6 +13643,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Progress.ChapterDialogueAutoTrigger
   dialogueTrigger: {fileID: 7527233504928182925}
   startDelaySeconds: 0.5
+--- !u!114 &2047877184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047877177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8a4c2f1b5d63a9487f2e1d0c9b8a7f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Progress.EndingCanvasTrigger
+  endingCanvas: {fileID: 403431961}
+  endingFade: {fileID: 0}
+  finalChapter: 3
 --- !u!1001 &2062107333
 PrefabInstance:
   m_ObjectHideFlags: 0
