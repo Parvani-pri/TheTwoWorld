@@ -17,9 +17,6 @@ namespace TwoWorlds.Inventory
         [SerializeField] TMP_Text itemNameText;
         [SerializeField] TMP_Text itemDescriptionText;
         [SerializeField] TMP_Text itemMetaText;
-        [SerializeField] ItemDropper itemDropper;
-        [SerializeField] Button discardButton;
-        [SerializeField] Button discardAllButton;
         [SerializeField] ItemInterpretUI itemInterpretUI;
         [SerializeField] Canvas dragCanvas;
         [SerializeField] float dragGhostSize = 64f;
@@ -69,20 +66,11 @@ namespace TwoWorlds.Inventory
             if (playerInventory == null)
                 playerInventory = FindFirstObjectByType<PlayerInventory>();
 
-            if (itemDropper == null)
-                itemDropper = FindFirstObjectByType<ItemDropper>();
-
             if (itemInterpretUI == null)
                 itemInterpretUI = GetComponentInChildren<ItemInterpretUI>(true);
 
             if (dragCanvas == null)
                 dragCanvas = GetComponentInParent<Canvas>();
-
-            if (discardButton != null)
-                discardButton.onClick.AddListener(() => DiscardSelectedItem(1));
-
-            if (discardAllButton != null)
-                discardAllButton.onClick.AddListener(() => DiscardSelectedItem(-1));
 
             BuildSlotViews();
             framesSinceReady = 0;
@@ -107,44 +95,6 @@ namespace TwoWorlds.Inventory
 
             if (WantsCloseInventory())
                 SetOpen(false);
-
-            if (isOpen)
-                HandleDiscardInput();
-        }
-
-        void HandleDiscardInput()
-        {
-            if (selectedSlotIndex < 0)
-                return;
-
-            var keyboard = Keyboard.current;
-            if (keyboard == null)
-                return;
-
-            var dropAll = keyboard.leftShiftKey.isPressed || keyboard.rightShiftKey.isPressed;
-            var dropHalf = keyboard.leftCtrlKey.isPressed || keyboard.rightCtrlKey.isPressed;
-
-            if (keyboard.deleteKey.wasPressedThisFrame || keyboard.xKey.wasPressedThisFrame)
-            {
-                if (dropAll)
-                    DiscardSelectedItem(-1);
-                else if (dropHalf)
-                    DiscardSelectedItem(GetHalfDiscardAmount());
-                else
-                    DiscardSelectedItem(1);
-            }
-        }
-
-        int GetHalfDiscardAmount()
-        {
-            if (selectedSlotIndex < 0 || playerInventory == null)
-                return 1;
-
-            var slot = playerInventory.GetSlot(selectedSlotIndex);
-            if (slot.IsEmpty)
-                return 1;
-
-            return Mathf.Max(1, slot.quantity / 2);
         }
 
         bool WantsCloseInventory()
@@ -205,13 +155,11 @@ namespace TwoWorlds.Inventory
                 selectedSlotIndex = -1;
                 ClearDragGhost();
                 ClearItemDetails();
-                RefreshDiscardButtons();
             }
             else
             {
                 selectedSlotIndex = -1;
                 ClearItemDetails();
-                RefreshDiscardButtons();
                 Refresh();
             }
         }
@@ -251,7 +199,6 @@ namespace TwoWorlds.Inventory
         {
             selectedSlotIndex = slot.IsEmpty ? -1 : slotIndex;
             ShowItemDetails(slot);
-            RefreshDiscardButtons();
             Refresh();
         }
 
@@ -269,7 +216,6 @@ namespace TwoWorlds.Inventory
                 selectedSlotIndex = fromIndex;
 
             ShowItemDetails(playerInventory.GetSlot(selectedSlotIndex));
-            RefreshDiscardButtons();
             Refresh();
             return true;
         }
@@ -333,51 +279,6 @@ namespace TwoWorlds.Inventory
             dragGhost = null;
         }
 
-        void DiscardSelectedItem(int amount)
-        {
-            if (selectedSlotIndex < 0 || itemDropper == null || playerInventory == null)
-                return;
-
-            var slot = playerInventory.GetSlot(selectedSlotIndex);
-            if (slot.IsEmpty)
-            {
-                selectedSlotIndex = -1;
-                ClearItemDetails();
-                RefreshDiscardButtons();
-                return;
-            }
-
-            var dropAmount = amount < 0 ? slot.quantity : Mathf.Clamp(amount, 1, slot.quantity);
-            if (!itemDropper.DropFromSlot(playerInventory, selectedSlotIndex, dropAmount))
-                return;
-
-            var remaining = playerInventory.GetSlot(selectedSlotIndex);
-            if (remaining.IsEmpty)
-            {
-                selectedSlotIndex = -1;
-                ClearItemDetails();
-            }
-            else
-            {
-                ShowItemDetails(remaining);
-            }
-
-            RefreshDiscardButtons();
-        }
-
-        void RefreshDiscardButtons()
-        {
-            var hasSelection = selectedSlotIndex >= 0 &&
-                               playerInventory != null &&
-                               !playerInventory.GetSlot(selectedSlotIndex).IsEmpty;
-
-            if (discardButton != null)
-                discardButton.interactable = hasSelection;
-
-            if (discardAllButton != null)
-                discardAllButton.interactable = hasSelection;
-        }
-
         void ClearItemDetails()
         {
             if (itemNameText != null)
@@ -430,12 +331,6 @@ namespace TwoWorlds.Inventory
 
         void OnDestroy()
         {
-            if (discardButton != null)
-                discardButton.onClick.RemoveAllListeners();
-
-            if (discardAllButton != null)
-                discardAllButton.onClick.RemoveAllListeners();
-
             ClearDragGhost();
         }
     }

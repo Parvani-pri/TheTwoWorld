@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e29b13a10225d5499b0e614618213ca, type: 3}
+  m_Name: MaskZhongKuiCraftRecipe
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Inventory.CraftRecipeData
+  recipeId: 002
+  displayName: "\u513A\u9762\u30FB\u937E\u9997\u5408\u6210\u914D\u65B9"
+  ingredients:
+  - item: {fileID: 11400000, guid: 8d5b7d57df295cb4c84adb04947ff1b8, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 2a25b87a29a4b574b92bdcca68ee06a9, type: 2}
+    amount: 3
+  - item: {fileID: 11400000, guid: 4fe72804a6eb0474fb0722152c0ad3ab, type: 2}
+    amount: 3
+  - item: {fileID: 11400000, guid: c9edca65bbf3aff49976dc25ed4c9e27, type: 2}
+    amount: 3
+  outputItem: {fileID: 11400000, guid: 9946fda5fbb30184a976db258a2f66e8, type: 2}
+  outputAmount: 1

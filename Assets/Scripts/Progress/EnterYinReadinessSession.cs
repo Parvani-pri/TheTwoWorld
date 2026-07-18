@@ -1,4 +1,5 @@
 using TwoWorlds.Core;
+using TwoWorlds.Dialogue;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +9,7 @@ namespace TwoWorlds.Progress
     {
         [SerializeField] EnterYinReadinessUI readinessUI;
         [SerializeField] GameProgress gameProgress;
+        [SerializeField] CharacterPortraitDatabase portraitDatabase;
         [SerializeField] string speakerName = "小妹";
         [SerializeField] Sprite speakerPortrait;
         [TextArea(2, 4)]
@@ -115,8 +117,18 @@ namespace TwoWorlds.Progress
             DismissRoamingInterruptIfNeeded();
             isActive = true;
             readinessUI.SetHandlers(OnReadySelected, OnNotReadySelected);
-            readinessUI.Show(speakerName, speakerPortrait, promptMessage, readyButtonLabel, notReadyButtonLabel);
+            readinessUI.Show(speakerName, ResolvePortrait(), promptMessage, readyButtonLabel, notReadyButtonLabel);
             GameEvents.RaiseDialogueStarted();
+        }
+
+        Sprite ResolvePortrait()
+        {
+            if (speakerPortrait != null)
+                return speakerPortrait;
+
+            return portraitDatabase != null
+                ? portraitDatabase.GetPortrait(speakerName)
+                : null;
         }
 
         void OnReadySelected()

@@ -10,6 +10,8 @@ namespace TwoWorlds.Core
         public static event Action<PlayerInventory> InventoryChanged;
         public static event Action<InventoryAddResult, ItemData> InventoryAddCompleted;
         public static event Action<bool> InventoryOpenChanged;
+        public static event Action<CraftRecipeData> CraftCompleted;
+        public static event Action<CraftRecipeData, CraftResult> CraftFailed;
         public static event Action DialogueStarted;
         public static event Action DialogueEnded;
         public static event Action<DialogueEndInfo> ScriptDialogueEnded;
@@ -38,6 +40,12 @@ namespace TwoWorlds.Core
             IsInventoryOpen = isOpen;
             InventoryOpenChanged?.Invoke(isOpen);
         }
+
+        public static void RaiseCraftCompleted(CraftRecipeData recipe) =>
+            CraftCompleted?.Invoke(recipe);
+
+        public static void RaiseCraftFailed(CraftRecipeData recipe, CraftResult result) =>
+            CraftFailed?.Invoke(recipe, result);
 
         public static void RaiseDialogueStarted()
         {

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b207e10d75d92024fb9491f5c0dc1573, type: 3}
   m_Name: Dream Silk
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Inventory.ItemData
-  itemId: 
-  displayName: 
-  description: 
-  icon: {fileID: 0}
+  itemId: 003
+  displayName: "\u566C\u5922\u9B42\u7D72"
+  description: "\u5F9E\u5669\u5922\u4E2D\u62BD\u51FA\u7684\u98C4\u6E3A\u7D72\u7DDA\uFF0C\u80FD\u5C07\u5E7B\u8C61\u7E54\u5165\u5E03\u6599\u3002"
+  icon: {fileID: 21300000, guid: 11128c55d36b8f3479c274c3335cb316, type: 3}
   itemType: 0
   maxStackSize: 99
   isUnique: 0

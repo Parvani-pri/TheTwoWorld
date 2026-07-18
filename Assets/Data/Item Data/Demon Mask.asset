@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b207e10d75d92024fb9491f5c0dc1573, type: 3}
   m_Name: Demon Mask
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Inventory.ItemData
-  itemId: 
-  displayName: 
-  description: 
-  icon: {fileID: 0}
+  itemId: 005
+  displayName: "\u9B51\u9AA8\u9762\u7532"
+  description: "\u6CE8\u5165\u4E86\u6028\u5FF5\u7684\u9670\u68EE\u9AA8\u9762\u7532\uFF0C\u65E8\u5728\u9707\u61FE\u8207\u5687\u963B\u6575\u4EBA\u3002"
+  icon: {fileID: 21300000, guid: a07bcc3479b9b2e42869026ab79f89fd, type: 3}
   itemType: 0
   maxStackSize: 99
   isUnique: 0
