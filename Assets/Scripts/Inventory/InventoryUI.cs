@@ -315,13 +315,23 @@ namespace TwoWorlds.Inventory
 
         static string BuildMetaText(InventorySlot slot)
         {
-            var typeLabel = slot.item.ItemType.ToString();
+            var typeLabel = GetItemTypeLabel(slot.item.ItemType);
             var quantityLabel = slot.item.IsUnique
-                ? "Unique"
+                ? "唯一"
                 : $"{slot.quantity} / {slot.item.MaxStackSize}";
 
-            return $"Type: {typeLabel}\nQuantity: {quantityLabel}";
+            return $"類型：{typeLabel}\n數量：{quantityLabel}";
         }
+
+        static string GetItemTypeLabel(ItemType itemType) => itemType switch
+        {
+            ItemType.Generic => "一般",
+            ItemType.Key => "關鍵",
+            ItemType.Mask => "儺面",
+            ItemType.Consumable => "消耗品",
+            ItemType.Quest => "任務",
+            _ => itemType.ToString()
+        };
 
         void OnDestroy()
         {

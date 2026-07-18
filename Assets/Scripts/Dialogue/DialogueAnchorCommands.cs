@@ -7,15 +7,15 @@ namespace TwoWorlds.Dialogue
         public const string MainLobbyXuFuMarkerId = "xufu";
         public const string MainLobbyXiaomeiMarkerId = "xiaomei";
 
-        public static void StageMainLobbyXuFuAndXiaomei(bool includeXiaomei = true)
+        public static void StageMainLobbyXuFuAndXiaomei(bool includeXiaomei = true, bool faceLeftOnArrive = false)
         {
-            MoveActorToMarker("xufu", MainLobbyXuFuMarkerId);
+            MoveActorToMarker("xufu", MainLobbyXuFuMarkerId, faceLeftOnArrive);
 
             if (includeXiaomei)
-                MoveActorToMarker("xiaomei", MainLobbyXiaomeiMarkerId);
+                MoveActorToMarker("xiaomei", MainLobbyXiaomeiMarkerId, faceLeftOnArrive);
         }
 
-        public static void MoveActorToMarker(string actorKey, string markerId)
+        public static void MoveActorToMarker(string actorKey, string markerId, bool faceLeftOnArrive = false)
         {
             if (!DialogueActorRegistry.TryGetActor(actorKey, out var actor))
             {
@@ -30,6 +30,9 @@ namespace TwoWorlds.Dialogue
             }
 
             actor.MoveTo(marker.WorldPosition);
+
+            if (faceLeftOnArrive)
+                actor.QueueFaceLeft();
         }
     }
 }

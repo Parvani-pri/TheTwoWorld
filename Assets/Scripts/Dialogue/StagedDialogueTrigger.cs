@@ -54,7 +54,7 @@ namespace TwoWorlds.Dialogue
         [SerializeField] DialogueCsvLibrary csvLibrary;
         [SerializeField] DialogueStageEntry[] stages;
         [SerializeField] GameProgress gameProgress;
-        [SerializeField] string promptText = "对话";
+        [SerializeField] string promptText = "對話";
 
         void Awake()
         {

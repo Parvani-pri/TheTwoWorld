@@ -18,7 +18,8 @@ namespace TwoWorlds.Dialogue
         [SerializeField] bool playOnce = true;
         [SerializeField] bool stageMainLobbyActorsOnStart;
         [SerializeField] bool stageXiaomeiOnStart = true;
-        [SerializeField] string promptText = "对话";
+        [SerializeField] bool faceMainLobbyActorsLeftOnStart;
+        [SerializeField] string promptText = "對話";
 
         void Awake()
         {
@@ -76,7 +77,7 @@ namespace TwoWorlds.Dialogue
             }
 
             if (stageMainLobbyActorsOnStart)
-                DialogueAnchorCommands.StageMainLobbyXuFuAndXiaomei(stageXiaomeiOnStart);
+                DialogueAnchorCommands.StageMainLobbyXuFuAndXiaomei(stageXiaomeiOnStart, faceMainLobbyActorsLeftOnStart);
 
             if (DialogueManager.Instance != null)
                 DialogueManager.Instance.StartDialogue(sessionData, interactor);

@@ -23,7 +23,7 @@ namespace TwoWorlds.Dialogue
         [SerializeField] int requiredAmount = 1;
         [SerializeField] bool consumeRequiredItem;
         [SerializeField] bool requireInteractHub;
-        [SerializeField] string promptText = "对话";
+        [SerializeField] string promptText = "對話";
 
         bool hasPlayedOnce;
 

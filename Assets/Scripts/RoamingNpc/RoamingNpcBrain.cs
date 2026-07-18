@@ -121,7 +121,7 @@ namespace TwoWorlds.RoamingNpc
             }
 
             if (interrupter != null)
-                interrupter.SetInterruptEnabled(AllowInterruptLogic());
+                interrupter.SetInterruptEnabled(AllowInterruptLogic() && !IsScriptedBeatActive);
         }
 
         bool IsExternalDialogueBlocking()

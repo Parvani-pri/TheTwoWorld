@@ -145,9 +145,9 @@ namespace TwoWorlds.EditorTools
                 new Vector2(0.05f, 0.08f), new Vector2(0.95f, 0.16f));
             status.color = new Color(0.85f, 0.85f, 0.85f, 1f);
 
-            CreateButton(previewArea.transform, "ConfirmCraftButton", "确认合成",
+            CreateButton(previewArea.transform, "ConfirmCraftButton", "確認合成",
                 new Vector2(0.25f, 0.02f), new Vector2(0.75f, 0.08f));
-            CreateButton(craftPanelGo.transform, "CraftCloseButton", "关闭",
+            CreateButton(craftPanelGo.transform, "CraftCloseButton", "關閉",
                 new Vector2(0.92f, 0.92f), new Vector2(0.98f, 0.98f));
 
             return craftPanelGo;

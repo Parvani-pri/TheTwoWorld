@@ -35,13 +35,13 @@ namespace TwoWorlds.Inventory
 
         static string BuildMessage(InventoryAddResult result, ItemData item)
         {
-            var itemName = item != null ? item.DisplayName : "item";
+            var itemName = item != null ? item.DisplayName : "物品";
 
             return result.Status switch
             {
-                InventoryAddStatus.Failed => "Inventory is full",
+                InventoryAddStatus.Failed => "背包已滿",
                 InventoryAddStatus.Partial =>
-                    $"Not enough space. Only received {result.AddedAmount}/{result.RequestedAmount} {itemName}",
+                    $"空間不足，僅獲得 {result.AddedAmount}/{result.RequestedAmount} {itemName}",
                 _ => null
             };
         }

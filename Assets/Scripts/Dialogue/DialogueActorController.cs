@@ -15,7 +15,15 @@ namespace TwoWorlds.Dialogue
         Vector3 moveTarget;
         bool hasMoveTarget;
         bool usingScriptedOverride;
+        PendingFacing pendingFacing;
         SpriteRenderer spriteRenderer;
+
+        enum PendingFacing
+        {
+            None,
+            Left,
+            Right
+        }
 
         public string ActorKey => string.IsNullOrWhiteSpace(actorKey) ? name : actorKey.Trim();
         public bool IsMoving => hasMoveTarget || (roamingController != null && roamingController.IsMovingToTarget);
@@ -63,8 +71,41 @@ namespace TwoWorlds.Dialogue
             if (Mathf.Approximately(horizontal, 0f))
                 return;
 
+            SetFacingSign(horizontal > 0f ? 1f : -1f);
+        }
+
+        public void FaceLeft()
+        {
+            SetFacingSign(-1f);
+            pendingFacing = PendingFacing.None;
+        }
+
+        public void FaceRight()
+        {
+            SetFacingSign(1f);
+            pendingFacing = PendingFacing.None;
+        }
+
+        public void QueueFaceLeft()
+        {
+            if (IsMoving)
+                pendingFacing = PendingFacing.Left;
+            else
+                FaceLeft();
+        }
+
+        public void QueueFaceRight()
+        {
+            if (IsMoving)
+                pendingFacing = PendingFacing.Right;
+            else
+                FaceRight();
+        }
+
+        void SetFacingSign(float sign)
+        {
             var scale = transform.localScale;
-            scale.x = horizontal > 0f ? Mathf.Abs(scale.x) : -Mathf.Abs(scale.x);
+            scale.x = sign >= 0f ? Mathf.Abs(scale.x) : -Mathf.Abs(scale.x);
             transform.localScale = scale;
 
             if (spriteRenderer != null)
@@ -85,6 +126,7 @@ namespace TwoWorlds.Dialogue
                 return;
 
             usingScriptedOverride = false;
+            pendingFacing = PendingFacing.None;
 
             if (roamingController != null)
                 roamingController.SetScriptedOverride(false);
@@ -95,23 +137,44 @@ namespace TwoWorlds.Dialogue
 
         void Update()
         {
-            if (roamingController != null || !hasMoveTarget)
+            if (roamingController == null && hasMoveTarget)
+            {
+                var current = transform.position;
+                var next = Vector3.MoveTowards(current, moveTarget, moveSpeed * Time.deltaTime);
+                next.y = current.y;
+                transform.position = next;
+                FacePlanarTarget(moveTarget);
+
+                if (GetPlanarDistance(next, moveTarget) <= arriveThreshold)
+                    hasMoveTarget = false;
+            }
+
+            TryApplyPendingFacing();
+        }
+
+        void TryApplyPendingFacing()
+        {
+            if (pendingFacing == PendingFacing.None || IsMoving)
                 return;
 
-            var current = transform.position;
-            var next = Vector3.MoveTowards(current, moveTarget, moveSpeed * Time.deltaTime);
-            next.y = current.y;
-            transform.position = next;
-            FacePlanarTarget(moveTarget);
-
-            if (GetPlanarDistance(next, moveTarget) <= arriveThreshold)
-                hasMoveTarget = false;
+            switch (pendingFacing)
+            {
+                case PendingFacing.Left:
+                    FaceLeft();
+                    break;
+                case PendingFacing.Right:
+                    FaceRight();
+                    break;
+            }
         }
 
         void EnableScriptedOverride()
         {
             if (usingScriptedOverride)
                 return;
+
+            var interrupter = GetComponent<RoamingNpcInterrupter>();
+            interrupter?.SuspendForScriptedBeat();
 
             usingScriptedOverride = true;
 

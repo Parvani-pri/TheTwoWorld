@@ -97,6 +97,9 @@ namespace TwoWorlds.RoamingNpc
             UpdateUnlockState();
             TrackBrainTransitions();
 
+            if (brain != null && brain.IsScriptedBeatActive)
+                return;
+
             if (ShouldYieldToScriptOrAiChat())
             {
                 AbortInterruptForExternalDialogue();
@@ -157,6 +160,24 @@ namespace TwoWorlds.RoamingNpc
         public void SetInterruptEnabled(bool enabled)
         {
             interruptLogicEnabled = enabled;
+        }
+
+        public void SuspendForScriptedBeat()
+        {
+            waitingForAi = false;
+            activeRequestId++;
+            StopInterruptTimeout();
+            InterruptUI?.Hide();
+
+            if (brain == null)
+                return;
+
+            if (brain.State == RoamingNpcState.Approaching ||
+                brain.State == RoamingNpcState.InterruptShowing)
+            {
+                controller?.StopMoving();
+                brain.SetState(RoamingNpcState.Roaming);
+            }
         }
 
         public void DismissInterrupt()
@@ -230,6 +251,9 @@ namespace TwoWorlds.RoamingNpc
             if (config == null || controller == null || brain == null)
                 return;
 
+            if (brain.IsScriptedBeatActive || controller.IsScriptedOverride)
+                return;
+
             if (ShouldYieldToScriptOrAiChat())
                 return;
 
@@ -250,6 +274,9 @@ namespace TwoWorlds.RoamingNpc
 
         void UpdateApproaching()
         {
+            if (brain != null && brain.IsScriptedBeatActive)
+                return;
+
             if (config == null || controller == null || brain == null)
                 return;
 

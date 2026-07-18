@@ -65,14 +65,14 @@ namespace TwoWorlds.Inventory
 
             if (aiService == null)
             {
-                SetInterpretText("AI 服务不可用。");
+                SetInterpretText("AI 服務不可用。");
                 return;
             }
 
             boundItem = item;
             var requestId = ++activeRequestId;
             SetButtonInteractable(false);
-            SetInterpretText("解读中…");
+            SetInterpretText("解讀中…");
 
             aiService.AskItemInterpretation(
                 item,
@@ -94,7 +94,7 @@ namespace TwoWorlds.Inventory
             if (requestId != activeRequestId)
                 return;
 
-            SetInterpretText($"解读失败：{error}");
+            SetInterpretText($"解讀失敗：{error}");
             SetButtonInteractable(boundItem != null);
         }
 

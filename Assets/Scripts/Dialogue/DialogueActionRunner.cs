@@ -115,6 +115,9 @@ namespace TwoWorlds.Dialogue
                 return;
             }
 
+            if (TryExecuteDirectionalFace(actor, targetId))
+                return;
+
             if (string.Equals(targetId, "player", System.StringComparison.OrdinalIgnoreCase))
             {
                 var player = interactor != null
@@ -187,6 +190,23 @@ namespace TwoWorlds.Dialogue
 
             var chapter = ParseChapterNumber(chapterText, gameProgress.CurrentChapterNumber);
             gameProgress.UnlockExitBattle(chapter);
+        }
+
+        static bool TryExecuteDirectionalFace(DialogueActorController actor, string targetId)
+        {
+            if (string.Equals(targetId, "left", System.StringComparison.OrdinalIgnoreCase))
+            {
+                actor.QueueFaceLeft();
+                return true;
+            }
+
+            if (string.Equals(targetId, "right", System.StringComparison.OrdinalIgnoreCase))
+            {
+                actor.QueueFaceRight();
+                return true;
+            }
+
+            return false;
         }
 
         static int ParseChapterNumber(string chapterText, int fallback)

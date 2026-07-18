@@ -194,7 +194,7 @@ namespace TwoWorlds.Inventory
                 previewOutputText.text = string.Empty;
 
             if (previewStatusText != null)
-                previewStatusText.text = "选择一条配方";
+                previewStatusText.text = "選擇一條配方";
 
             if (confirmCraftButton != null)
                 confirmCraftButton.interactable = false;
@@ -223,7 +223,7 @@ namespace TwoWorlds.Inventory
             if (recipe.OutputItem == null)
                 return string.Empty;
 
-            return $"产出：{recipe.OutputItem.DisplayName} ×{recipe.OutputAmount}";
+            return $"產出：{recipe.OutputItem.DisplayName} ×{recipe.OutputAmount}";
         }
 
         string BuildStatusMessage(CraftRecipeData recipe, bool canCraft)
@@ -235,9 +235,9 @@ namespace TwoWorlds.Inventory
                 return "材料不足";
 
             if (playerInventory != null && !playerInventory.CanAddItem(recipe.OutputItem, recipe.OutputAmount))
-                return "背包空间不足";
+                return "背包空間不足";
 
-            return "无法合成";
+            return "無法合成";
         }
 
         void OnConfirmCraft()
@@ -266,14 +266,14 @@ namespace TwoWorlds.Inventory
                 case CraftResult.InventoryFull:
                     GameEvents.RaiseCraftFailed(selectedRecipe, result);
                     if (previewStatusText != null)
-                        previewStatusText.text = "背包空间不足";
+                        previewStatusText.text = "背包空間不足";
                     RefreshAll();
                     break;
 
                 default:
                     GameEvents.RaiseCraftFailed(selectedRecipe, result);
                     if (previewStatusText != null)
-                        previewStatusText.text = "配方无效";
+                        previewStatusText.text = "配方無效";
                     break;
             }
         }
