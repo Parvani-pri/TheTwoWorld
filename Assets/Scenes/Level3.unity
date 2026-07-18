@@ -129,15 +129,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2879108641396881800, guid: c01cd89e36e716341a6f45ebd050caec, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.13839
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2879108641396881800, guid: c01cd89e36e716341a6f45ebd050caec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -13.70958
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2879108641396881800, guid: c01cd89e36e716341a6f45ebd050caec, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 30.7303
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2879108641396881800, guid: c01cd89e36e716341a6f45ebd050caec, type: 3}
       propertyPath: m_LocalRotation.w
@@ -243,6 +243,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mei Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 4764543605113827307, guid: c01cd89e36e716341a6f45ebd050caec, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -253,6 +257,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4764543605113827307, guid: c01cd89e36e716341a6f45ebd050caec, type: 3}
   m_PrefabInstance: {fileID: 4925577}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4925579 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 959400341176463621, guid: c01cd89e36e716341a6f45ebd050caec, type: 3}
+  m_PrefabInstance: {fileID: 4925577}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4925578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c8a1f3e9d5b47a2c4e7b0d8f2a95c16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.CombatHealth
 --- !u!1001 &5596898
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5043,11 +5058,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Progress.ChapterBootstrap
   gameProgress: {fileID: 0}
-  chapterId: ch1_grave
-  chapterLabel: "\u7B2C\u4E00\u7AE0 \xB7 \u7956\u575F"
-  stageLabel: "\u8C03\u67E5\u7956\u575F"
-  chapterNumber: 1
-  initializeChapterProgress: 1
+  chapterId: ch3_fate
+  chapterLabel: "\u7B2C\u4E09\u7AE0 \xB7 \u547D\u8584"
+  stageLabel: "\u67E5\u8FFD\u547D\u8584"
+  chapterNumber: 3
+  initializeChapterProgress: 0
 --- !u!114 &680392881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6215,6 +6230,10 @@ GameObject:
   - component: {fileID: 783498261}
   - component: {fileID: 783498263}
   - component: {fileID: 783498262}
+  - component: {fileID: 783498266}
+  - component: {fileID: 783498267}
+  - component: {fileID: 783498268}
+  - component: {fileID: 783498269}
   - component: {fileID: 783498265}
   m_Layer: 0
   m_Name: GameSystem
@@ -6297,6 +6316,73 @@ MonoBehaviour:
   boss: {fileID: 4925578}
   targetSpawnAmount: 3
   spawnInterval: 10
+--- !u!114 &783498266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783498260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f63739e27cbbee841bc3cf82ab67949d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Progress.ChapterDialogueAutoTrigger
+  dialogueTrigger: {fileID: 783498267}
+  startDelaySeconds: 0
+--- !u!114 &783498267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783498260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dbc0bdf400daf54d9b70466882efbd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.ChapterDialogueTrigger
+  csvLibrary: {fileID: 11400000, guid: 709a92fdc576e5442881e723b7c528a0, type: 2}
+  gameProgress: {fileID: 0}
+  chapterNumber: 3
+  segment: 2
+  playOnce: 1
+  promptText: "\u5BF9\u8BDD"
+--- !u!114 &783498268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783498260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dbc0bdf400daf54d9b70466882efbd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.ChapterDialogueTrigger
+  csvLibrary: {fileID: 11400000, guid: 709a92fdc576e5442881e723b7c528a0, type: 2}
+  gameProgress: {fileID: 0}
+  chapterNumber: 3
+  segment: 3
+  playOnce: 1
+  promptText: "\u5BF9\u8BDD"
+--- !u!114 &783498269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783498260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8b3c4d5e6f7489012345678abcdef01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Progress.ChapterBossDeathTrigger
+  bossHealth: {fileID: 4925579}
+  postBattleDialogue: {fileID: 783498268}
+  gameProgress: {fileID: 0}
+  chapterNumber: 3
+  bossObjectName: Mei Variant
 --- !u!1 &818362495
 GameObject:
   m_ObjectHideFlags: 0
@@ -14152,18 +14238,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8481240108570144352, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
+      propertyPath: inputReader
+      value: 
+      objectReference: {fileID: 783498261}
     - target: {fileID: 1119939806924613663, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
       propertyPath: m_Name
       value: XuFu 1_Scripted Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1896462449403119450, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+      propertyPath: hitbox
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896462449403119450, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
       propertyPath: inputReader
       value: 
       objectReference: {fileID: 783498261}
-    - target: {fileID: 1896462449403119450, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
-      propertyPath: hitbox
-      value: 
-      objectReference: {fileID: 1714475728}
     - target: {fileID: 3536650286331317489, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -16.82
@@ -14208,10 +14298,6 @@ PrefabInstance:
       propertyPath: healthBarTransform
       value: 
       objectReference: {fileID: 520347209}
-    - target: {fileID: 8481240108570144352, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
-      propertyPath: inputReader
-      value: 
-      objectReference: {fileID: 783498261}
     - target: {fileID: 6719955143066674890, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
       propertyPath: inputReader
       value: 
@@ -14224,17 +14310,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1714475726}
   m_SourcePrefab: {fileID: 100100000, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
---- !u!114 &1714475728 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 454353220785182171, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
-  m_PrefabInstance: {fileID: 1714475724}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1c2d3e4f5a6478993aabbccddeeff05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.CombatHitbox
 --- !u!114 &1714475725 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4246430339642010077, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}

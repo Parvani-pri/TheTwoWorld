@@ -26,20 +26,47 @@ namespace TwoWorlds.Progress
             if (postBattleDialogue == null)
                 postBattleDialogue = GetComponent<ChapterDialogueTrigger>();
 
-            if (bossHealth == null)
-                bossHealth = FindBossHealth();
+            ResolveBossHealth();
         }
 
         void OnEnable()
         {
-            if (bossHealth == null)
-                bossHealth = FindBossHealth();
-
-            if (bossHealth != null)
-                bossHealth.Died += OnBossDied;
+            ResolveBossHealth();
+            SubscribeToBossDeath();
         }
 
         void OnDisable()
+        {
+            UnsubscribeFromBossDeath();
+        }
+
+        void Update()
+        {
+            if (handled || bossHealth != null)
+                return;
+
+            ResolveBossHealth();
+            SubscribeToBossDeath();
+        }
+
+        void ResolveBossHealth()
+        {
+            if (bossHealth != null)
+                return;
+
+            bossHealth = FindBossHealth();
+        }
+
+        void SubscribeToBossDeath()
+        {
+            if (bossHealth == null)
+                return;
+
+            bossHealth.Died -= OnBossDied;
+            bossHealth.Died += OnBossDied;
+        }
+
+        void UnsubscribeFromBossDeath()
         {
             if (bossHealth != null)
                 bossHealth.Died -= OnBossDied;
@@ -73,7 +100,9 @@ namespace TwoWorlds.Progress
 
         CombatHealth FindBossHealth()
         {
-            foreach (var health in FindObjectsByType<CombatHealth>(FindObjectsSortMode.None))
+            foreach (var health in FindObjectsByType<CombatHealth>(
+                         FindObjectsInactive.Include,
+                         FindObjectsSortMode.None))
             {
                 if (health.Faction != CombatFaction.Enemy)
                     continue;

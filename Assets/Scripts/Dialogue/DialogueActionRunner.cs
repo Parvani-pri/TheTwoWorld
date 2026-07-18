@@ -101,19 +101,7 @@ namespace TwoWorlds.Dialogue
             if (!TryParseActorTarget(payload, out var actorKey, out var markerId))
                 return;
 
-            if (!DialogueActorRegistry.TryGetActor(actorKey, out var actor))
-            {
-                Debug.LogWarning($"[DialogueActionRunner] Actor not found: {actorKey}");
-                return;
-            }
-
-            if (!DialogueActorRegistry.TryGetMarker(markerId, out var marker))
-            {
-                Debug.LogWarning($"[DialogueActionRunner] Marker not found: {markerId}");
-                return;
-            }
-
-            actor.MoveTo(marker.WorldPosition);
+            DialogueAnchorCommands.MoveActorToMarker(actorKey, markerId);
         }
 
         void ExecuteFace(string payload, GameObject interactor)

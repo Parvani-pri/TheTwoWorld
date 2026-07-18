@@ -34,6 +34,9 @@ namespace TwoWorlds.Progress
                 yield break;
             }
 
+            if (!dialogueTrigger.IsDialogueAvailable(player.gameObject))
+                yield break;
+
             dialogueTrigger.TriggerDialogue(player.gameObject);
         }
     }

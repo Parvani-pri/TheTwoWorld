@@ -12992,6 +12992,7 @@ GameObject:
   - component: {fileID: 2047877179}
   - component: {fileID: 2047877178}
   - component: {fileID: 2047877182}
+  - component: {fileID: 2047877183}
   m_Layer: 0
   m_Name: GameSystem
   m_TagString: Untagged
@@ -13068,6 +13069,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.DialogueActionRunner
   gameProgress: {fileID: 1528944090}
+--- !u!114 &2047877183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047877177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f63739e27cbbee841bc3cf82ab67949d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Progress.ChapterDialogueAutoTrigger
+  dialogueTrigger: {fileID: 7527233504928182925}
+  startDelaySeconds: 0.5
 --- !u!1001 &2062107333
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14066,6 +14081,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7744587430497006610, guid: 7cc1144baea599d4b8a338a78cfa6ccc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7527233504928182924}
+    - targetCorrespondingSourceObject: {fileID: 7744587430497006610, guid: 7cc1144baea599d4b8a338a78cfa6ccc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7527233504928182925}
+    - targetCorrespondingSourceObject: {fileID: 7744587430497006610, guid: 7cc1144baea599d4b8a338a78cfa6ccc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7527233504928182926}
   m_SourcePrefab: {fileID: 100100000, guid: 7cc1144baea599d4b8a338a78cfa6ccc, type: 3}
 --- !u!1 &7527233504928182911 stripped
 GameObject:
@@ -14250,6 +14271,8 @@ MonoBehaviour:
   chapterNumber: 1
   segment: 4
   playOnce: 1
+  stageMainLobbyActorsOnStart: 0
+  stageXiaomeiOnStart: 1
   promptText: "\u5BF9\u8BDD"
 --- !u!114 &7527233504928182920
 MonoBehaviour:
@@ -14313,6 +14336,8 @@ MonoBehaviour:
   chapterNumber: 2
   segment: 1
   playOnce: 1
+  stageMainLobbyActorsOnStart: 0
+  stageXiaomeiOnStart: 1
   promptText: "\u5BF9\u8BDD"
 --- !u!114 &7527233504928182923
 MonoBehaviour:
@@ -14331,6 +14356,8 @@ MonoBehaviour:
   chapterNumber: 2
   segment: 4
   playOnce: 1
+  stageMainLobbyActorsOnStart: 1
+  stageXiaomeiOnStart: 1
   promptText: "\u5BF9\u8BDD"
 --- !u!114 &7527233504928182924
 MonoBehaviour:
@@ -14349,7 +14376,43 @@ MonoBehaviour:
   chapterNumber: 3
   segment: 1
   playOnce: 1
+  stageMainLobbyActorsOnStart: 1
+  stageXiaomeiOnStart: 1
   promptText: "\u5BF9\u8BDD"
+--- !u!114 &7527233504928182925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7527233504928182911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dbc0bdf400daf54d9b70466882efbd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.ChapterDialogueTrigger
+  csvLibrary: {fileID: 11400000, guid: 709a92fdc576e5442881e723b7c528a0, type: 2}
+  gameProgress: {fileID: 0}
+  chapterNumber: 3
+  segment: 4
+  playOnce: 1
+  stageMainLobbyActorsOnStart: 1
+  stageXiaomeiOnStart: 0
+  promptText: "\u5BF9\u8BDD"
+--- !u!114 &7527233504928182926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7527233504928182911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f2079bf3ee37934f931a5b3093d5f31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Dialogue.XiaomeiLobbyPresence
+  gameProgress: {fileID: 0}
+  hideAfterChapter: 3
 --- !u!1001 &8523639893896796372
 PrefabInstance:
   m_ObjectHideFlags: 0

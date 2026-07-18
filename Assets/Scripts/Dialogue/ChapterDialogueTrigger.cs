@@ -16,6 +16,8 @@ namespace TwoWorlds.Dialogue
         [SerializeField] int chapterNumber = 1;
         [SerializeField] ChapterSegment segment = ChapterSegment.PreBattle;
         [SerializeField] bool playOnce = true;
+        [SerializeField] bool stageMainLobbyActorsOnStart;
+        [SerializeField] bool stageXiaomeiOnStart = true;
         [SerializeField] string promptText = "对话";
 
         void Awake()
@@ -72,6 +74,9 @@ namespace TwoWorlds.Dialogue
                 Debug.LogWarning($"[ChapterDialogueTrigger] Missing CSV dialogue: {dialogueId}");
                 return;
             }
+
+            if (stageMainLobbyActorsOnStart)
+                DialogueAnchorCommands.StageMainLobbyXuFuAndXiaomei(stageXiaomeiOnStart);
 
             if (DialogueManager.Instance != null)
                 DialogueManager.Instance.StartDialogue(sessionData, interactor);
