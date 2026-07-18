@@ -2944,6 +2944,10 @@ PrefabInstance:
       value: XuFu 1_Scripted Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1896462449403119450, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+      propertyPath: hitbox
+      value: 
+      objectReference: {fileID: 573533605}
+    - target: {fileID: 1896462449403119450, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
       propertyPath: inputReader
       value: 
       objectReference: {fileID: 782196558}
@@ -3037,6 +3041,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c8a1f3e9d5b47a2c4e7b0d8f2a95c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.CombatHealth
+--- !u!114 &573533605 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3130454350420969849, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+  m_PrefabInstance: {fileID: 573533601}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c2d3e4f5a6478993aabbccddeeff05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.CombatHitbox
 --- !u!1 &577878827
 GameObject:
   m_ObjectHideFlags: 0
