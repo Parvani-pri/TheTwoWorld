@@ -138,7 +138,7 @@ PrefabInstance:
     - target: {fileID: 1896462449403119450, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
       propertyPath: hitbox
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1389460218}
     - target: {fileID: 1896462449403119450, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
       propertyPath: inputReader
       value: 
@@ -187,10 +187,18 @@ PrefabInstance:
       propertyPath: healthBarTransform
       value: 
       objectReference: {fileID: 966451243}
+    - target: {fileID: 6380719469098037954, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+      propertyPath: inputReader
+      value: 
+      objectReference: {fileID: 1820472274}
     - target: {fileID: 6719955143066674890, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
       propertyPath: inputReader
       value: 
       objectReference: {fileID: 1820472274}
+    - target: {fileID: 7012055181835160655, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+      propertyPath: arena
+      value: 
+      objectReference: {fileID: 1427149195}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5559,6 +5567,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1385633550}
   m_CullTransparentMesh: 1
+--- !u!114 &1389460218 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3130454350420969849, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+  m_PrefabInstance: {fileID: 100973718}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c2d3e4f5a6478993aabbccddeeff05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.CombatHitbox
+--- !u!1 &1427149194
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1427149196}
+  - component: {fileID: 1427149195}
+  m_Layer: 0
+  m_Name: ArenaBounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1427149195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427149194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e4d2b6f9a1c47d3b5e0c8f2a6d91e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.ArenaBounds
+  groundSize: {x: 20, y: 20}
+  maxFlightHeight: 3
+--- !u!4 &1427149196
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427149194}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.34, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1455738542
 GameObject:
   m_ObjectHideFlags: 0
@@ -9129,3 +9194,4 @@ SceneRoots:
   - {fileID: 226462160283935325}
   - {fileID: 336782680}
   - {fileID: 1455738550}
+  - {fileID: 1427149196}

@@ -2038,10 +2038,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: sMonster3
       objectReference: {fileID: 0}
-    - target: {fileID: 6831782933637853608, guid: 59c99963bb58fb545a4191c82dc26f74, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7185986519108065031, guid: 59c99963bb58fb545a4191c82dc26f74, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.7
@@ -2086,10 +2082,6 @@ PrefabInstance:
       propertyPath: arena
       value: 
       objectReference: {fileID: 1064042059}
-    - target: {fileID: 8354516958070938045, guid: 59c99963bb58fb545a4191c82dc26f74, type: 3}
-      propertyPath: maxHealth
-      value: 100
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2106,10 +2098,6 @@ PrefabInstance:
     - target: {fileID: 1633026597236042558, guid: a93ee62bb2650a04ca2c6b88b9b7e7ed, type: 3}
       propertyPath: m_Name
       value: sMonster6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1633026597236042558, guid: a93ee62bb2650a04ca2c6b88b9b7e7ed, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6069697363506298375, guid: a93ee62bb2650a04ca2c6b88b9b7e7ed, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2244,10 +2232,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: sMonster2_lvl1
       objectReference: {fileID: 0}
-    - target: {fileID: 2620063814176416821, guid: cd26c0179a2952446afce333ec4bf9c2, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6081148276660603711, guid: cd26c0179a2952446afce333ec4bf9c2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.97
@@ -2369,10 +2353,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 111169921075094077, guid: 8e2b12efd29a6f840b58d886fbf1c885, type: 3}
-      propertyPath: m_Offset.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1755066198539707868, guid: 8e2b12efd29a6f840b58d886fbf1c885, type: 3}
       propertyPath: 'pscList.Array.data[0]'
       value: 
@@ -2488,10 +2468,6 @@ PrefabInstance:
     - target: {fileID: 6640949084473536944, guid: 8e2b12efd29a6f840b58d886fbf1c885, type: 3}
       propertyPath: m_Name
       value: sMonster1_lvl1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6640949084473536944, guid: 8e2b12efd29a6f840b58d886fbf1c885, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

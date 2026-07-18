@@ -214,6 +214,14 @@ PrefabInstance:
       propertyPath: TriggerModule.primitives.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1731797471868734749, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
+      propertyPath: originalPivot
+      value: 
+      objectReference: {fileID: 892744900159515046}
+    - target: {fileID: 1731797471868734749, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
+      propertyPath: originalParent
+      value: 
+      objectReference: {fileID: 3536650286331317489}
     - target: {fileID: 1790470724794015652, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.33
@@ -866,7 +874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ParticleSystemCollider
   attackData: {fileID: 11400000, guid: df4035a89666db9458e6b1330f0c4057, type: 2}
-  shouldDetach: 1
+  shouldDetach: 0
 --- !u!1 &1587667714633556793 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4266935394840969115, guid: 2c6a71bd8879ee34889229e3000a7756, type: 3}

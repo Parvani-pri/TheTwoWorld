@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using TwoWorlds.Combat;
 using UnityEngine;
@@ -11,8 +10,10 @@ public class ParticleSystemCollider : MonoBehaviour
     ParticleSystem ps;
     List<Component> colliders = new List<Component>();
     private List<ParticleSystem.Particle> enterParticles = new List<ParticleSystem.Particle>();
+    public Vector3 originalPos;
     private void Awake()
     {
+        originalPos = transform.position;
         ps = GetComponent<ParticleSystem>();
     }
 

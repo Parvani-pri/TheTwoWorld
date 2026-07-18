@@ -750,8 +750,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.EnemyLootDropper
   lootTable: {fileID: 11400000, guid: 88b88baef1daedc489f83cccc13710d2, type: 2}
-  dropOffset: {x: 0, y: 0, z: 0}
   dropOnlyOnce: 1
+  dropOffset: {x: 0, y: 0, z: 0}
+  popDuration: 0.18
+  flyDuration: 0.42
 --- !u!4 &6081148276660603711 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7677378444047943256, guid: 5816546f8dd31f442b275e87b85d79a1, type: 3}

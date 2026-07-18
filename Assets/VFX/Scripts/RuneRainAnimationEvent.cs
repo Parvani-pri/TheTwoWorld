@@ -47,6 +47,7 @@ public class RuneRainAnimationEvent : MonoBehaviour
         foreach (ParticleSystem ps in particles)
         {
             ps.gameObject.transform.parent = originalParent;
+            ps.transform.position = ps.GetComponent<ParticleSystemCollider>().originalPos;
             ps.transform.localScale = new Vector3(Mathf.Abs(ps.transform.localScale.x), Mathf.Abs(ps.transform.localScale.y), Mathf.Abs(ps.transform.localScale.z));
         }
     }

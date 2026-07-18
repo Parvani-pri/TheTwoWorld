@@ -3366,6 +3366,52 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!1 &505844078
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 505844080}
+  - component: {fileID: 505844079}
+  m_Layer: 0
+  m_Name: ArenaBounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &505844079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505844078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e4d2b6f9a1c47d3b5e0c8f2a6d91e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.ArenaBounds
+  groundSize: {x: 60, y: 40}
+  maxFlightHeight: 3
+--- !u!4 &505844080
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505844078}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 8.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &512429448
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6361,6 +6407,7 @@ MonoBehaviour:
   playOnce: 1
   stageMainLobbyActorsOnStart: 0
   stageXiaomeiOnStart: 1
+  faceMainLobbyActorsLeftOnStart: 0
   promptText: "\u5C0D\u8A71"
 --- !u!114 &783498268
 MonoBehaviour:
@@ -6381,6 +6428,7 @@ MonoBehaviour:
   playOnce: 1
   stageMainLobbyActorsOnStart: 0
   stageXiaomeiOnStart: 1
+  faceMainLobbyActorsLeftOnStart: 0
   promptText: "\u5C0D\u8A71"
 --- !u!114 &783498269
 MonoBehaviour:
@@ -14269,7 +14317,7 @@ PrefabInstance:
     - target: {fileID: 1896462449403119450, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
       propertyPath: hitbox
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1714475728}
     - target: {fileID: 1896462449403119450, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
       propertyPath: inputReader
       value: 
@@ -14318,10 +14366,18 @@ PrefabInstance:
       propertyPath: healthBarTransform
       value: 
       objectReference: {fileID: 520347209}
+    - target: {fileID: 6380719469098037954, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+      propertyPath: inputReader
+      value: 
+      objectReference: {fileID: 783498261}
     - target: {fileID: 6719955143066674890, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
       propertyPath: inputReader
       value: 
       objectReference: {fileID: 783498261}
+    - target: {fileID: 7012055181835160655, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+      propertyPath: arena
+      value: 
+      objectReference: {fileID: 505844079}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14360,6 +14416,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1119939806924613663, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
   m_PrefabInstance: {fileID: 1714475724}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1714475728 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3130454350420969849, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+  m_PrefabInstance: {fileID: 1714475724}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c2d3e4f5a6478993aabbccddeeff05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.CombatHitbox
 --- !u!1001 &1715165516
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18250,3 +18317,4 @@ SceneRoots:
   - {fileID: 4925577}
   - {fileID: 520347208}
   - {fileID: 781208984}
+  - {fileID: 505844080}

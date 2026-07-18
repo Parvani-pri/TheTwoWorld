@@ -2950,7 +2950,7 @@ PrefabInstance:
     - target: {fileID: 1896462449403119450, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
       propertyPath: hitbox
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 573533605}
     - target: {fileID: 1896462449403119450, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
       propertyPath: inputReader
       value: 
@@ -2999,10 +2999,18 @@ PrefabInstance:
       propertyPath: healthBarTransform
       value: 
       objectReference: {fileID: 1505145377}
+    - target: {fileID: 6380719469098037954, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+      propertyPath: inputReader
+      value: 
+      objectReference: {fileID: 782196558}
     - target: {fileID: 6719955143066674890, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
       propertyPath: inputReader
       value: 
       objectReference: {fileID: 782196558}
+    - target: {fileID: 7012055181835160655, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+      propertyPath: arena
+      value: 
+      objectReference: {fileID: 1352349732}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3041,6 +3049,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c8a1f3e9d5b47a2c4e7b0d8f2a95c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.CombatHealth
+--- !u!114 &573533605 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3130454350420969849, guid: 16bb9ba28b9d2b148a772f03203c186c, type: 3}
+  m_PrefabInstance: {fileID: 573533601}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c2d3e4f5a6478993aabbccddeeff05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.CombatHitbox
 --- !u!1 &577878827
 GameObject:
   m_ObjectHideFlags: 0
@@ -4184,6 +4203,7 @@ MonoBehaviour:
   playOnce: 1
   stageMainLobbyActorsOnStart: 0
   stageXiaomeiOnStart: 1
+  faceMainLobbyActorsLeftOnStart: 0
   promptText: "\u5C0D\u8A71"
 --- !u!114 &782196564
 MonoBehaviour:
@@ -4222,6 +4242,7 @@ MonoBehaviour:
   playOnce: 1
   stageMainLobbyActorsOnStart: 0
   stageXiaomeiOnStart: 1
+  faceMainLobbyActorsLeftOnStart: 0
   promptText: "\u5C0D\u8A71"
 --- !u!114 &782196566
 MonoBehaviour:
@@ -6400,6 +6421,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: face3c4641bde5f4badc9d4ab4c3ee15, type: 3}
   m_PrefabInstance: {fileID: 1339935824}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1352349731
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1352349733}
+  - component: {fileID: 1352349732}
+  m_Layer: 0
+  m_Name: ArenaBounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1352349732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352349731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e4d2b6f9a1c47d3b5e0c8f2a6d91e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoWorlds.Combat.ArenaBounds
+  groundSize: {x: 30, y: 30}
+  maxFlightHeight: 3
+--- !u!4 &1352349733
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352349731}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1404844218
 GameObject:
   m_ObjectHideFlags: 0
@@ -11247,3 +11314,4 @@ SceneRoots:
   - {fileID: 1472187825}
   - {fileID: 1505145376}
   - {fileID: 1468596635}
+  - {fileID: 1352349733}
