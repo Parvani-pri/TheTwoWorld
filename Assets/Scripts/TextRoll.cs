@@ -10,7 +10,7 @@ public class TextRoll : MonoBehaviour
     public CanvasGroup textcanvas;
 
     private void OnEnable() {
-        text.DOFade(1, 0.5f);
+        text.DOFade(1, 1f);
         text.DOFade(0, 0.5f).SetDelay(6f).OnComplete(()=>{
         //textcanvas.DOFade(0, 0.5f);
         SceneManager.LoadScene(1);
