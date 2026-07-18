@@ -115,6 +115,19 @@ namespace TwoWorlds.Combat
         {
             GroundPosition = groundPosition;
         }
+
+        /// <summary>
+        /// Updates internal ground/height state from the current transform without moving it.
+        /// Use after external systems (e.g. scripted dialogue moves) set transform.position directly.
+        /// </summary>
+        public void SyncGroundFromTransform()
+        {
+            GroundPosition = ClampGround(new Vector2(transform.position.x, transform.position.z));
+            var groundY = GetGroundLevelY();
+            Height = Mathf.Max(0f, transform.position.y - groundY);
+            if (depthSortedRenderer != null)
+                depthSortedRenderer.sortingOrder = Mathf.RoundToInt(-GroundPosition.y * depthSortingScale);
+        }
     }
 }
 

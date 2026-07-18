@@ -1,3 +1,4 @@
+using TwoWorlds.Combat;
 using TwoWorlds.RoamingNpc;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ namespace TwoWorlds.Dialogue
         bool usingScriptedOverride;
         PendingFacing pendingFacing;
         SpriteRenderer spriteRenderer;
+        CombatActor combatActor;
 
         enum PendingFacing
         {
@@ -37,6 +39,8 @@ namespace TwoWorlds.Dialogue
 
             if (roamingBrain == null)
                 roamingBrain = GetComponent<RoamingNpcBrain>();
+
+            combatActor = GetComponent<CombatActor>();
         }
 
         void OnEnable()
@@ -133,6 +137,8 @@ namespace TwoWorlds.Dialogue
 
             if (roamingBrain != null)
                 roamingBrain.EndScriptedBeat();
+
+            SyncCombatGroundFromTransform();
         }
 
         void Update()
@@ -143,6 +149,7 @@ namespace TwoWorlds.Dialogue
                 var next = Vector3.MoveTowards(current, moveTarget, moveSpeed * Time.deltaTime);
                 next.y = current.y;
                 transform.position = next;
+                SyncCombatGroundFromTransform();
                 FacePlanarTarget(moveTarget);
 
                 if (GetPlanarDistance(next, moveTarget) <= arriveThreshold)
@@ -183,6 +190,11 @@ namespace TwoWorlds.Dialogue
 
             if (roamingBrain != null)
                 roamingBrain.BeginScriptedBeat();
+        }
+
+        void SyncCombatGroundFromTransform()
+        {
+            combatActor?.SyncGroundFromTransform();
         }
 
         static float GetPlanarDistance(Vector3 a, Vector3 b)
