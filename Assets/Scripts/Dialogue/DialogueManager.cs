@@ -1,4 +1,5 @@
 using System.Collections;
+using TwoWorlds.Combat;
 using TwoWorlds.Core;
 using TwoWorlds.Inventory;
 using UnityEngine;
@@ -168,6 +169,9 @@ namespace TwoWorlds.Dialogue
                 GameEvents.RaiseDialogueEnded(new DialogueEndInfo(interactor, endedDialogueId, progressNote));
             else
                 GameEvents.RaiseDialogueEnded();
+
+            GameEvents.RaiseCombatStarted();
+            EnemySpawnManager.canSpawn = true;
         }
 
         void TryGrantReward()

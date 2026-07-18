@@ -10,14 +10,14 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField] float spawnInterval = 10f;
     float spawnTimer;
     int spawnCount;
-    bool canSpawn;
+    public static bool canSpawn;
     bool hasBossSpawned;
 
 
     private void Awake()
     {
         hasBossSpawned = false;
-        canSpawn = true;
+        canSpawn = false;
         spawnTimer = 0f;
         spawnCount = 0;
     }

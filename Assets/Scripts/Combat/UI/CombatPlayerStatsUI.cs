@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using TwoWorlds.Core;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +9,7 @@ namespace TwoWorlds.Combat
 {
     public class CombatPlayerStatsUI : MonoBehaviour
     {
+        [SerializeField] List<GameObject> components = new List<GameObject>();
         [SerializeField] CombatHealth targetHealth;
         [SerializeField] Image playerHealthFill;
         [SerializeField] Image playerSprintFill;
@@ -43,9 +46,24 @@ namespace TwoWorlds.Combat
 
 
 
-        void Start() => RefreshFromTarget();
+        void Start()
+        {
+            RefreshFromTarget();
+            foreach (var component in components)
+            {
+                component.gameObject.SetActive(false);
+            }
+        }
 
-        void OnCombatStarted() => RefreshFromTarget();
+
+        void OnCombatStarted()
+        {
+            RefreshFromTarget();
+            foreach (var component in components)
+            {
+                component.gameObject.SetActive(true);
+            }
+        }
 
         void OnActorHealthChanged(CombatHealth health, int current, int max)
         {

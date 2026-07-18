@@ -1,10 +1,14 @@
 using System.Collections.Generic;
+using TwoWorlds.Core;
 using UnityEngine;
 
 namespace XuFu.MaskSystem
 {
     public class MaskController : MonoBehaviour
     {
+        [SerializeField] InputReader inputReader;
+        [SerializeField] GameObject shield;
+
         [Header("Animation Follow Strength")]
         public float runFollowStrength;
         public float jumpFollowStrength;
@@ -43,6 +47,31 @@ namespace XuFu.MaskSystem
         {
             SetAnimation(currentAnimation);
             EquipMask(equippedMask);
+        }
+
+        private void Update()
+        {
+            if (equippedMask.maskId == "mask_blank") return;
+
+            if (equippedMask.maskId == "bird_mask")
+            {
+               if (inputReader.MaskAbilityAction.IsPressed())
+                {
+                    shield.SetActive(true);
+                }
+               else if (inputReader.MaskAbilityAction.WasReleasedThisFrame())
+                {
+                    shield.SetActive(false);
+                }
+            }
+            else if (equippedMask.maskId == "zhong_mask")
+            {
+                if (inputReader.MaskAbilityAction.WasPressedThisFrame())
+                {
+                    transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    PlayerAttackUI.OnMaskAbilityCast(2, 20f);
+                }
+            }
         }
 
         void LateUpdate()

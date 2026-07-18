@@ -10,6 +10,12 @@ public class PlayerAttackUI : MonoBehaviour
     [SerializeField] Image attack2;
     [SerializeField] Image attack2Charge;
     [SerializeField] Image attack3;
+    [SerializeField] Image mask1;
+    [SerializeField] Image mask2;
+    [SerializeField] Image mask_No;
+    [SerializeField] GameObject mask1_parent;
+    [SerializeField] GameObject mask2_parent;
+    [SerializeField] GameObject mask_No_parent;
 
     [SerializeField] AttackData attack1Data;
     [SerializeField] AttackData attack2Data;
@@ -21,6 +27,8 @@ public class PlayerAttackUI : MonoBehaviour
     static event Action OnAttack2Charging;
     static event Action OnAttack2Released;
     static event Action<float> OnAttack3Launched;
+    static event Action<float> OnMask1AbilityCast;
+    static event Action<float> OnMask2AbilityCast;
 
     static bool shouldCharge;
     private void Awake()
@@ -38,7 +46,11 @@ public class PlayerAttackUI : MonoBehaviour
         OnAttack2Charging += PlayerAttackUI_OnAttack2Charging;
         OnAttack2Released += PlayerAttackUI_OnAttack2Released;
         OnAttack3Launched += PlayerAttackUI_OnAttack3Launched;
+        OnMask1AbilityCast += PlayerAttackUI_OnMask1AbilityCast;
+        OnMask2AbilityCast += PlayerAttackUI_OnMask2AbilityCast;
     }
+
+
 
 
     private void OnDisable()
@@ -48,17 +60,19 @@ public class PlayerAttackUI : MonoBehaviour
         OnAttack2Charging -= PlayerAttackUI_OnAttack2Charging;
         OnAttack2Released -= PlayerAttackUI_OnAttack2Released;
         OnAttack3Launched -= PlayerAttackUI_OnAttack3Launched;
+        OnMask1AbilityCast -= PlayerAttackUI_OnMask1AbilityCast;
+        OnMask2AbilityCast -= PlayerAttackUI_OnMask2AbilityCast;
     }
     private void PlayerAttackUI_OnAttack1Launched(float cooldown)
     {
         attack1.fillAmount = 1;
-        StartCoroutine(StartAttackCD(attack1Data.Cooldown, attack1));
+        StartCoroutine(StartCD(attack1Data.Cooldown, attack1));
 
     }
     private void PlayerAttackUI_OnAttack2Launched(float cooldown)
     {
         attack2.fillAmount = 1;
-        StartCoroutine(StartAttackCD(attack2Data.Cooldown, attack2));
+        StartCoroutine(StartCD(attack2Data.Cooldown, attack2));
     }
     private void PlayerAttackUI_OnAttack2Charging()
     {
@@ -105,20 +119,32 @@ public class PlayerAttackUI : MonoBehaviour
     private void PlayerAttackUI_OnAttack3Launched(float cooldown)
     {
         attack3.fillAmount = 1;
-        StartCoroutine(StartAttackCD(attack3Data.Cooldown, attack3));
+        StartCoroutine(StartCD(attack3Data.Cooldown, attack3));
     }
 
-    IEnumerator StartAttackCD(float cooldown, Image attack)
+    private void PlayerAttackUI_OnMask1AbilityCast(float cooldown)
+    {
+        mask1.fillAmount = 1;
+        StartCoroutine(StartCD(attack3Data.Cooldown, mask1));
+    }
+    private void PlayerAttackUI_OnMask2AbilityCast(float cooldown)
+    {
+        mask2.fillAmount = 1;
+        StartCoroutine(StartCD(attack3Data.Cooldown, mask2));
+    }
+
+
+    IEnumerator StartCD(float cooldown, Image item)
     {
         float timeLapsed = 0f;
         float initialFill = 1f;
         while (timeLapsed < cooldown)
         {
-            attack.fillAmount = Mathf.Lerp(initialFill, 0f, timeLapsed / cooldown);
+            item.fillAmount = Mathf.Lerp(initialFill, 0f, timeLapsed / cooldown);
             timeLapsed += Time.deltaTime;
             yield return null;
         }
-        attack.fillAmount = 0f;
+        item.fillAmount = 0f;
     }
 
     public static void OnAttackLaunched(int id, float cooldown)
@@ -137,6 +163,20 @@ public class PlayerAttackUI : MonoBehaviour
             default:
                 break;
 
+        }
+    }
+    public static void OnMaskAbilityCast(int id, float cooldown)
+    {
+        switch (id)
+        {
+            case 1:
+                OnMask1AbilityCast?.Invoke(cooldown); 
+                break;
+            case 2:
+                OnMask2AbilityCast?.Invoke(cooldown);
+                break;
+            default:
+                break;
         }
     }
 }
