@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using XuFu.MaskSystem;
 
 namespace TwoWorlds.Combat
 {
@@ -50,6 +51,8 @@ namespace TwoWorlds.Combat
             if (attackData == null || hitCollider == null)
                 return;
 
+
+
             activeAttack = attackData;
             activeTimer = attackData.HitboxActiveDuration;
             isActive = true;
@@ -83,9 +86,16 @@ namespace TwoWorlds.Combat
             var filter = TriggerFilter;
             filter.useTriggers = true;
             hitCollider.Overlap(filter, overlapResults);
-
+            print(overlapResults.Count);
             foreach (var other in overlapResults)
-                TryHit(other, accumulatedMultiplier);
+            {
+                if (other.GetComponent<CombatHurtbox>() != null && other.gameObject != this)
+                {
+                    TryHit(other, accumulatedMultiplier);
+                }
+            }
+
+
         }
 
         void TryHit(Collider2D other, float accumulatedMultiplier)
@@ -113,13 +123,24 @@ namespace TwoWorlds.Combat
             }
 
             hitThisActivation.Add(hurtbox);
+            if (hurtbox.transform.parent.GetComponentInChildren<Shield>(true) != null)
+            {
+                if (hurtbox.transform.parent.GetComponentInChildren<Shield>(true).gameObject.activeSelf == true)
+                {
+                    PlayerAttackUI.OnMaskAbilityCast(1, 10f);
+                    MaskController.maskAbilityTimer = 10f;
+                    hurtbox.transform.parent.GetComponentInChildren<Shield>(true).gameObject.SetActive(false);
+                    print("block successful");
+                    return;
+                }
+            }
+
+            print("will take damage");
             hurtbox.Health.TakeDamage((int)(activeAttack.Damage * accumulatedMultiplier), owner);
             if (hurtbox.Health.CurrentHealth <= 0 && owner.Faction == CombatFaction.Enemy)
             {
-                print("condition 1 checked");
                 if (GetComponentInParent<EnemyAttackAI>() != null)
                 {
-                    print("condition 2 checked");
                     GetComponentInParent<EnemyAttackAI>().IsPlayerDead(true);
                 }
             }

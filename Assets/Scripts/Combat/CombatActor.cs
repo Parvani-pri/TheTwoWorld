@@ -111,6 +111,10 @@ namespace TwoWorlds.Combat
         {
             isTransformLocked = isLocked == 0 ? false : true;
         }
+        public void SetGroundPosition(Vector2 groundPosition)
+        {
+            GroundPosition = groundPosition;
+        }
     }
 }
 

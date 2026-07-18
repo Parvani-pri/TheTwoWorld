@@ -142,13 +142,13 @@ namespace TwoWorlds.Combat
 
         void FaceTarget(CombatActor chaseTarget)
         {
-            var horizontal = chaseTarget.GroundPosition.x - actor.GroundPosition.x;
-            if (Mathf.Approximately(horizontal, 0f))
-                return;
+            //var horizontal = chaseTarget.GroundPosition.x - actor.GroundPosition.x;
+            //if (Mathf.Approximately(horizontal, 0f))
+            //    return;
 
-            var scale = hitbox.transform.localScale;
-            scale.x = horizontal > 0f ? Mathf.Abs(scale.x) : -Mathf.Abs(scale.x);
-            hitbox.transform.localScale = scale;
+            //var scale = hitbox.transform.localScale;
+            //scale.x = horizontal > 0f ? Mathf.Abs(scale.x) : -Mathf.Abs(scale.x);
+            //hitbox.transform.localScale = scale;
         }
 
         public void LaunchAttack(int attackID)
