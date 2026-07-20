@@ -7,7 +7,7 @@ namespace TwoWorlds.Progress
     public class EnterYinReadinessTrigger : MonoBehaviour, IInteractable
     {
         [SerializeField] EnterYinReadinessSession readinessSession;
-        [SerializeField] string promptText = "入阴";
+        [SerializeField] string promptText = "入陰";
 
         void Awake()
         {

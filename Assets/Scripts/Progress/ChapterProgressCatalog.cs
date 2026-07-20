@@ -19,7 +19,7 @@ namespace TwoWorlds.Progress
         static readonly Dictionary<int, string> SegmentLabels = new()
         {
             [(int)ChapterSegment.PreBattle] = "战前",
-            [(int)ChapterSegment.EnterYin] = "入阴",
+            [(int)ChapterSegment.EnterYin] = "入陰",
             [(int)ChapterSegment.PostBattle] = "战后",
             [(int)ChapterSegment.Epilogue] = "尾声"
         };

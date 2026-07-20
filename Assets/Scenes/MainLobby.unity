@@ -6448,8 +6448,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 180, y: 70}
-  m_SizeDelta: {x: -460, y: -300}
+  m_AnchoredPosition: {x: 175, y: 70}
+  m_SizeDelta: {x: -470, y: -300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1106397891
 MonoBehaviour:
@@ -9687,9 +9687,9 @@ MonoBehaviour:
   portraitDatabase: {fileID: 11400000, guid: 0d3e31341ddabd14693c0ea38dac48f0, type: 2}
   speakerName: "\u5C0F\u59B9"
   speakerPortrait: {fileID: 0}
-  promptMessage: "\u8BB8\u8D1F\uFF0C\u4F60\u51C6\u5907\u597D\u5165\u9634\u4E86\u5417\uFF1F"
-  readyButtonLabel: "\u51C6\u5907\u597D\u4E86"
-  notReadyButtonLabel: "\u6CA1\u51C6\u5907\u597D"
+  promptMessage: "\u8A31\u8CA0\uFF0C\u4F60\u6E96\u5099\u597D\u5165\u9670\u4E86\u55CE\uFF1F"
+  readyButtonLabel: "\u6E96\u5099\u597D\u4E86"
+  notReadyButtonLabel: "\u6C92\u6E96\u5099\u597D"
 --- !u!114 &1528944097
 MonoBehaviour:
   m_ObjectHideFlags: 0

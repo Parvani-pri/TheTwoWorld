@@ -12,7 +12,7 @@ namespace TwoWorlds.Progress
     {
         [SerializeField] GameProgress gameProgress;
         [SerializeField] int chapterNumber = 1;
-        [SerializeField] string promptText = "入阴";
+        [SerializeField] string promptText = "入陰";
         [SerializeField] bool consumeAfterUnlock = true;
 
         bool consumed;

@@ -13,9 +13,9 @@ namespace TwoWorlds.Progress
         [SerializeField] string speakerName = "小妹";
         [SerializeField] Sprite speakerPortrait;
         [TextArea(2, 4)]
-        [SerializeField] string promptMessage = "许负，你准备好入阴了吗？";
-        [SerializeField] string readyButtonLabel = "准备好了";
-        [SerializeField] string notReadyButtonLabel = "没准备好";
+        [SerializeField] string promptMessage = "許負，你準備好入陰了嗎？";
+        [SerializeField] string readyButtonLabel = "準備好了";
+        [SerializeField] string notReadyButtonLabel = "沒準備好";
 
         bool isActive;
         int pendingChapter;
@@ -155,9 +155,18 @@ namespace TwoWorlds.Progress
         {
             isActive = false;
             pendingChapter = 0;
-            readinessUI?.SetHandlers(null, null);
-            readinessUI?.Hide();
+            HideReadinessUI();
             GameEvents.RaiseDialogueEnded();
+        }
+
+        void HideReadinessUI()
+        {
+            // Unity objects use overloaded ==; avoid ?. which misses destroyed references.
+            if (readinessUI == null)
+                return;
+
+            readinessUI.SetHandlers(null, null);
+            readinessUI.Hide();
         }
 
         static void DismissRoamingInterruptIfNeeded()
