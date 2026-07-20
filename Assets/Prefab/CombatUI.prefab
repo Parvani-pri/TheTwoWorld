@@ -420,6 +420,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1298035238813802527}
   - component: {fileID: 4816987865449031072}
+  - component: {fileID: 8812345678901234567}
   m_Layer: 0
   m_Name: Ability
   m_TagString: Untagged
@@ -473,13 +474,40 @@ MonoBehaviour:
   mask1: {fileID: 3045229397130298859}
   mask2: {fileID: 5977685576692782706}
   mask_No: {fileID: 6993250893601236055}
+  mask1Icon: {fileID: 659015697675888415}
+  mask2Icon: {fileID: 2684672845453465076}
   mask1_parent: {fileID: 4450770954761675235}
   mask2_parent: {fileID: 3193608102354865029}
   mask_No_parent: {fileID: 6663837868602725200}
+  mask1Trigger: {fileID: 2195481021278465261}
+  mask2Trigger: {fileID: 108361508482213436}
   attack1Data: {fileID: 11400000, guid: c8d9e0f1a2b3434590aabbccddeeff11, type: 2}
   attack2Data: {fileID: 11400000, guid: 0b6e57fd406777042b0992e4840bd702, type: 2}
   chargeMaxTimer: 3
   attack3Data: {fileID: 11400000, guid: df4035a89666db9458e6b1330f0c4057, type: 2}
+--- !u!114 &8812345678901234567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859726133225743831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f4a2c1d9e6b47a3b5c8d0f2e1a394b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::XuFu.MaskSystem.MaskEquipGate
+  maskController: {fileID: 0}
+  playerInventory: {fileID: 0}
+  attackUI: {fileID: 4816987865449031072}
+  boqiCombatMask: {fileID: 11400000, guid: 5fc1f841aa9778c43b0f16c024a81b9a, type: 2}
+  zhongKuiCombatMask: {fileID: 11400000, guid: a64529f57fe0da44c8cbdebe093e6b21, type: 2}
+  blankMask: {fileID: 11400000, guid: fa845397bd7c0064b94e459ce737e5a6, type: 2}
+  boqiInventoryItem: {fileID: 11400000, guid: 1c65d046c0979314786172bc16107f5c, type: 2}
+  zhongKuiInventoryItem: {fileID: 11400000, guid: 9946fda5fbb30184a976db258a2f66e8, type: 2}
+  lockedMaskIcon: {fileID: 21300000, guid: de104b36d4017a747a56760108fceb80, type: 3}
+  mask1Trigger: {fileID: 2195481021278465261}
+  mask2Trigger: {fileID: 108361508482213436}
 --- !u!1 &2088922030038493192
 GameObject:
   m_ObjectHideFlags: 0
@@ -1251,13 +1279,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: XuFu.MaskSystem.MaskController, Assembly-CSharp
-          m_MethodName: EquipMask
-          m_Mode: 2
+        - m_Target: {fileID: 8812345678901234567}
+          m_TargetAssemblyTypeName: XuFu.MaskSystem.MaskEquipGate, Assembly-CSharp
+          m_MethodName: TryEquipZhongKuiMask
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: a64529f57fe0da44c8cbdebe093e6b21, type: 2}
-            m_ObjectArgumentAssemblyTypeName: XuFu.MaskSystem.MaskItem, Assembly-CSharp
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -1877,13 +1905,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: XuFu.MaskSystem.MaskController, Assembly-CSharp
-          m_MethodName: EquipMask
-          m_Mode: 2
+        - m_Target: {fileID: 8812345678901234567}
+          m_TargetAssemblyTypeName: XuFu.MaskSystem.MaskEquipGate, Assembly-CSharp
+          m_MethodName: TryEquipBoqiMask
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 5fc1f841aa9778c43b0f16c024a81b9a, type: 2}
-            m_ObjectArgumentAssemblyTypeName: XuFu.MaskSystem.MaskItem, Assembly-CSharp
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -2556,13 +2584,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: XuFu.MaskSystem.MaskController, Assembly-CSharp
-          m_MethodName: EquipMask
-          m_Mode: 2
+        - m_Target: {fileID: 8812345678901234567}
+          m_TargetAssemblyTypeName: XuFu.MaskSystem.MaskEquipGate, Assembly-CSharp
+          m_MethodName: TryEquipBlankMask
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 5fc1f841aa9778c43b0f16c024a81b9a, type: 2}
-            m_ObjectArgumentAssemblyTypeName: XuFu.MaskSystem.MaskItem, Assembly-CSharp
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 

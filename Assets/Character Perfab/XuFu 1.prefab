@@ -5220,7 +5220,7 @@ MonoBehaviour:
   maskRenderer: {fileID: 7730647463437194940}
   database: {fileID: 11400000, guid: e50714c6df4ee184295e12325f2bbe80, type: 2}
   currentAnimation: idle
-  equippedMask: {fileID: 11400000, guid: 5fc1f841aa9778c43b0f16c024a81b9a, type: 2}
+  equippedMask: {fileID: 11400000, guid: fa845397bd7c0064b94e459ce737e5a6, type: 2}
   quickMasks:
   - {fileID: 11400000, guid: 5fc1f841aa9778c43b0f16c024a81b9a, type: 2}
   - {fileID: 11400000, guid: a64529f57fe0da44c8cbdebe093e6b21, type: 2}

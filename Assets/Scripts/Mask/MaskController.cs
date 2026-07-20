@@ -36,11 +36,15 @@ namespace XuFu.MaskSystem
         public string currentAnimation = "idle";
         public MaskItem equippedMask;
 
+        public MaskItem EquippedMask => equippedMask;
+
         [Header("Optional: Up To 3 Masks")]
         public MaskItem[] quickMasks;
 
         [Header("Settings")]
         public bool hideMaskWhenNoFrameFound = true;
+
+        MaskEquipGate equipGate;
 
         private MaskAnimationProfile currentProfile;
         private MaskAnchorData currentAnchorData;
@@ -65,7 +69,11 @@ namespace XuFu.MaskSystem
                 maskAbilityTimer -= Time.deltaTime;
             }
 
-            if (equippedMask.maskId == "mask_blank") return;
+            if (equippedMask == null || equippedMask.maskId == "mask_blank")
+                return;
+
+            if (equipGate != null && !equipGate.IsMaskOwned(equippedMask))
+                return;
 
             if (equippedMask.maskId == "bird_mask")
             {
@@ -184,8 +192,13 @@ private void SetIfChanged(string animName)
             }
         }
 
+        public void SetEquipGate(MaskEquipGate gate) => equipGate = gate;
+
         public void EquipMask(MaskItem mask)
         {
+            if (mask != null && equipGate != null && !equipGate.IsMaskOwned(mask))
+                return;
+
             equippedMask = mask;
 
             if (maskRenderer == null)

@@ -25,11 +25,12 @@ namespace TwoWorlds.Inventory
         void Awake()
         {
             EnsureCapacity();
+            PlayerInventoryPersistence.Instance?.TryRestoreCurrentInventory();
         }
 
         void Start()
         {
-            PlayerInventoryPersistence.Instance?.TryRestoreCurrentInventory();
+            NotifyChanged();
         }
 
         void EnsureCapacity()
@@ -140,6 +141,26 @@ namespace TwoWorlds.Inventory
             {
                 if (!slot.IsEmpty && slot.item == item)
                     total += slot.quantity;
+            }
+
+            return total >= amount;
+        }
+
+        public bool HasItemId(string itemId, int amount = 1)
+        {
+            if (string.IsNullOrWhiteSpace(itemId) || amount <= 0)
+                return false;
+
+            var total = 0;
+            foreach (var slot in slots)
+            {
+                if (slot.IsEmpty || slot.item == null)
+                    continue;
+
+                if (!string.Equals(slot.item.ItemId, itemId, System.StringComparison.OrdinalIgnoreCase))
+                    continue;
+
+                total += slot.quantity;
             }
 
             return total >= amount;
