@@ -13,8 +13,10 @@ namespace TwoWorlds.Progress
         [SerializeField] TMP_Text bodyText;
         [SerializeField] Button readyButton;
         [SerializeField] Button notReadyButton;
+        [SerializeField] float disabledReadyAlpha = 0.55f;
 
         CanvasGroup canvasGroup;
+        CanvasGroup readyButtonCanvasGroup;
         Action onReadyHandler;
         Action onNotReadyHandler;
 
@@ -68,11 +70,40 @@ namespace TwoWorlds.Progress
 
             SetButtonLabel(readyButton, readyLabel);
             SetButtonLabel(notReadyButton, notReadyLabel);
+            SetReadyInteractable(true);
+        }
+
+        public void SetPresentation(string message, bool readyEnabled)
+        {
+            if (bodyText != null)
+                bodyText.text = message ?? string.Empty;
+
+            SetReadyInteractable(readyEnabled);
+        }
+
+        public void SetReadyInteractable(bool enabled)
+        {
+            if (readyButton != null)
+                readyButton.interactable = enabled;
+
+            EnsureReadyButtonCanvasGroup();
+            if (readyButtonCanvasGroup != null)
+                readyButtonCanvasGroup.alpha = enabled ? 1f : disabledReadyAlpha;
         }
 
         public void Hide()
         {
             SetVisible(false);
+        }
+
+        void EnsureReadyButtonCanvasGroup()
+        {
+            if (readyButton == null)
+                return;
+
+            readyButtonCanvasGroup = readyButton.GetComponent<CanvasGroup>();
+            if (readyButtonCanvasGroup == null)
+                readyButtonCanvasGroup = readyButton.gameObject.AddComponent<CanvasGroup>();
         }
 
         void EnsureCanvasGroup()
