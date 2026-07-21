@@ -1,7 +1,7 @@
 using System;
 using TwoWorlds.Combat;
 using TwoWorlds.Inventory;
-using UnityEngine.UI;
+using UnityEngine;
 
 namespace TwoWorlds.Core
 {
@@ -85,12 +85,32 @@ namespace TwoWorlds.Core
 
         public static void UpdateSprintBar(float target, float max)
         {
+            Debug.Log("sprint");
             OnActorSprint?.Invoke(target, max);
+
+            Delegate[] subscribers = OnActorSprint.GetInvocationList();
+            Debug.Log($"Total subscribers: {subscribers.Length}");
+
+            foreach (Delegate subscriber in subscribers)
+            {
+                // Target is the script instance, Method is the function name
+                Debug.Log($"Target: {subscriber.Target} | Method: {subscriber.Method.Name}");
+            }
         }
 
         public static void UpdateFlightBar(float target, float max)
         {
+            Debug.Log("flight");
             OnActorFlight?.Invoke(target, max);
+
+            Delegate[] subscribers = OnActorFlight.GetInvocationList();
+            Debug.Log($"Total subscribers: {subscribers.Length}");
+
+            foreach (Delegate subscriber in subscribers)
+            {
+                // Target is the script instance, Method is the function name
+                Debug.Log($"Target: {subscriber.Target} | Method: {subscriber.Method.Name}");
+            }
         }
 
     }
