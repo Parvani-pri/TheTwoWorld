@@ -5,7 +5,7 @@ namespace TwoWorlds.Progress
 {
     public static class EnterYinMaskRequirements
     {
-        static readonly string[] Chapter2Required = { MaskEquipGate.ZhongKuiItemId };
+        static readonly string[] Chapter2Required = { MaskEquipGate.BoqiItemId };
         static readonly string[] Chapter3Required = { MaskEquipGate.ZhongKuiItemId, MaskEquipGate.BoqiItemId };
 
         public static IReadOnlyList<string> GetRequiredItemIds(int chapter)

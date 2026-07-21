@@ -15,11 +15,11 @@ MonoBehaviour:
   recipeId: 002
   displayName: "\u513A\u9762\u30FB\u937E\u9997\u5408\u6210\u914D\u65B9"
   ingredients:
-  - item: {fileID: 11400000, guid: 8d5b7d57df295cb4c84adb04947ff1b8, type: 2}
+  - item: {fileID: 11400000, guid: 14a9a5abfac8c6b4393e64259e5b6dc9, type: 2}
     amount: 1
-  - item: {fileID: 11400000, guid: 2a25b87a29a4b574b92bdcca68ee06a9, type: 2}
+  - item: {fileID: 11400000, guid: eac0e58dadacdca4080c863ee3b559e2, type: 2}
     amount: 1
-  - item: {fileID: 11400000, guid: 4fe72804a6eb0474fb0722152c0ad3ab, type: 2}
+  - item: {fileID: 11400000, guid: 098b301da11dda44c84c967bf1514a26, type: 2}
     amount: 1
   - item: {fileID: 11400000, guid: c9edca65bbf3aff49976dc25ed4c9e27, type: 2}
     amount: 1
