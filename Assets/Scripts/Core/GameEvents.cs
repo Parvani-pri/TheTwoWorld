@@ -1,7 +1,7 @@
 using System;
 using TwoWorlds.Combat;
 using TwoWorlds.Inventory;
-using UnityEngine.UI;
+using UnityEngine;
 
 namespace TwoWorlds.Core
 {

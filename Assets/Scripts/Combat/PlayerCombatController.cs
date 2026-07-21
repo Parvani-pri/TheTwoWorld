@@ -83,7 +83,7 @@ namespace TwoWorlds.Combat
                 currentFallingSpeed += fallingAcceleration * Time.deltaTime;
             }
 
-            if (Mathf.Approximately(vertical, 0f) && Actor.Height <= 0.05f)
+            if (Mathf.Approximately(vertical, 0f) && Actor.Height <= 0.05f && remainingFlightDuration <= maxFlightDuration)
                 RestoreFlightDuration();
         }
 

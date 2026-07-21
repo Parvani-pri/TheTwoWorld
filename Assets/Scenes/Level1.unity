@@ -6975,9 +6975,15 @@ MonoBehaviour:
   normalEnemies:
   - {fileID: 1716304157}
   - {fileID: 490132101}
+  enemySequence:
+  - {fileID: 1716304157}
+  - {fileID: 490132101}
+  - {fileID: 1716304157}
+  - {fileID: 490132101}
   boss: {fileID: 1997381870}
   targetSpawnAmount: 4
   spawnInterval: 10
+  useRandomSpawn: 0
 --- !u!1001 &1840015172
 PrefabInstance:
   m_ObjectHideFlags: 0
