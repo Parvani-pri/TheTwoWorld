@@ -4,10 +4,12 @@ using UnityEngine;
 public class EnemySpawnManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> normalEnemies;
+    [SerializeField] List<GameObject> enemySequence;
     [SerializeField] GameObject boss;
     List<GameObject> existingEnemies = new List<GameObject>();
     [SerializeField] int targetSpawnAmount;
     [SerializeField] float spawnInterval = 10f;
+    [SerializeField] bool useRandomSpawn = true;
     float spawnTimer;
     int spawnCount;
     public static bool canSpawn;
@@ -28,16 +30,28 @@ public class EnemySpawnManager : MonoBehaviour
         {
             spawnTimer -= Time.deltaTime;
         }
-
-        if (canSpawn && spawnCount < targetSpawnAmount && spawnTimer <= 0f)
+        if (useRandomSpawn)
         {
-            print("spawned");
-            int spawnIndex = Random.Range(0, normalEnemies.Count);
-            existingEnemies.Add(Instantiate(normalEnemies[spawnIndex], Vector3.zero, Quaternion.identity));
-            existingEnemies[existingEnemies.Count - 1].SetActive(true);
-            spawnTimer = spawnInterval;
-            spawnCount++;
+            if (canSpawn && spawnCount < targetSpawnAmount && spawnTimer <= 0f)
+            {
+                int spawnIndex = Random.Range(0, normalEnemies.Count);
+                existingEnemies.Add(Instantiate(normalEnemies[spawnIndex], Vector3.zero, Quaternion.identity));
+                existingEnemies[existingEnemies.Count - 1].SetActive(true);
+                spawnTimer = spawnInterval;
+                spawnCount++;
+            }
         }
+        else
+        {
+            if (canSpawn && spawnCount < enemySequence.Count && spawnTimer <= 0f)
+            {
+                existingEnemies.Add(Instantiate(enemySequence[spawnCount], Vector3.zero, Quaternion.identity));
+                existingEnemies[existingEnemies.Count - 1].SetActive(true);
+                spawnTimer = spawnInterval;
+                spawnCount++;
+            }
+        }
+
 
         if(spawnCount == targetSpawnAmount && !hasBossSpawned)
         {

@@ -91,8 +91,6 @@ namespace TwoWorlds.Core
         public static void UpdateFlightBar(float target, float max)
         {
             OnActorFlight?.Invoke(target, max);
-
-            Delegate[] subscribers = OnActorFlight.GetInvocationList();
         }
 
     }
